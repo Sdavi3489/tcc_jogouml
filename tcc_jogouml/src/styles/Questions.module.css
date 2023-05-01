@@ -1,0 +1,22 @@
+.container_qt{
+    display: block;
+    background-color: #FFEAD2;
+    width: 30rem;
+    height: 23rem;
+    text-align: center;
+    padding: 1.5rem;
+    margin-left: auto;
+    margin-right: auto;
+    border: 1px solid;
+    border-radius: 8px;
+}
+
+.pq{
+    color: #213547;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+
+.btnA{
+    margin: 15px;
+}
