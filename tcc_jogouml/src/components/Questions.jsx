@@ -1,54 +1,40 @@
 import React from 'react'
 import styles from '../styles/Questions.module.css'
 import { useState, useEffect, useRef } from 'react'
-import { FcOk, FcDisapprove } from 'react-icons/fc';
+import { FcOk, FcDisapprove, FcLike } from 'react-icons/fc';
 import { FiArrowLeftCircle, FiArrowRightCircle } from "react-icons/fi";
 
 const Questions = () => {
-    const [valTrue, setValTrue] = useState(false); // Verifica se o valor é verdadeiro ou falso
+    //const [valTrue, setValTrue] = useState(false); // Verifica se o valor é verdadeiro ou falso
     const [showResp, setshowResp] = useState(false); // Mostra resultado na tela quando o resultado for true, quando o usuário escolher a resposta acionando a função verfica_resp
-    const [count, setCount] = useState(1);
-    const [bd_dados, setBdados] = useState([])
-    const [ver, setVer] = useState([])
-    const [resp, setResp] = useState([])
-
-
-    const questions = {
-        "id": 1,
-        "pergunta": "O que é caso de uso?",
-        "resposta": [{ "a": "É uma ação do usuário", "b": "Representa a ligação do usuário com o sistema", "c": "Serve como forma de relacionamento", "d": "É uma característica do ator" }],
-        "verificado": [true, false, false, false]
-    }
-
-    // const questions = {
-    //     question: [
-    //         {
-    //             "id": 1,
-    //             "pergunta": "O que é caso de uso?",
-    //             "resposta": ["É uma ação do usuário","Representa a ligação do usuário com o sistema","Serve como forma de relacionamento","É uma característica do ator"],
-    //             "verificado": [true, false, false, false]
-    //         },
-    //         {
-    //             "id": 2,
-    //             "pergunta": "O que são os atores?",
-    //             "resposta": ["Representa apenas o sistema", "Representa a ligação do usuário com o sistema", "Serve como forma de relacionamento", "São usuários que utilizam o sistema" ],
-    //             "verificado": [false, false, false, true]
-    //         }
-
-    //     ]
-    // }
-
+    const [count, setCount] = useState(1); //conta o id das perguntas conforme o usuário avança e serve para indentifica o id da tabela pergunta.
+    const [bd_dados, setBdados] = useState([]) //guarda todas as informações da requisição get do banco de dados da tabela pergunta.
+    const [ver, setVer] = useState([]) //guarda as informações que enviamos para o banco de dados da tabela resposta.
+    const [count_vida, setCountVida] = useState(5) //Contador de vidas
+    const [Score, setScore] = useState(0) // Pontuação do jogador 
 
 
     function verifica_resp(e) {
         e.preventDefault();
-        const resp_dada = { "id_resp": count, "resposta_dada": e.target.value, "usuario_fk": 1, "pergunta_fk": count }
-        setValTrue(!valTrue);
-        const rev = bd_dados.map((res) => res.ver_a)
-        setshowResp(true);
-        console.log(bd_dados.map((res) => res.ver_a))
-        console.log(bd_dados.map((res) => res.ver_a[0]))
-        console.log(rev[0])
+        const resp_dada = { "id_resp": count, "resposta_dada": e.target.value, "usuario_fk": 1, "pergunta_fk": count } // manda as informações em json para a requisição post.
+        const rev = bd_dados.map((res) => res.resposta_correta) //pega a resposta correta
+        setshowResp(true); //Mostra a resposta correta e incorreta da questão
+
+        console.log(rev);
+        if(resp_dada.resposta_dada == rev){
+            console.log('Ganhou 3 pontos!');
+            setScore((scr)=>scr+3);
+        }
+        else{
+            console.log('Perdeu 1 ponto!');
+            setScore((scr)=>scr-1);
+            setCountVida((ch)=>ch-1);
+        }
+        
+        
+        //console.log(bd_dados.map((res) => res.ver_a))
+        //console.log(bd_dados.map((res) => res.ver_a[0]))
+        //console.log(rev[0])
 
         fetch('http://localhost:3000/answer', {
             method: 'POST',
@@ -97,19 +83,19 @@ const Questions = () => {
     function next_question(e) {
         e.preventDefault()
         setCount((e) => e + 1)
-        // console.log(ver.resposta_dada == bd_dados.resposta_correta)
         setshowResp(false)
     }
 
 
     return (
         <div className={styles.container_qt}>
+            <div className={styles.container_vida}><p className={styles.score}>PONTOS: {Score}</p><p className={styles.countHearts}>{count_vida}</p><FcLike className={styles.fcLike} size={35}/></div>
             <p className={styles.pq}>{bd_dados.map((e, index) => e.pergunta)}</p>
-            <button className={styles.btnA} onClick={verifica_resp} value='A'>{bd_dados.map((r) => r.opcao_a)}</button>{showResp && (bd_dados.map((res) => res.ver_a == true? <FcOk /> : <FcDisapprove />))}
-            <button className={styles.btnA} onClick={verifica_resp} value='B'>{bd_dados.map((r) => r.opcao_b)}</button>{showResp && (bd_dados.map((res) => res.ver_b == true? <FcOk /> : <FcDisapprove />))}
-            <button className={styles.btnA} onClick={verifica_resp} value='C'>{bd_dados.map((r) => r.opcao_c)}</button>{showResp && (bd_dados.map((res) => res.ver_c == true? <FcOk /> : <FcDisapprove />))}
-            <button className={styles.btnA} onClick={verifica_resp} value='D'>{bd_dados.map((r) => r.opcao_d)}</button>{showResp && (bd_dados.map((res) => res.ver_d == true? <FcOk /> : <FcDisapprove />))}
-            {showResp && (<button className={styles.btnArrow} onClick={next_question}><FiArrowRightCircle /></button>)}
+            <button className={styles.btnA} onClick={verifica_resp} value='A'>{bd_dados.map((r) => r.opcao_a)}</button>{showResp && (bd_dados.map((res,index) => res.ver_a == true? <FcOk /> : <FcDisapprove />))}
+            <button className={styles.btnA} onClick={verifica_resp} value='B'>{bd_dados.map((r) => r.opcao_b)}</button>{showResp && (bd_dados.map((res,index) => res.ver_b == true? <FcOk /> : <FcDisapprove />))}
+            <button className={styles.btnA} onClick={verifica_resp} value='C'>{bd_dados.map((r) => r.opcao_c)}</button>{showResp && (bd_dados.map((res,index) => res.ver_c == true? <FcOk /> : <FcDisapprove />))}
+            <button className={styles.btnA} onClick={verifica_resp} value='D'>{bd_dados.map((r) => r.opcao_d)}</button>{showResp && (bd_dados.map((res,index) => res.ver_d == true? <FcOk /> : <FcDisapprove />))}
+            <div className={styles.container_btn}>{showResp && (<button className={styles.btnArrow} onClick={next_question}><FiArrowRightCircle /></button>)}</div>
         </div>
     )
     // #AAAAAA - cor cinza 

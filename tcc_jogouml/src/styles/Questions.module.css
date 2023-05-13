@@ -2,7 +2,7 @@
     display: flex;
     background-color: #FFEAD2;
     width: 30rem;
-    height: 25rem;
+    height: 30rem;
     text-align: center;
     padding: 1.5rem;
     margin-left: auto;
@@ -12,6 +12,27 @@
     position: relative;
     flex-flow: column wrap;
     align-items: center;
+}
+
+.container_vida{
+    display: flex;
+    width: 30rem;
+    position: relative;
+    flex-flow: row wrap;
+    justify-content: center;
+    
+}
+
+.countHearts{
+    font-family: 'Montserrat', 'Roboto', sans-serif;
+    font-weight: bold;
+    font-size: 33px;
+    padding-left: 25rem;
+}
+
+.score{
+    font-size: 25px;
+
 }
 
 .pq {
@@ -54,4 +75,9 @@
     cursor: pointer;
     transition: border-color 0.25s;
     margin: 5px;
+}
+
+.container_btn{
+    display: flex;
+    justify-content: center;
 }
