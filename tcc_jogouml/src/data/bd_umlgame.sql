@@ -63,6 +63,9 @@ COMMIT;
 
 DELETE FROM Resposta;
 
+
+DELETE FROM Pergunta;
+
 DROP TABLE Usuario CASCADE
 DROP TABLE Resposta cascade
 DROP TABLE Pergunta CASCADE

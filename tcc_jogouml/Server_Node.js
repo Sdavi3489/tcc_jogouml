@@ -3,6 +3,7 @@ const app = express();
 import cors from 'cors';
 import bodyParser from 'body-parser';
 import pg from 'pg';
+//const axios = require('axios');
 app.use(bodyParser.json());
 app.use(cors());
 
@@ -17,6 +18,18 @@ const client = new pg.Client(
 );
 
 client.connect();
+
+app.post('/perg', function (req, res) {
+    client.query({
+        text: 'INSERT INTO Pergunta (id_perg,pergunta,opcao_a,opcao_b,opcao_c,opcao_d,ver_a,ver_b,ver_c,ver_d,resposta_correta) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11)',
+        values: [req.body.id_perg, req.body.pergunta, req.body.opcao_a, req.body.opcao_b, req.body.opcao_c, req.body.opcao_d, req.body.ver_a, req.body.ver_b, req.body.ver_c, req.body.ver_d, req.body.resposta_correta]
+    })
+        .then(
+            function (ret) {
+                res.json(req.body)
+            }
+        )
+});
 
 app.get('/question/:id', function (req, res) {
     client.query({

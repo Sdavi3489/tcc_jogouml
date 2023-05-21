@@ -1,0 +1,57 @@
+/*body{
+
+    background-color: #fff;
+}*/
+.containerHome {
+    display: flex;
+    justify-content: space-around;
+}
+
+.banner {
+    height: 50rem;
+    width: 150rem;
+}
+
+.username {
+    display: flex;
+    background-color: #fff;
+    width: 345px;
+    height: 363px;
+    justify-content: center;
+    border-radius: 8px;
+    margin-right: 3rem;
+}
+
+form {
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: top;
+    margin: 5rem;
+}
+
+.userLabel {
+    font-family: 'Montserrat', 'Roboto', sans-serif;
+    font-weight: bold;
+    font-size: 15px;
+    margin-bottom: 1rem;
+    /*margin: 3rem;*/
+
+}
+
+.ipt {
+    font-family: 'Montserrat', 'Roboto', sans-serif;
+    width: 250px;
+    height: 40px;
+    border-radius: 8px;
+    padding: 10px;
+}
+
+.btnEntrar {
+    font-family: 'Montserrat', 'Roboto', sans-serif;
+    font-weight: bold;
+    margin-top: 1.5rem;
+    height: 55px;
+    width: 150px;
+    border-radius: 8px;
+    cursor: pointer;
+}

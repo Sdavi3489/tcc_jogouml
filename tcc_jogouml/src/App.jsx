@@ -5,6 +5,8 @@ import Navbar from './layout/Navbar'
 import './App.css'
 import Questions from './components/Questions'
 import Footer from './layout/Footer'
+import Add_question from './pages/Add_question'
+import { Outlet } from 'react-router-dom'
 
 function App() {
   //const [count, setCount] = useState(0)
@@ -20,9 +22,8 @@ function App() {
   return (
     <>
       <Navbar/>
-      <h1>Home</h1>
-      <Questions/>
-
+      <Outlet/>
+      <Footer/>
     </>
   )
 }
