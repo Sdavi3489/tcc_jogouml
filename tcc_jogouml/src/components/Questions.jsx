@@ -3,6 +3,8 @@ import styles from '../styles/Questions.module.css'
 import { useState, useEffect, useRef } from 'react'
 import { FcOk, FcDisapprove, FcLike } from 'react-icons/fc';
 import { FiArrowLeftCircle, FiArrowRightCircle } from "react-icons/fi";
+import { useNavigate } from 'react-router-dom';
+import Resultado from './Resultado';
 
 const Questions = () => {
     //const [valTrue, setValTrue] = useState(false); // Verifica se o valor é verdadeiro ou falso
@@ -12,6 +14,7 @@ const Questions = () => {
     const [ver, setVer] = useState([]) //guarda as informações que enviamos para o banco de dados da tabela resposta.
     const [count_vida, setCountVida] = useState(5) //Contador de vidas
     const [Score, setScore] = useState(0) // Pontuação do jogador 
+    const navigate = useNavigate() // navega para o link definido quando o for acionado
 
 
     function verifica_resp(e) {
@@ -84,6 +87,10 @@ const Questions = () => {
         e.preventDefault()
         setCount((e) => e + 1)
         setshowResp(false)
+        if(count == 10){
+            // esse if == 10 vai ser provisório por enquanto não adicionamos mais perguntas, quando adicionar mais eu coloco o tamanho (lenght) do array
+            navigate(`/result/${Score}`); // esse navigate vai fazer um redirecionamento para a página de resultados
+        }
     }
 
 

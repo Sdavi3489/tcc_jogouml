@@ -26,7 +26,7 @@ app.post('/perg', function (req, res) {
     })
         .then(
             function (ret) {
-                res.json(req.body)
+                res.json(req.body) //esse post serve para inserir as perguntas novas
             }
         )
 });
@@ -55,17 +55,17 @@ app.post('/answer', function (req, res) {
         )
 })
 
-// app.get('/verify/:resp', function (req, res) {
-//     client.query({
-//         text: 'SELECT * FROM Pergunta WHERE id_perg = $1',
-//         values: [req.params.resp]
-//     })
-//         .then(
-//             function (ret) {
-//                 res.json(ret.rows)
-//             }
-//         )
-// })
+app.get('/result', function (req, res) {
+    client.query({
+        text: 'SELECT resposta_correta, resposta_dada FROM Pergunta, Resposta WHERE id_perg = id_resp',
+        //values: [req.body.resposta_correta, req.body.resposta_dada]
+    })
+        .then(
+            function (ret) {
+                res.json(ret.rows)
+            }
+        )
+})
 
 
 

@@ -7,6 +7,7 @@ import User from './pages/User.jsx'
 import Home from './pages/Home.jsx'
 import Rules from './pages/Rules.jsx'
 import Ranking from './pages/Ranking.jsx'
+import Resultado from './components/Resultado.jsx'
 
 const router = createBrowserRouter([
   {
@@ -24,6 +25,10 @@ const router = createBrowserRouter([
       {
         path: 'rank',
         element: <Ranking/>,
+      },
+      {
+        path: '/result/:score',
+        element: <Resultado/>,
       },
       {
         path: '/play/:id_user',
