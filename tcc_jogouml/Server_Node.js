@@ -1,12 +1,19 @@
+import dotenv from 'dotenv';
+dotenv.config();
 import express from 'express';
 const app = express();
 import cors from 'cors';
 import bodyParser from 'body-parser';
 import pg from 'pg';
-//const axios = require('axios');
+import jwt from 'jsonwebtoken';
+import { serialize } from 'cookie';
+import cookieParser from 'cookie-parser';
+import axios from 'axios';
 app.use(bodyParser.json());
 app.use(cors());
+app.use(cookieParser());
 
+//lembrar de utilizar de guardar a senha do banco de dados no arquivo .env para segurança, quando for fazer deploy
 const client = new pg.Client(
     {
         user: 'postgres',
@@ -45,8 +52,8 @@ app.get('/question/:id', function (req, res) {
 
 app.post('/answer', function (req, res) {
     client.query({
-        text: 'INSERT INTO Resposta (id_resp,resposta_dada,usuario_fk, pergunta_fk) VALUES($1,$2,$3,$4)',
-        values: [req.body.id_resp, req.body.resposta_dada, req.body.usuario_fk, req.body.pergunta_fk]
+        text: 'INSERT INTO Resposta (resposta_dada,usuario_fk, pergunta_fk) VALUES($1,$2,$3)',
+        values: [req.body.resposta_dada, req.body.usuario_fk, req.body.pergunta_fk]
     })
         .then(
             function (ret) {
@@ -67,6 +74,143 @@ app.get('/result', function (req, res) {
         )
 })
 
+// Rota para fazer o login e gerar o token
+app.post('/registro', (req, res) => {
+    client.query({
+        text: 'INSERT INTO Usuario (username,hash) VALUES($1,$2)',
+        values: [req.body.username, req.body.hash]
+    })
+        .then(
+            function (ret) {
+                if (!req.body.username) {
+                    return res.status(422).json({ msg: "O username é obrigatório!" })
+                }
+                if (!req.body.hash) {
+                    return res.status(422).json({ msg: "A senha é obrigatória!" })
+                }
+                res.json(req.body);
+            });
+});
+
+const getUser = [];
+
+app.post('/login', (req, res) => {
+    // json dos dados do usuario
+    const { id_user, username, hash } = req.body;
+
+    if (!username) {
+        return res.status(422).json({ msg: "O username é obrigatório!" })
+    }
+    if (!hash) {
+        return res.status(422).json({ msg: "A senha é obrigatória!" })
+    }
+    try {
+        getUser.unshift(req.body);
+        res.status(200).json({ msg: 'Login bem-sucedido!'});
+    } catch (error) {
+        console.log(error);
+        res.status(401).json({ error: 'Credenciais inválidas' });
+    }
+});
+
+const secretKey = process.env.SECRET_KEY;
+
+app.use((req, res, next) => {
+    const IDuser = getUser.map((e)=>e.id_user)
+    const id = IDuser[0];
+    console.log("id: ",id);
+    const token = jwt.sign({ userId: id}, secretKey, { expiresIn: '1h' });
+    if (token) {
+        req.headers.authorization = `Bearer ${token}`;
+        res.cookie('token', token, { httpOnly: true, path:'/private',});
+    }
+
+    next();
+});
+
+app.get('/protegido', (req, res) => {
+    //const token = req.cookies.token;
+    const token = req.headers.authorization
+    const IDLoginUser = getUser.map((e)=>e.id_user)
+
+    // Verificar se o token está presente
+    if (!token) {
+        return res.status(401).json({ message: 'Token não fornecido', valido: false });
+    }
+
+    // Verificar e validar o token
+    try {
+        const decoded = jwt.verify(token.replace('Bearer ', ''), secretKey);
+
+        // Caso o token seja válido
+        // retornar dados do usuário autenticado
+        const userId = decoded.userId;
+        console.log("var global", IDLoginUser[0])
+        console.log("userId: ",userId)
+        return res.status(200).json({ message: 'Rota protegida', userId: userId, valido: true, user: getUser[0]});
+ 
+    } catch (error) {
+        // O token é inválido ou expirou
+        return res.status(401).json({ message: 'Token inválido', valido: false});
+    }
+});
+
+app.get('/user/:username', function (req, res) {
+    client.query({
+        text: 'SELECT * FROM Usuario WHERE username = $1',
+        values: [req.params.username]
+    })
+        .then(
+            function (ret) {
+                res.json(ret.rows)
+            }
+        )
+})
+
+const clearAuthCookie = (res) => {
+    const cookieOptions = {
+        expires: new Date(0), // Define a data de expiração para um momento no passado
+        httpOnly: true, // Garante que o cookie só seja acessível via HTTP
+        path: '/',
+    };
+
+    const emptyCookie = serialize('token', '', cookieOptions);
+    res.setHeader('Set-Cookie', emptyCookie);
+    //res.send('Cookie apagado!');
+};
+
+app.get('/logout', (req, res) => {
+    try {
+        clearAuthCookie(res);
+        res.json({ logout: "Logout realizado com sucesso!", })
+    } catch (error) {
+        res.send("Aconteceu o seguinte erro: ", error)
+    }
+});
+
+
+// Rota protegida que requer autenticação
+app.get('/protectedCookie', (req, res) => {
+    // Verificar se o cookie de autenticação está presente
+    //const token = req.cookies.token;
+    const token = req.cookies.token = req.headers.authorization
+
+    if(!token){
+        return res.status(401).json({ message: 'Token não fornecido', valido: null})
+    }
+
+    try {
+        return res.json({ token: token, valido: true })
+    } catch (error) {
+        return res.status(401).json({ message: 'Token inválido', valido: false})
+    }
+    // if (token) {
+    //     //res.send('Acesso autorizado!');
+    //     return res.json({ token: token, valido: true })
+    // } else {
+    //     return res.status(401).json({ message: 'Token inválido', valido: false})
+    // }
+});
 
 
 app.listen(3000,

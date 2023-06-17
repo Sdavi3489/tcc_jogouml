@@ -6,7 +6,8 @@ import { FiArrowLeftCircle, FiArrowRightCircle } from "react-icons/fi";
 import { useNavigate } from 'react-router-dom';
 import Resultado from './Resultado';
 
-const Questions = () => {
+
+const Questions = ({userID}) => {
     //const [valTrue, setValTrue] = useState(false); // Verifica se o valor é verdadeiro ou falso
     const [showResp, setshowResp] = useState(false); // Mostra resultado na tela quando o resultado for true, quando o usuário escolher a resposta acionando a função verfica_resp
     const [count, setCount] = useState(1); //conta o id das perguntas conforme o usuário avança e serve para indentifica o id da tabela pergunta.
@@ -19,7 +20,7 @@ const Questions = () => {
 
     function verifica_resp(e) {
         e.preventDefault();
-        const resp_dada = { "id_resp": count, "resposta_dada": e.target.value, "usuario_fk": 1, "pergunta_fk": count } // manda as informações em json para a requisição post.
+        const resp_dada = {"resposta_dada": e.target.value, "usuario_fk": userID, "pergunta_fk": count } // manda as informações em json para a requisição post.
         const rev = bd_dados.map((res) => res.resposta_correta) //pega a resposta correta
         setshowResp(true); //Mostra a resposta correta e incorreta da questão
 
@@ -87,6 +88,7 @@ const Questions = () => {
         e.preventDefault()
         setCount((e) => e + 1)
         setshowResp(false)
+        // utilizar o map para pegar o numero do index e somar index + 1 para dar o numero certo do total de questões  
         if(count == 10){
             // esse if == 10 vai ser provisório por enquanto não adicionamos mais perguntas, quando adicionar mais eu coloco o tamanho (lenght) do array
             navigate(`/result/${Score}`); // esse navigate vai fazer um redirecionamento para a página de resultados

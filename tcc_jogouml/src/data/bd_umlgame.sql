@@ -1,6 +1,7 @@
 CREATE TABLE Usuario(
-	id_user INTEGER PRIMARY KEY,
-	username VARCHAR(255),
+	id_user SERIAL PRIMARY KEY,
+	username VARCHAR(255) NOT NULL,
+	hash TEXT NOT NULL,
 	pontuacao INTEGER
 )
 
@@ -19,7 +20,7 @@ CREATE TABLE Pergunta(
 )
 
 CREATE TABLE Resposta(
-	id_resp INTEGER PRIMARY KEY,
+	id_resp SERIAL PRIMARY KEY,
 	resposta_dada CHAR(1),
 	usuario_fk INT not null,
 	pergunta_fk INT not null,
@@ -27,8 +28,15 @@ CREATE TABLE Resposta(
 	FOREIGN KEY (pergunta_fk) REFERENCES Pergunta(id_perg)	
 )
 
-INSERT INTO Usuario VALUES(1,'Davi',900)
-INSERT INTO Usuario VALUES(2,'João',800)
+CREATE SEQUENCE IF NOT EXISTS usuario_id_user_seq
+    INCREMENT 1
+    START 1
+    MINVALUE 1
+    MAXVALUE 2147483647
+    CACHE 1;
+
+INSERT INTO Usuario (username, hash) VALUES('Davi','654546546dsadasdas')
+INSERT INTO Usuario (username, hash) VALUES('João','654546546dsadasdas')
 INSERT INTO Usuario VALUES(3,'Paulo')
 INSERT INTO Pergunta VALUES(1,'O que é caso de uso?','É uma ação do usuário','Representa a ligação do usuário com o sistema','Serve como forma de relacionamento','É uma característica do ator',true,false,false,false,'A')
 INSERT INTO Pergunta VALUES(2,'O que são os atores?','Representa apenas o sistema','Representa a ligação do usuário com o sistema', 'Serve como forma de relacionamento', 'São usuários que utilizam o sistema',false,false,false,true,'D')
@@ -62,6 +70,7 @@ DELETE FROM Resposta;
 COMMIT;
 
 DELETE FROM Resposta;
+DELETE FROM Usuario;
 
 
 DELETE FROM Pergunta;
