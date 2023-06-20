@@ -1,0 +1,31 @@
+.container {
+    display: flex;
+    background-color: #333333;
+    width: 100%;
+    height: auto;
+    flex-flow: column wrap;
+    padding-bottom: 25rem;
+    justify-content: center;
+    align-items: center;
+}
+
+.Title{
+    color: #FFF;
+    padding-bottom: 1rem;
+}
+
+.tableRanking{
+    background-color: #333333;
+    text-align: center;
+    border: none;
+    border-radius: 8px;
+    height: auto;
+    width: 25rem;
+}
+
+tr, td{
+    font-family: 'Roboto' sans-serif;
+    font-weight: bold;
+    color: #FFF;
+    border: none;
+}

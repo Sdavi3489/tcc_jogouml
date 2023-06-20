@@ -20,14 +20,14 @@ const Questions = ({userID}) => {
 
     function verifica_resp(e) {
         e.preventDefault();
-        const resp_dada = {"resposta_dada": e.target.value, "usuario_fk": userID, "pergunta_fk": count } // manda as informações em json para a requisição post.
+        const resp_dada = {"id_resp": count,"resposta_dada": e.target.value, "usuario_fk": userID, "pergunta_fk": count } // manda as informações em json para a requisição post.
         const rev = bd_dados.map((res) => res.resposta_correta) //pega a resposta correta
         setshowResp(true); //Mostra a resposta correta e incorreta da questão
 
         console.log(rev);
         if(resp_dada.resposta_dada == rev){
-            console.log('Ganhou 3 pontos!');
-            setScore((scr)=>scr+3);
+            console.log('Ganhou 1 ponto!');
+            setScore((scr)=>scr+1);
         }
         else{
             console.log('Perdeu 1 ponto!');
@@ -91,7 +91,7 @@ const Questions = ({userID}) => {
         // utilizar o map para pegar o numero do index e somar index + 1 para dar o numero certo do total de questões  
         if(count == 10){
             // esse if == 10 vai ser provisório por enquanto não adicionamos mais perguntas, quando adicionar mais eu coloco o tamanho (lenght) do array
-            navigate(`/result/${Score}`); // esse navigate vai fazer um redirecionamento para a página de resultados
+            navigate(`/result/${userID}/${Score}`); // esse navigate vai fazer um redirecionamento para a página de resultados
         }
     }
 

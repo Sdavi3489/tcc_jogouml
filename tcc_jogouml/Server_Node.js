@@ -52,8 +52,8 @@ app.get('/question/:id', function (req, res) {
 
 app.post('/answer', function (req, res) {
     client.query({
-        text: 'INSERT INTO Resposta (resposta_dada,usuario_fk, pergunta_fk) VALUES($1,$2,$3)',
-        values: [req.body.resposta_dada, req.body.usuario_fk, req.body.pergunta_fk]
+        text: 'INSERT INTO Resposta (id_resp,resposta_dada,usuario_fk, pergunta_fk) VALUES($1,$2,$3,$4)',
+        values: [req.body.id_resp,req.body.resposta_dada, req.body.usuario_fk, req.body.pergunta_fk]
     })
         .then(
             function (ret) {
@@ -65,6 +65,32 @@ app.post('/answer', function (req, res) {
 app.get('/result', function (req, res) {
     client.query({
         text: 'SELECT resposta_correta, resposta_dada FROM Pergunta, Resposta WHERE id_perg = id_resp',
+        //values: [req.body.resposta_correta, req.body.resposta_dada]
+    })
+        .then(
+            function (ret) {
+                res.json(ret.rows)
+            }
+        )
+})
+
+// Atualiza a pontuação do usuário
+app.put('/rank/:id/:score', function (req, res) {
+    client.query({
+        text: 'UPDATE Usuario SET pontuacao = $2 WHERE id_user = $1',
+        values: [req.params.id, req.params.score]
+    })
+        .then(
+            function (ret) {
+                res.json(ret.rows)
+            }
+        )
+})
+
+// Consulta a pontuação de todos os usuários
+app.get('/ranking', function (req, res) {
+    client.query({
+        text: 'SELECT username, pontuacao FROM Usuario ORDER BY pontuacao DESC',
         //values: [req.body.resposta_correta, req.body.resposta_dada]
     })
         .then(

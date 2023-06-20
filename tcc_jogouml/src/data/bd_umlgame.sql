@@ -20,7 +20,7 @@ CREATE TABLE Pergunta(
 )
 
 CREATE TABLE Resposta(
-	id_resp SERIAL PRIMARY KEY,
+	id_resp INT PRIMARY KEY,
 	resposta_dada CHAR(1),
 	usuario_fk INT not null,
 	pergunta_fk INT not null,
@@ -78,3 +78,10 @@ DELETE FROM Pergunta;
 DROP TABLE Usuario CASCADE
 DROP TABLE Resposta cascade
 DROP TABLE Pergunta CASCADE
+
+
+UPDATE Usuario
+SET pontuacao = 20
+WHERE id_user = 1
+
+SELECT username, pontuacao FROM Usuario ORDER BY pontuacao DESC;

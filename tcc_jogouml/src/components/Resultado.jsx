@@ -5,10 +5,10 @@ import { useState, useEffect } from 'react'
 
 const Resultado = () => {
 
-    const { score } = useParams();
+    const { id, score } = useParams();
     const [result, setResult] = useState([]);
-    const style_red = {backgroundColor: "#FF0000"}
-    const style_green = {backgroundColor: "#008000"}
+    const style_red = { backgroundColor: "#FF0000" }
+    const style_green = { backgroundColor: "#008000" }
 
 
     useEffect(() => {
@@ -21,6 +21,20 @@ const Resultado = () => {
                 console.log('Ocorreu um erro:', error);
             });
     }, [result])
+
+    useEffect(() => {
+        fetch(`http://localhost:3000/rank/${id}/${score}`, {
+            method: 'PUT'
+        })
+            .then(response => response.json())
+            .then(data => {
+                //setVer(data);
+                console.log(data.score); // Dados retornados pela API após a requisição POST
+            })
+            .catch(error => {
+                console.log('Ocorreu um erro:', error);
+            });
+    }, [])
 
     return (
         <>
@@ -35,7 +49,7 @@ const Resultado = () => {
                         result.map((res, index) => {
                             return <tr key={index}>
                                 <td style={style_green}>{res.resposta_correta}</td>
-                                {(res.resposta_dada) == res.resposta_correta? <td style={style_green}>{res.resposta_dada}</td>: <td style={style_red}>{res.resposta_dada}</td>}
+                                {(res.resposta_dada) == res.resposta_correta ? <td style={style_green}>{res.resposta_dada}</td> : <td style={style_red}>{res.resposta_dada}</td>}
                             </tr>
 
                         })

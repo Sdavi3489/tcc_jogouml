@@ -7,6 +7,7 @@ import { useState, useEffect } from 'react'
 // app.use(cookieParser());
 import { Link, useNavigate } from 'react-router-dom'
 import { BiLogOut } from "react-icons/bi";
+import Navbar from '../layout/Navbar';
 
 
 const Menu = () => {

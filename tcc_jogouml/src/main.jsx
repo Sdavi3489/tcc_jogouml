@@ -13,16 +13,6 @@ import { useState } from 'react';
 import PrivateRoute from './Routes/PrivateRoute.jsx'
 import Menu from './pages/Menu.jsx'
 
-// const [Autenticar, setAutenticar] = useState(false);
-
-// const handleLogin = () => {
-//   setAutenticar(true);
-// };
-
-// const handleLogout = () => {
-//   setAutenticar(false);
-// };
-
 
 const router = createBrowserRouter([
   {
@@ -50,8 +40,8 @@ const router = createBrowserRouter([
         element: <Register />,
       },
       {
-        path: '/result/:score',
-        element: <Resultado />,
+        path: '/result/:id/:score',
+        element: <PrivateRoute><Resultado /></PrivateRoute>,
       },
       {
         path: '/private/play/:id_user',
@@ -66,28 +56,4 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     <RouterProvider router={router} />
   </React.StrictMode>
 
-  // ReactDOM.createRoot(document.getElementById('root')).render(
-  //   <React.StrictMode>
-  //     <App />
-  //   </React.StrictMode>,
-
-  ///////// Backup da pagina de intruções estou utilizando para criar uma rota protegida como teste depois mudar isto
-  // {
-  //   path: "rules",
-  //   element: <Rules />,
-  // },
-
-  // {
-  //   element: <PrivateRoute
-  //     path="/rules"
-  //     element={<Rules />}
-  //     Autenticar={Autenticar}
-  //     onLogout={handleLogout}
-  //   />,
-  // },
-
-  // {
-  //   path: "menu",
-  //   element: <PrivateRoute><Menu/></PrivateRoute>,
-  // },
 )
