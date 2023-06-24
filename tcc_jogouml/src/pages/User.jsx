@@ -6,7 +6,6 @@ const User = () => {
   const { id_user } = useParams();
   return (
     <>
-      <h1>User</h1>
       <Questions userID={id_user}/>
     </>
   )

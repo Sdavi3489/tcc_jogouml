@@ -1,19 +1,16 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
-//import jwt from 'jsonwebtoken';
-// import cookieParser from 'cookie-parser';
-//import { useState, useEffect } from 'react'
-// import cookieParser from 'cookie-parser';
-// app.use(cookieParser());
 import { Link, useNavigate } from 'react-router-dom'
 import { BiLogOut } from "react-icons/bi";
 import Navbar from '../layout/Navbar';
+import useCaseImage from '../assets/caso-de-uso-menu.jpg';
+import style from '../styles/Menu.module.css';
 
 
 const Menu = () => {
 
   const [user, setUser] = useState('');
-  // const [logout, setLogout] = useState(false);
+  const [sumUC, setSumUC] = useState(false);
   const navigate = useNavigate();
 
   function OnLogout() {
@@ -39,18 +36,42 @@ const Menu = () => {
     fetchData();
   }, []);
 
-  function onPlayGame(){
+  function onPlayGame() {
     return navigate(`/private/play/${user.id_user}`)
   }
 
-  console.log(user.username)
+  //console.log(user.username)
 
   return (
     <>
-      <h1>Olá {user.username}</h1>
-      <button type="submit" onClick={onPlayGame}>Começar</button>
-
-
+      <div className={style.containerMenu}>
+        <h1>Olá {user.username}</h1>
+        <div className={style.containerCards}>
+          <div className={style.cardMenu}>
+            <img className={style.imgMenu} src={useCaseImage} alt="Imagem do diagrama de caso de uso" onClick={() => sumUC? setSumUC(false): setSumUC(true)} />
+            <span className={style.spanDesc}>Caso de Uso</span>
+          </div>
+        </div>
+        {sumUC == true && (
+          <div className={style.containerDet}>
+            <details className={style.det}>
+              <summary>Nível de dificuldade: </summary>
+              <details className={style.det}>
+                <summary>Iniciante: </summary>
+                <ul className={style.coluna}>
+                  <li className={style.linha}>Atores</li>
+                  <li className={style.linha}>Caso de uso</li>
+                  <li className={style.linha}>Relacionamentos</li>
+                  <li className={style.linha}>Include</li>
+                  <li className={style.linha}>Exclude</li><br />
+                  <li className={style.linha}><button className={style.btnPlay} type="submit" onClick={onPlayGame}>Começar</button></li>
+                </ul>
+              </details>
+            </details>
+          </div>
+        )
+        }
+      </div>
     </>
   )
 }
