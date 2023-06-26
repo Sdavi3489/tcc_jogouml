@@ -37,6 +37,19 @@ const Menu = () => {
   }, []);
 
   function onPlayGame() {
+
+    fetch('http://localhost:3000/Delresptemp', {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+    })
+      .then(data => {
+        console.log(data)
+      })
+      .catch(error => {
+        console.log('Ocorreu um erro:', error);
+      });
     return navigate(`/private/play/${user.id_user}`)
   }
 
@@ -48,7 +61,7 @@ const Menu = () => {
         <h1>Olá {user.username}</h1>
         <div className={style.containerCards}>
           <div className={style.cardMenu}>
-            <img className={style.imgMenu} src={useCaseImage} alt="Imagem do diagrama de caso de uso" onClick={() => sumUC? setSumUC(false): setSumUC(true)} />
+            <img className={style.imgMenu} src={useCaseImage} alt="Imagem do diagrama de caso de uso" onClick={() => sumUC ? setSumUC(false) : setSumUC(true)} />
             <span className={style.spanDesc}>Caso de Uso</span>
           </div>
         </div>

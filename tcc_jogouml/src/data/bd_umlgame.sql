@@ -65,10 +65,6 @@ EXISTS(
 DELETE FROM Resposta WHERE id_resp = 1
 DELETE FROM Resposta WHERE id_resp = 2
 
-BEGIN;
-DELETE FROM Resposta;
-COMMIT;
-
 DELETE FROM Resposta;
 DELETE FROM Usuario;
 
@@ -81,7 +77,14 @@ DROP TABLE Pergunta CASCADE
 
 
 UPDATE Usuario
-SET pontuacao = 20
+SET pontuacao = 7
 WHERE id_user = 1
+
+UPDATE Usuario
+SET pontuacao = 20
+WHERE id_user = 1 AND 20 > pontuacao;
+
+
+SELECT pontuacao FROM Usuario WHERE id_user=1
 
 SELECT username, pontuacao FROM Usuario ORDER BY pontuacao DESC;

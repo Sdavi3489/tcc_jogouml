@@ -62,6 +62,17 @@ app.post('/answer', function (req, res) {
         )
 })
 
+app.delete('/Delresptemp', function (req, res) {
+    client.query({
+        text: 'DELETE FROM Resposta',
+    })
+        .then(
+            function (ret) {
+                res.send('Reinício das respostas')
+            }
+        )
+})
+
 app.get('/result', function (req, res) {
     client.query({
         text: 'SELECT resposta_correta, resposta_dada FROM Pergunta, Resposta WHERE id_perg = id_resp',
@@ -74,15 +85,31 @@ app.get('/result', function (req, res) {
         )
 })
 
+//Consulta todos a pontuação de um usuário específico
+app.get('/scoreUser/:id', function (req, res) {
+    client.query({
+        text: 'SELECT pontuacao FROM Usuario WHERE id_user=$1',
+        values: [req.params.id]
+    })
+        .then(
+            function (ret) {
+                res.json(ret.rows)
+            }
+        )
+})
+
 // Atualiza a pontuação do usuário
 app.put('/rank/:id/:score', function (req, res) {
     client.query({
-        text: 'UPDATE Usuario SET pontuacao = $2 WHERE id_user = $1',
+        text: 'UPDATE Usuario SET pontuacao = $2 WHERE id_user = $1 AND $2 > pontuacao',
         values: [req.params.id, req.params.score]
     })
         .then(
             function (ret) {
                 res.json(ret.rows)
+                console.log(ret.rows.score)
+                console.log(ret.rowCount)
+
             }
         )
 })
@@ -144,7 +171,7 @@ const secretKey = process.env.SECRET_KEY;
 app.use((req, res, next) => {
     const IDuser = getUser.map((e)=>e.id_user)
     const id = IDuser[0];
-    console.log("id: ",id);
+    //console.log("id: ",id);
     const token = jwt.sign({ userId: id}, secretKey, { expiresIn: '1h' });
     if (token) {
         req.headers.authorization = `Bearer ${token}`;
@@ -171,8 +198,8 @@ app.get('/protegido', (req, res) => {
         // Caso o token seja válido
         // retornar dados do usuário autenticado
         const userId = decoded.userId;
-        console.log("var global", IDLoginUser[0])
-        console.log("userId: ",userId)
+        //console.log("var global", IDLoginUser[0])
+        //console.log("userId: ",userId)
         return res.status(200).json({ message: 'Rota protegida', userId: userId, valido: true, user: getUser[0]});
  
     } catch (error) {

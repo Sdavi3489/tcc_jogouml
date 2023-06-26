@@ -40,7 +40,7 @@ const router = createBrowserRouter([
         element: <Register />,
       },
       {
-        path: '/result/:id/:score',
+        path: '/private/result/:id/:score',
         element: <PrivateRoute><Resultado /></PrivateRoute>,
       },
       {

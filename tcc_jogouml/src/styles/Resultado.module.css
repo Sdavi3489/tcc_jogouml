@@ -2,7 +2,7 @@
     display: flex;
     background-color: #FFEAD2;
     width: 30rem;
-    height: 30rem;
+    height: auto;
     text-align: center;
     padding: 1.5rem;
     margin-left: auto;
@@ -36,10 +36,20 @@ tr{
 }
 
 th{
+    color: #213547;
     padding: 10px;
 }
 
 td{
     padding-top: 2px;
     padding-bottom: 2px;
+}
+
+.containerOpt{
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 10px;
+    width: 30rem;
+    height: 3rem;
+    background-color: #333;
 }
