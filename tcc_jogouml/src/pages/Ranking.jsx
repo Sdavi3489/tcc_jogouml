@@ -24,9 +24,9 @@ const Ranking = () => {
         <h1 className={styles.Title}>Ranking</h1>
         <table className={styles.tableRanking}>
           <tr>
-            <th>Posição</th>
-            <th>Username</th>
-            <th>Pontuação</th>
+            <th className={styles.thRank}>Posição</th>
+            <th className={styles.thRank}>Username</th>
+            <th className={styles.thRank}>Pontuação</th>
           </tr>
           {
             rank.map((res, index) => {

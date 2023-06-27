@@ -4,17 +4,33 @@ import { useParams } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { VscDebugRestart } from "react-icons/vsc";
-import { BiMenu} from "react-icons/bi";
+import { BiMenu } from "react-icons/bi";
 
 const Resultado = () => {
 
     const { id, score } = useParams();
     const [result, setResult] = useState([]);
-    const [bdscore, setBDscore] = useState(0);
     const style_red = { backgroundColor: "#FF0000" }
     const style_green = { backgroundColor: "#008000" }
     const style_perg = { backgroundColor: "#333" }
+    const navigate = useNavigate() // navega para o link definido quando o for acionado
 
+    function RestartPlayGame() {
+
+        fetch('http://localhost:3000/Delresptemp', {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        })
+            .then(data => {
+                console.log(data)
+            })
+            .catch(error => {
+                console.log('Ocorreu um erro:', error);
+            });
+        return navigate(`/private/play/${id}`)
+    }
 
     useEffect(() => {
         fetch(`http://localhost:3000/result`)
@@ -26,18 +42,6 @@ const Resultado = () => {
                 console.log('Ocorreu um erro:', error);
             });
     }, [result])
-
-    // useEffect(() => {
-    //     fetch(`http://localhost:3000/scoreUser/${id}`)
-    //         .then(response => response.json())
-    //         .then(data => {
-    //             setBDscore(data[0].pontuacao);
-    //             console.log('Ponruacao antiga' + data[0].pontuacao);
-    //         })
-    //         .catch(error => {
-    //             console.log('Ocorreu um erro:', error);
-    //         });
-    // }, [])
 
     useEffect(() => {
         fetch(`http://localhost:3000/rank/${id}/${score}`, {
@@ -78,8 +82,9 @@ const Resultado = () => {
                     }
                 </table>
                 <div className={styles.containerOpt}>
-                    <Link to={`/private`}><BiMenu size={50}/></Link>
-                    <Link to={`/private/play/${id}`}><VscDebugRestart size={50}/></Link>
+                    <Link to={`/private`}><BiMenu size={50} /></Link>
+                    {/*<button className={styles.btnRestart} onClick={RestartPlayGame}>Reiniciar</button>*/}
+                    <Link onClick={RestartPlayGame}><VscDebugRestart size={50}/></Link>
                 </div>
             </div>
         </>

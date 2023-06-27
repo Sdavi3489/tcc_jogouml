@@ -36,7 +36,6 @@ const Questions = ({ userID }) => {
             setCountVida((ch) => ch - 1);
         }
 
-
         //console.log(bd_dados.map((res) => res.ver_a))
         //console.log(bd_dados.map((res) => res.ver_a[0]))
         //console.log(rev[0])
@@ -73,14 +72,17 @@ const Questions = ({ userID }) => {
         //e.preventDefault()
         setCount((e) => e + 1)
         setshowResp(false)
+
+        if (count_vida == 0) {
+            return navigate('/private/gameover');
+        }
         // utilizar o map para pegar o numero do index e somar index + 1 para dar o numero certo do total de questões  
         if (count == 10) {
             // esse if == 10 vai ser provisório por enquanto não adicionamos mais perguntas, quando adicionar mais eu coloco o tamanho (lenght) do array
-            navigate(`/private/result/${userID}/${Score}`);// esse navigate vai fazer um redirecionamento para a página de resultados
-            
+            return navigate(`/private/result/${userID}/${Score}`);// esse navigate vai fazer um redirecionamento para a página de resultados
+
         }
     }
-
 
     return (
         <div className={styles.container_qt}>

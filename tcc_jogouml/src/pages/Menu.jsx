@@ -37,7 +37,6 @@ const Menu = () => {
   }, []);
 
   function onPlayGame() {
-
     fetch('http://localhost:3000/Delresptemp', {
       method: 'DELETE',
       headers: {

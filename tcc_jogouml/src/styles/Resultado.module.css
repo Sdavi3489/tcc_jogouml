@@ -20,6 +20,22 @@
     font-weight: bold;
 }
 
+.btnRestart{
+    width: 5rem;
+    height: 3rem;
+    font-family: 'Roboto', sans-serif;
+    font-size: medium;
+    color: #FFF;
+    cursor: pointer;
+    border-radius: 8px;
+    background-image: linear-gradient(to right, rgb(0, 150, 0) 20%, rgb(0, 255, 0) 80%);
+}
+
+.btnRestart:hover{
+    background-color: #d3d3d3;
+    transition: background-color 0.5s ease;
+}
+
 table, tr, td{
     border: 1px solid black;
 }

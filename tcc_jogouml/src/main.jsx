@@ -12,6 +12,7 @@ import Register from './pages/Register.jsx'
 import { useState } from 'react';
 import PrivateRoute from './Routes/PrivateRoute.jsx'
 import Menu from './pages/Menu.jsx'
+import GameOver from './components/GameOver.jsx'
 
 
 const router = createBrowserRouter([
@@ -46,6 +47,10 @@ const router = createBrowserRouter([
       {
         path: '/private/play/:id_user',
         element: <PrivateRoute><User /></PrivateRoute>,
+      },
+      {
+        path: '/private/gameover',
+        element: <PrivateRoute><GameOver/></PrivateRoute>,
       },
     ]
   },

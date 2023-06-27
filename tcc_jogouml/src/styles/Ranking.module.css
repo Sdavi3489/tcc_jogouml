@@ -1,7 +1,7 @@
 .container {
     display: flex;
     background-color: #333333;
-    width: 100%;
+    width: auto;
     height: auto;
     flex-flow: column wrap;
     padding-bottom: 25rem;
@@ -28,4 +28,8 @@ tr, td{
     font-weight: bold;
     color: #FFF;
     border: none;
+}
+
+.thRank{
+    color: #FFF;
 }
