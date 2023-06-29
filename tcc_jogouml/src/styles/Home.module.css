@@ -15,11 +15,13 @@
 .login {
     display: flex;
     background-color: #fff;
-    width: 32rem;
-    height: 32rem;
+    width: auto;
+    height: auto;
+    /*width: 32rem;
+    height: 32rem;*/
     justify-content: center;
     border-radius: 8px;
-    margin-right: 3rem;
+    /*margin-right: 3rem;*/
 }
 
 form {

@@ -13,19 +13,6 @@ const Menu = () => {
   const [sumUC, setSumUC] = useState(false);
   const navigate = useNavigate();
 
-  function OnLogout() {
-    fetch(`http://localhost:3000/logout`)
-      .then(response => response.json())
-      .then(data => {
-        const sair = data.logout
-        console.log(sair)
-        //navigate(`/private/${false}`);
-      })
-      .catch(error => {
-        console.log('Ocorreu um erro:', error);
-      });
-  }
-
   useEffect(() => {
     const fetchData = async () => {
       const response = await fetch('http://localhost:3000/protegido');
@@ -49,7 +36,11 @@ const Menu = () => {
       .catch(error => {
         console.log('Ocorreu um erro:', error);
       });
+
+    //sessionStorage.setItem('play', true);
+
     return navigate(`/private/play/${user.id_user}`)
+
   }
 
   //console.log(user.username)

@@ -3,19 +3,15 @@ import style from '../styles/Home.module.css'
 import banner from "../assets/banner_jogo.jpg"
 import bcrypt from 'bcryptjs';
 import { useNavigate } from 'react-router-dom';
-
-
-// function initialState(){
-//   return {user: '', password: ''};
-// }
+import Alert from '@mui/material/Alert';
+import AlertTitle from '@mui/material/AlertTitle';
+import Stack from '@mui/material/Stack';
 
 const Home = () => {
-  // const [users, setUsers] = useState(''); // informações do usuario
-  // const [password, setPassword] = useState('');
   const [username, setUsername] = useState(''); // informações do usuario
   const [password, setPassword] = useState('');
   const [iduser, setIduser] = useState('');
-  //const [hash, setHash] = useState('');
+  const [isValido, setIsvalido] = useState(false);
   const [user, setUser] = useState([]);
   const navigate = useNavigate()
 
@@ -104,7 +100,7 @@ const Home = () => {
           console.log('Não é válido:', error);
         });
     } else {
-      Alert('Senha incorreta');
+      setIsvalido(true);
     }
   }
 
@@ -124,7 +120,7 @@ const Home = () => {
     <>
       <div className={style.containerHome}>
         <div className={style.banner}>
-          <img src={banner} alt="banner do site que representa um diagrama de caso de uso" />
+          <img src={banner} alt="banner do site que representa um diagrama de caso de uso" height={'100%'} />
         </div>
         <div className={style.login}>
           <form action="" onSubmit={onSubmitValues}>
@@ -134,6 +130,12 @@ const Home = () => {
             <input className={style.ipt} type="password" placeholder="Senha" value={password} onChange={(e) => setPassword(e.target.value)} />
             <button className={style.btnEntrar} type='submit'>Entrar</button>
             <a className={style.registro} href="/register">Registre-se</a>
+            {isValido && <Stack sx={{ width: '100%' }} spacing={2}>
+              <Alert severity="error">
+                <AlertTitle>Erro</AlertTitle>
+                Senha ou Usuário incorreto — <strong>Tente novamente!</strong>
+              </Alert>
+            </Stack>}
           </form>
         </div>
       </div>

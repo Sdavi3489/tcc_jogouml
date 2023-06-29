@@ -13,7 +13,7 @@ import { useState } from 'react';
 import PrivateRoute from './Routes/PrivateRoute.jsx'
 import Menu from './pages/Menu.jsx'
 import GameOver from './components/GameOver.jsx'
-
+import PrivatePlay from './Routes/PrivatePlay.jsx'
 
 const router = createBrowserRouter([
   {
