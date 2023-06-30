@@ -73,6 +73,8 @@ DELETE FROM Pergunta;
 
 DROP TABLE Usuario CASCADE
 DROP TABLE Resposta cascade
+
+UPDATE Usuario SET pontuacao = 0 WHERE id_user = 3
 DROP TABLE Pergunta CASCADE
 
 

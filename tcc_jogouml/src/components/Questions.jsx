@@ -1,10 +1,10 @@
 import React from 'react'
 import styles from '../styles/Questions.module.css'
-import { useState, useEffect, useRef } from 'react'
-import { FcOk, FcDisapprove, FcLike } from 'react-icons/fc';
-import { FiArrowLeftCircle, FiArrowRightCircle } from "react-icons/fi";
+import { useState, useEffect} from 'react'
+import { FcOk, FcLike } from 'react-icons/fc';
+import { FiArrowRightCircle } from "react-icons/fi";
+import { IoCloseCircle } from "react-icons/io5";
 import { useNavigate } from 'react-router-dom';
-import Resultado from './Resultado';
 
 
 const Questions = ({ userID }) => {
@@ -15,7 +15,7 @@ const Questions = ({ userID }) => {
     const [ver, setVer] = useState([]) //guarda as informações que enviamos para o banco de dados da tabela resposta.
     const [count_vida, setCountVida] = useState(5) //Contador de vidas
     const [Score, setScore] = useState(0) // Pontuação do jogador 
-    const [prevresp, setPrevresp] = useState(0)
+    const [resp, setResp] = useState('') // Esta variável identifica qual opção foi escolhida pelo jogador e server para mostrar o resultado na tela.
     const navigate = useNavigate() // navega para o link definido quando o for acionado
 
 
@@ -24,7 +24,7 @@ const Questions = ({ userID }) => {
         const resp_dada = { "id_resp": count, "resposta_dada": e.target.value, "usuario_fk": userID, "pergunta_fk": count } // manda as informações em json para a requisição post.
         const rev = bd_dados.map((res) => res.resposta_correta) //pega a resposta correta
         setshowResp(true); //Mostra a resposta correta e incorreta da questão
-
+        setResp(resp_dada.resposta_dada);
         console.log(rev);
         if (resp_dada.resposta_dada == rev) {
             console.log('Ganhou 1 ponto!');
@@ -88,10 +88,10 @@ const Questions = ({ userID }) => {
         <div className={styles.container_qt}>
             <div className={styles.container_vida}><p className={styles.score}>PONTOS: {Score}</p><p className={styles.countHearts}>{count_vida}</p><FcLike className={styles.fcLike} size={35} /></div>
             <p className={styles.pq}>{bd_dados.map((e, index) => e.pergunta)}</p>
-            <button className={styles.btnA} onClick={verifica_resp} value='A'>{bd_dados.map((r) => r.opcao_a)}</button>{showResp && (bd_dados.map((res, index) => res.ver_a == true ? <FcOk /> : <FcDisapprove />))}
-            <button className={styles.btnA} onClick={verifica_resp} value='B'>{bd_dados.map((r) => r.opcao_b)}</button>{showResp && (bd_dados.map((res, index) => res.ver_b == true ? <FcOk /> : <FcDisapprove />))}
-            <button className={styles.btnA} onClick={verifica_resp} value='C'>{bd_dados.map((r) => r.opcao_c)}</button>{showResp && (bd_dados.map((res, index) => res.ver_c == true ? <FcOk /> : <FcDisapprove />))}
-            <button className={styles.btnA} onClick={verifica_resp} value='D'>{bd_dados.map((r) => r.opcao_d)}</button>{showResp && (bd_dados.map((res, index) => res.ver_d == true ? <FcOk /> : <FcDisapprove />))}
+            <button className={styles.btnA} onClick={verifica_resp} value='A'>{bd_dados.map((r) => r.opcao_a)}</button>{showResp && resp == 'A' && (bd_dados.map((res, index) => res.ver_a == true ? <FcOk size={25}/> : <IoCloseCircle color="#FF0000" size={25}/>))}
+            <button className={styles.btnA} onClick={verifica_resp} value='B'>{bd_dados.map((r) => r.opcao_b)}</button>{showResp && resp == 'B' && (bd_dados.map((res, index) => res.ver_b == true ? <FcOk size={25}/> : <IoCloseCircle color="#FF0000" size={25}/>))}
+            <button className={styles.btnA} onClick={verifica_resp} value='C'>{bd_dados.map((r) => r.opcao_c)}</button>{showResp && resp == 'C' && (bd_dados.map((res, index) => res.ver_c == true ? <FcOk size={25}/> : <IoCloseCircle color="#FF0000" size={25}/>))}
+            <button className={styles.btnA} onClick={verifica_resp} value='D'>{bd_dados.map((r) => r.opcao_d)}</button>{showResp && resp == 'D' && (bd_dados.map((res, index) => res.ver_d == true ? <FcOk size={25}/> : <IoCloseCircle color="#FF0000" size={25}/>))}
             <div className={styles.container_btn}>{showResp && (<button className={styles.btnArrow} onClick={next_question}><FiArrowRightCircle /></button>)}</div>
         </div>
     )

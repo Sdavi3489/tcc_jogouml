@@ -1,17 +1,29 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { BiLogOut } from "react-icons/bi";
 import Navbar from '../layout/Navbar';
 import useCaseImage from '../assets/caso-de-uso-menu.jpg';
 import style from '../styles/Menu.module.css';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import CardMedia from '@mui/material/CardMedia';
+import Typography from '@mui/material/Typography';
+import { Button, CardActionArea, CardActions } from '@mui/material';
+import Tabs from '@mui/material/Tabs';
+import Tab from '@mui/material/Tab';
 
 
 const Menu = () => {
 
   const [user, setUser] = useState('');
   const [sumUC, setSumUC] = useState(false);
+  const [value, setValue] = useState(1);
   const navigate = useNavigate();
+
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+    console.log("Tab value: ")
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -39,7 +51,14 @@ const Menu = () => {
 
     //sessionStorage.setItem('play', true);
 
-    return navigate(`/private/play/${user.id_user}`)
+    if (value == 0) {
+      return navigate(`/private/play/${user.id_user}`)
+    }
+    if (value == 1) {
+      return navigate(`/rank`)
+    }
+
+    //return navigate(`/private/play/${user.id_user}`)
 
   }
 
@@ -50,31 +69,42 @@ const Menu = () => {
       <div className={style.containerMenu}>
         <h1>Olá {user.username}</h1>
         <div className={style.containerCards}>
-          <div className={style.cardMenu}>
-            <img className={style.imgMenu} src={useCaseImage} alt="Imagem do diagrama de caso de uso" onClick={() => sumUC ? setSumUC(false) : setSumUC(true)} />
-            <span className={style.spanDesc}>Caso de Uso</span>
+          <div>
+            <Card sx={{ maxWidth: 250 }}>
+              <CardActionArea>
+                <CardMedia
+                  component="img"
+                  height="140"
+                  image={useCaseImage}
+                  alt="Imagem do diagrama de caso de uso"
+                />
+                <CardContent>
+                  <Typography gutterBottom variant="h5" component="div">
+                    Caso de uso
+                  </Typography>
+                  <Typography variant="body2" color="text.secondary">
+                    Esta sessão contém conteúdo sobre:
+                    Atores,
+                    Caso de uso,
+                    Relacionamentos,
+                    Include,
+                    Exclude
+                  </Typography>
+                </CardContent>
+                <Tabs value={value} onChange={handleChange} aria-label="disabled tabs example">
+                  <Tab label="Iniciante" />
+                  <Tab label="Intermediário" />
+                </Tabs>
+              </CardActionArea>
+              <CardActions>
+                <Button size="large" color="primary" onClick={onPlayGame}>
+                  Começar
+                </Button>
+              </CardActions>
+            </Card>
           </div>
         </div>
-        {sumUC == true && (
-          <div className={style.containerDet}>
-            <details className={style.det}>
-              <summary>Nível de dificuldade: </summary>
-              <details className={style.det}>
-                <summary>Iniciante: </summary>
-                <ul className={style.coluna}>
-                  <li className={style.linha}>Atores</li>
-                  <li className={style.linha}>Caso de uso</li>
-                  <li className={style.linha}>Relacionamentos</li>
-                  <li className={style.linha}>Include</li>
-                  <li className={style.linha}>Exclude</li><br />
-                  <li className={style.linha}><button className={style.btnPlay} type="submit" onClick={onPlayGame}>Começar</button></li>
-                </ul>
-              </details>
-            </details>
-          </div>
-        )
-        }
-      </div>
+      </div >
     </>
   )
 }
