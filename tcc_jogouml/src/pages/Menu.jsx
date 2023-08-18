@@ -11,6 +11,7 @@ import Typography from '@mui/material/Typography';
 import { Button, CardActionArea, CardActions } from '@mui/material';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
+import bcrypt from 'bcryptjs';
 
 
 const Menu = () => {
@@ -19,6 +20,7 @@ const Menu = () => {
   const [sumUC, setSumUC] = useState(false);
   const [value, setValue] = useState(1);
   const navigate = useNavigate();
+  localStorage.removeItem('inGame'); // remove sessão do jogo caso esteja em aberto no navegador e caso o usuario resolva voltar para o menu
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -35,7 +37,7 @@ const Menu = () => {
     fetchData();
   }, []);
 
-  function onPlayGame() {
+  async function onPlayGame() {
     fetch('http://localhost:3000/Delresptemp', {
       method: 'DELETE',
       headers: {
@@ -49,11 +51,29 @@ const Menu = () => {
         console.log('Ocorreu um erro:', error);
       });
 
-    //sessionStorage.setItem('play', true);
 
+    //Função para criptografar o username
+    const criptoUsername = async (username) => {
+      try {
+        const salt = await bcrypt.genSalt(10); // Gerar um salt aleatório
+        const hash = await bcrypt.hash(username, salt); // Gerar o hash da senha com o salt
+        return hash;
+      } catch (error) {
+        throw new Error('Erro ao criptografar o username');
+      }
+    };
+
+    // Criptografar o username durante o registro
+    const userCripto = await criptoUsername(user.username);
+    console.log('username criptografado:', userCripto);
+
+    
+    //value == 0 significa que o nivel esta no iniciante
     if (value == 0) {
+      localStorage.setItem('inGame',userCripto);
       return navigate(`/private/play/${user.id_user}`)
     }
+    //value == 1 significa que o nivel esta no intermediário
     if (value == 1) {
       return navigate(`/rank`)
     }

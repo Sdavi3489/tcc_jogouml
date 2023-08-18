@@ -14,6 +14,7 @@ const Navbar = () => {
                 const sair = data.logout
                 console.log(sair)
                 localStorage.removeItem('sessao');
+                localStorage.removeItem('inGame');
                 navigate(`/`);
             })
             .catch(error => {

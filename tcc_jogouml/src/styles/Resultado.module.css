@@ -36,9 +36,9 @@
     transition: background-color 0.5s ease;
 }
 
-table, tr, td{
+/*table, tr, td{
     border: 1px solid black;
-}
+}*/
 
 .tableRes{
     margin-top: 30px;

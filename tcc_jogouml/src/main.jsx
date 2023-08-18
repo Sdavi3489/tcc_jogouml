@@ -13,6 +13,7 @@ import { useState } from 'react';
 import PrivateRoute from './Routes/PrivateRoute.jsx'
 import Menu from './pages/Menu.jsx'
 import GameOver from './components/GameOver.jsx'
+import PrivateRouteGame from './Routes/PrivateRouteGame.jsx'
 
 
 const router = createBrowserRouter([
@@ -42,15 +43,15 @@ const router = createBrowserRouter([
       },
       {
         path: '/private/result/:id/:score',
-        element: <PrivateRoute><Resultado /></PrivateRoute>,
+        element: <PrivateRouteGame><Resultado /></PrivateRouteGame>,
       },
       {
         path: '/private/play/:id_user',
-        element: <PrivateRoute><User /></PrivateRoute>,
+        element: <PrivateRouteGame><User /></PrivateRouteGame>,
       },
       {
         path: '/private/gameover',
-        element: <PrivateRoute><GameOver/></PrivateRoute>,
+        element: <PrivateRouteGame><GameOver/></PrivateRouteGame>,
       },
     ]
   },

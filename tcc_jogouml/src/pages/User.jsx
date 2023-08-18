@@ -3,10 +3,10 @@ import Questions from '../components/Questions'
 import { useParams } from 'react-router-dom'
 
 const User = () => {
-  const { id_user } = useParams();
+  const { id_user, user } = useParams();
   return (
     <>
-      <Questions userID={id_user}/>
+      <Questions userID={id_user} userPlayer={user}/>
     </>
   )
 }

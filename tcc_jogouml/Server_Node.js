@@ -62,6 +62,10 @@ app.post('/answer', function (req, res) {
         )
 })
 
+// app.post('/answer', function (req, res) {
+//     res.status(200).json(req.body); // os dados da resposta enviada através da requisição POST
+// })
+
 app.delete('/Delresptemp', function (req, res) {
     client.query({
         text: 'DELETE FROM Resposta',

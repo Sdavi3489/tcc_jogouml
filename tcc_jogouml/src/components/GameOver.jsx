@@ -4,6 +4,8 @@ import style from '../styles/GameOver.module.css'
 import { BsFillEmojiFrownFill } from "react-icons/bs";
 
 const GameOver = () => {
+    localStorage.removeItem('inGame'); // remove sessão do jogo caso esteja em aberto no navegador e caso o usuario resolva voltar para o menu
+
     return (
         <>
             <div className={style.contGameOver}>

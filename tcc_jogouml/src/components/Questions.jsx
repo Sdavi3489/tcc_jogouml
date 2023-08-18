@@ -1,6 +1,6 @@
 import React from 'react'
 import styles from '../styles/Questions.module.css'
-import { useState, useEffect} from 'react'
+import { useState, useEffect } from 'react'
 import { FcOk, FcLike } from 'react-icons/fc';
 import { FiArrowRightCircle } from "react-icons/fi";
 import { IoCloseCircle } from "react-icons/io5";
@@ -16,6 +16,7 @@ const Questions = ({ userID }) => {
     const [count_vida, setCountVida] = useState(5) //Contador de vidas
     const [Score, setScore] = useState(0) // Pontuação do jogador 
     const [resp, setResp] = useState('') // Esta variável identifica qual opção foi escolhida pelo jogador e server para mostrar o resultado na tela.
+    //const [result, setResult] = useState({})
     const navigate = useNavigate() // navega para o link definido quando o for acionado
 
 
@@ -23,8 +24,10 @@ const Questions = ({ userID }) => {
         e.preventDefault();
         const resp_dada = { "id_resp": count, "resposta_dada": e.target.value, "usuario_fk": userID, "pergunta_fk": count } // manda as informações em json para a requisição post.
         const rev = bd_dados.map((res) => res.resposta_correta) //pega a resposta correta
+        //document.getElementById(e).disabled = false;
         setshowResp(true); //Mostra a resposta correta e incorreta da questão
-        setResp(resp_dada.resposta_dada);
+        setResp(resp_dada.resposta_dada);// manda a resposta escolhida pelo jogador
+        
         console.log(rev);
         if (resp_dada.resposta_dada == rev) {
             console.log('Ganhou 1 ponto!');
@@ -55,6 +58,12 @@ const Questions = ({ userID }) => {
             .catch(error => {
                 console.log('Ocorreu um erro:', error);
             });
+        
+        // o set Timeot define o tempo necessário de 3 segundos para que o usuário confira o resultado antes de pular para a próxima questão
+        setTimeout(() => {
+            next_question();
+        }, 3000);
+        
     }
 
     useEffect(() => {
@@ -68,7 +77,7 @@ const Questions = ({ userID }) => {
             });
     }, [count])
 
-    function next_question(e) {
+    function next_question() {
         //e.preventDefault()
         setCount((e) => e + 1)
         setshowResp(false)
@@ -78,7 +87,10 @@ const Questions = ({ userID }) => {
         }
         // utilizar o map para pegar o numero do index e somar index + 1 para dar o numero certo do total de questões  
         if (count == 10) {
+            // const result = ver.map((res) => res.resposta_dada) //pega a resposta dada
+            // <Resultado resp=ver.resp_dada/>
             // esse if == 10 vai ser provisório por enquanto não adicionamos mais perguntas, quando adicionar mais eu coloco o tamanho (lenght) do array
+            localStorage.removeItem('inGame');
             return navigate(`/private/result/${userID}/${Score}`);// esse navigate vai fazer um redirecionamento para a página de resultados
 
         }
@@ -88,11 +100,11 @@ const Questions = ({ userID }) => {
         <div className={styles.container_qt}>
             <div className={styles.container_vida}><p className={styles.score}>PONTOS: {Score}</p><p className={styles.countHearts}>{count_vida}</p><FcLike className={styles.fcLike} size={35} /></div>
             <p className={styles.pq}>{bd_dados.map((e, index) => e.pergunta)}</p>
-            <button className={styles.btnA} onClick={verifica_resp} value='A'>{bd_dados.map((r) => r.opcao_a)}</button>{showResp && resp == 'A' && (bd_dados.map((res, index) => res.ver_a == true ? <FcOk size={25}/> : <IoCloseCircle color="#FF0000" size={25}/>))}
-            <button className={styles.btnA} onClick={verifica_resp} value='B'>{bd_dados.map((r) => r.opcao_b)}</button>{showResp && resp == 'B' && (bd_dados.map((res, index) => res.ver_b == true ? <FcOk size={25}/> : <IoCloseCircle color="#FF0000" size={25}/>))}
-            <button className={styles.btnA} onClick={verifica_resp} value='C'>{bd_dados.map((r) => r.opcao_c)}</button>{showResp && resp == 'C' && (bd_dados.map((res, index) => res.ver_c == true ? <FcOk size={25}/> : <IoCloseCircle color="#FF0000" size={25}/>))}
-            <button className={styles.btnA} onClick={verifica_resp} value='D'>{bd_dados.map((r) => r.opcao_d)}</button>{showResp && resp == 'D' && (bd_dados.map((res, index) => res.ver_d == true ? <FcOk size={25}/> : <IoCloseCircle color="#FF0000" size={25}/>))}
-            <div className={styles.container_btn}>{showResp && (<button className={styles.btnArrow} onClick={next_question}><FiArrowRightCircle /></button>)}</div>
+            <button className={styles.btnA} onClick={verifica_resp} value='A'>{bd_dados.map((r) => r.opcao_a)}</button>{showResp && resp == 'A' && (bd_dados.map((res, index) => res.ver_a == true ? <FcOk size={25} /> : <IoCloseCircle color="#FF0000" size={25} />))}
+            <button className={styles.btnA} onClick={verifica_resp} value='B'>{bd_dados.map((r) => r.opcao_b)}</button>{showResp && resp == 'B' && (bd_dados.map((res, index) => res.ver_b == true ? <FcOk size={25} /> : <IoCloseCircle color="#FF0000" size={25} />))}
+            <button className={styles.btnA} onClick={verifica_resp} value='C'>{bd_dados.map((r) => r.opcao_c)}</button>{showResp && resp == 'C' && (bd_dados.map((res, index) => res.ver_c == true ? <FcOk size={25} /> : <IoCloseCircle color="#FF0000" size={25} />))}
+            <button className={styles.btnA} onClick={verifica_resp} value='D'>{bd_dados.map((r) => r.opcao_d)}</button>{showResp && resp == 'D' && (bd_dados.map((res, index) => res.ver_d == true ? <FcOk size={25} /> : <IoCloseCircle color="#FF0000" size={25} />))}
+            {/* <div className={styles.container_btn}>{showResp && (<button className={styles.btnArrow} onClick={next_question}><FiArrowRightCircle /></button>)}</div> */}
         </div>
     )
     // #AAAAAA - cor cinza 

@@ -10,7 +10,7 @@ import Stack from '@mui/material/Stack';
 const Home = () => {
   const [username, setUsername] = useState(''); // informações do usuario
   const [password, setPassword] = useState('');
-  const [iduser, setIduser] = useState('');
+  //const [iduser, setIduser] = useState('');
   const [isValido, setIsvalido] = useState(false);
   const [user, setUser] = useState([]);
   const navigate = useNavigate()
@@ -29,20 +29,20 @@ const Home = () => {
     e.preventDefault();
     //const login = { "id_user": 1, "username": username, "hash": password}
 
-    //Função para criptografar a senha
-    const criptoUsername = async (username) => {
-      try {
-        const salt = await bcrypt.genSalt(10); // Gerar um salt aleatório
-        const hash = await bcrypt.hash(username, salt); // Gerar o hash da senha com o salt
-        return hash;
-      } catch (error) {
-        throw new Error('Erro ao criptografar o username');
-      }
-    };
+    // //Função para criptografar o username
+    // const criptoUsername = async (username) => {
+    //   try {
+    //     const salt = await bcrypt.genSalt(10); // Gerar um salt aleatório
+    //     const hash = await bcrypt.hash(username, salt); // Gerar o hash da senha com o salt
+    //     return hash;
+    //   } catch (error) {
+    //     throw new Error('Erro ao criptografar o username');
+    //   }
+    // };
 
-    // Criptografar a senha durante o registro
-    const userCripto = await criptoUsername(username);
-    console.log('username criptografado:', userCripto);
+    // // Criptografar o username durante o registro
+    // const userCripto = await criptoUsername(username);
+    // console.log('username criptografado:', userCripto);
 
     // Função para verificar a senha
     const comparePassword = async (password, hash) => {
