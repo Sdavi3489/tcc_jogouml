@@ -8,6 +8,7 @@ CREATE TABLE Usuario(
 CREATE TABLE Pergunta(
 	id_perg INT PRIMARY KEY,
 	pergunta VARCHAR(255),
+	img VARCHAR(255),
 	opcao_a VARCHAR(255),
 	opcao_b VARCHAR(255),
 	opcao_c VARCHAR(255),
@@ -28,6 +29,23 @@ CREATE TABLE Resposta(
 	FOREIGN KEY (pergunta_fk) REFERENCES Pergunta(id_perg)	
 )
 
+CREATE TABLE Conquista (
+  	idConq SERIAL PRIMARY KEY,
+  	conquista VARCHAR(100) NOT NULL,
+	img VARCHAR(255),
+  	descricao TEXT
+);
+
+-- Tabela para relacionar usuários e suas conquistas
+CREATE TABLE Usuario_Conquista (
+  id_usuario INT,
+  id_conquista INT,
+  PRIMARY KEY (id_usuario, id_conquista),
+  FOREIGN KEY (id_usuario) REFERENCES Usuario(id_user),
+  FOREIGN KEY (id_conquista) REFERENCES Conquista(idConq)
+);
+
+
 CREATE SEQUENCE IF NOT EXISTS usuario_id_user_seq
     INCREMENT 1
     START 1
@@ -47,6 +65,9 @@ INSERT INTO Resposta VALUES(2,'Representa apenas o sistema',150,1,2)
 SELECT * FROM Usuario
 SELECT * FROM Pergunta
 SELECT * FROM Resposta
+SELECT * FROM Conquista
+SELECT * FROM Usuario_Conquista
+SELECT id_conquista FROM Usuario,Usuario_Conquista WHERE id_user = id_usuario
 SELECT * FROM Pergunta WHERE id_perg = 1
 
 SELECT resposta_dada FROM Resposta Where resposta_dada
@@ -70,9 +91,11 @@ DELETE FROM Usuario;
 
 
 DELETE FROM Pergunta;
+DELETE FROM Usuario_Conquista;
 
 DROP TABLE Usuario CASCADE
 DROP TABLE Resposta cascade
+DROP TABLE Conquista cascade
 
 UPDATE Usuario SET pontuacao = 0 WHERE id_user = 3
 DROP TABLE Pergunta CASCADE
@@ -85,6 +108,13 @@ WHERE id_user = 1
 UPDATE Usuario
 SET pontuacao = 20
 WHERE id_user = 1 AND 20 > pontuacao;
+
+-- Adicionando as conquistas
+INSERT INTO Conquista (conquista, descricao) VALUES ('Começando com o pé direiro!','Acerte a primeira pergunta')
+INSERT INTO Conquista (conquista, descricao) VALUES ('Três seguidas','Acerte três perguntas seguidas')
+INSERT INTO Conquista (conquista, descricao) VALUES ('Finalizando com chave de ouro!','Acerte a última pergunta')
+INSERT INTO Conquista (conquista, descricao) VALUES ('Troféu Gabaritando Caso de Uso Iniciante','Gabarite o nível iniciante')
+
 
 
 SELECT pontuacao FROM Usuario WHERE id_user=1

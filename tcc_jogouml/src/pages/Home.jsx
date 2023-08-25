@@ -9,7 +9,7 @@ import Stack from '@mui/material/Stack';
 
 const Home = () => {
   const [username, setUsername] = useState(''); // informações do usuario
-  const [password, setPassword] = useState('');
+  const [password, setPassword] = useState(''); // senha
   //const [iduser, setIduser] = useState('');
   const [isValido, setIsvalido] = useState(false);
   const [user, setUser] = useState([]);

@@ -6,11 +6,11 @@
 #root {
   margin: 0 auto;
   padding: 0 auto;
-
 }
 
 body{
   font-family: 'Montserrat', 'Roboto', sans-serif;
+  max-width: 100%;
 }
 
 /*

@@ -5,6 +5,10 @@ import { useState, useEffect } from 'react'
 const Ranking = () => {
 
   const [rank, setRank] = useState([]);
+  for (let index = 0; index < 12; index++) {
+    localStorage.removeItem(`co0${index}`);
+    localStorage.removeItem(`tr0${index}`);
+  }
 
   useEffect(() => {
     fetch(`http://localhost:3000/ranking`)

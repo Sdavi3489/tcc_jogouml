@@ -42,7 +42,7 @@ const router = createBrowserRouter([
         element: <Register />,
       },
       {
-        path: '/private/result/:id/:score',
+        path: '/private/result/:id/:score/:acertos',
         element: <PrivateRouteGame><Resultado /></PrivateRouteGame>,
       },
       {

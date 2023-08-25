@@ -21,6 +21,12 @@ const Menu = () => {
   const [value, setValue] = useState(1);
   const navigate = useNavigate();
   localStorage.removeItem('inGame'); // remove sessão do jogo caso esteja em aberto no navegador e caso o usuario resolva voltar para o menu
+  
+  for (let index = 0; index < 12; index++) {
+    localStorage.removeItem(`co0${index}`);
+    localStorage.removeItem(`tr0${index}`);
+  }
+
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -87,7 +93,7 @@ const Menu = () => {
   return (
     <>
       <div className={style.containerMenu}>
-        <h1>Olá {user.username}</h1>
+        <span className={style.spanInfo}>Olá {user.username}</span>
         <div className={style.containerCards}>
           <div>
             <Card sx={{ maxWidth: 250 }}>

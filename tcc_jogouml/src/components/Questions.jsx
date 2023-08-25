@@ -16,7 +16,9 @@ const Questions = ({ userID }) => {
     const [count_vida, setCountVida] = useState(5) //Contador de vidas
     const [Score, setScore] = useState(0) // Pontuação do jogador 
     const [resp, setResp] = useState('') // Esta variável identifica qual opção foi escolhida pelo jogador e server para mostrar o resultado na tela.
-    //const [result, setResult] = useState({})
+    const [acertos, setAcertos] = useState(0)
+    const [Jogseg, setJogSeg] = useState(0) // Esta variável indica as jogadas seguidas do jogador
+    //const [conq, setConq] = useState([])
     const navigate = useNavigate() // navega para o link definido quando o for acionado
 
 
@@ -27,16 +29,65 @@ const Questions = ({ userID }) => {
         //document.getElementById(e).disabled = false;
         setshowResp(true); //Mostra a resposta correta e incorreta da questão
         setResp(resp_dada.resposta_dada);// manda a resposta escolhida pelo jogador
-        
+
         console.log(rev);
         if (resp_dada.resposta_dada == rev) {
             console.log('Ganhou 1 ponto!');
-            setScore((scr) => scr + 1);
+            setScore((scr) => scr + 50); // Acrescenta o numero de pontos
+            setAcertos((act) => act + 1); //Acrescenta numero de acertos
+            setJogSeg((seg) => seg + 1); //Acrescenta jogadas seguindas
+
+            switch (count) {
+                case 1:
+                    console.log('Conquista: Começando com o pé direito')
+                    localStorage.setItem(`co01`, 'Conquista: Começando com o pé direito');
+                    break;
+                case 10:
+                    localStorage.setItem(`co07`, 'Conquista: Finalizando com chave de ouro!');
+                    console.log('Conquista: Finalizando com chave de ouro!')
+                    break;
+            }
+
+            switch (Jogseg) {
+                case 3:
+                    localStorage.setItem(`co03`, 'Conquista: Acerte três perguntas seguidas');
+                    console.log('Conquista: Acerte três perguntas seguidas')
+                    break;                
+                case 5:
+                    localStorage.setItem(`co04`, 'Conquista: Acerte cinco perguntas seguidas');
+                    console.log('Conquista: Acerte cinco perguntas seguidas')
+                    break;
+            }
+
+            // if (count == 1) {
+            //     let infoRel = {
+            //         acerto1: true,
+            //     }
+            //     fetch('http://localhost:3000/conq', {
+            //         method: 'POST',
+            //         headers: {
+            //             'Content-Type': 'application/json'
+            //         },
+            //         body: JSON.stringify({"id_usuario": userID, "id_conquista": 1}),
+            //     })
+            //         .then(response => response.json())
+            // }
+            // if (count == 10) {
+            //     fetch('http://localhost:3000/conq', {
+            //         method: 'POST',
+            //         headers: {
+            //             'Content-Type': 'application/json'
+            //         },
+            //         body: JSON.stringify({"id_usuario": userID, "id_conquista": 4}),
+            //     })
+            //         .then(response => response.json())
+            // }
         }
         else {
             console.log('Perdeu 1 ponto!');
-            setScore((scr) => scr - 1);
-            setCountVida((ch) => ch - 1);
+            setScore((scr) => scr - 30); // Diminui o numero de pontos
+            setCountVida((ch) => ch - 1); // Diminui uma vida do jogador
+            setJogSeg(0);// jogada volta para 0 caso jogador erre uma pergunta
         }
 
         //console.log(bd_dados.map((res) => res.ver_a))
@@ -58,12 +109,12 @@ const Questions = ({ userID }) => {
             .catch(error => {
                 console.log('Ocorreu um erro:', error);
             });
-        
-        // o set Timeot define o tempo necessário de 3 segundos para que o usuário confira o resultado antes de pular para a próxima questão
-        setTimeout(() => {
-            next_question();
-        }, 3000);
-        
+
+        // o set Timeot define o tempo necessário de 2 segundos para que o usuário confira o resultado antes de pular para a próxima questão
+        // setTimeout(() => {
+        //     next_question();
+        // }, 2000);
+
     }
 
     useEffect(() => {
@@ -90,8 +141,11 @@ const Questions = ({ userID }) => {
             // const result = ver.map((res) => res.resposta_dada) //pega a resposta dada
             // <Resultado resp=ver.resp_dada/>
             // esse if == 10 vai ser provisório por enquanto não adicionamos mais perguntas, quando adicionar mais eu coloco o tamanho (lenght) do array
+            if(Score == 500){
+                localStorage.setItem(`tr01`, 'Conquista: Troféu gabaritando caso de uso');
+            }
             localStorage.removeItem('inGame');
-            return navigate(`/private/result/${userID}/${Score}`);// esse navigate vai fazer um redirecionamento para a página de resultados
+            return navigate(`/private/result/${userID}/${Score}/${acertos}`);// esse navigate vai fazer um redirecionamento para a página de resultados
 
         }
     }
@@ -104,7 +158,7 @@ const Questions = ({ userID }) => {
             <button className={styles.btnA} onClick={verifica_resp} value='B'>{bd_dados.map((r) => r.opcao_b)}</button>{showResp && resp == 'B' && (bd_dados.map((res, index) => res.ver_b == true ? <FcOk size={25} /> : <IoCloseCircle color="#FF0000" size={25} />))}
             <button className={styles.btnA} onClick={verifica_resp} value='C'>{bd_dados.map((r) => r.opcao_c)}</button>{showResp && resp == 'C' && (bd_dados.map((res, index) => res.ver_c == true ? <FcOk size={25} /> : <IoCloseCircle color="#FF0000" size={25} />))}
             <button className={styles.btnA} onClick={verifica_resp} value='D'>{bd_dados.map((r) => r.opcao_d)}</button>{showResp && resp == 'D' && (bd_dados.map((res, index) => res.ver_d == true ? <FcOk size={25} /> : <IoCloseCircle color="#FF0000" size={25} />))}
-            {/* <div className={styles.container_btn}>{showResp && (<button className={styles.btnArrow} onClick={next_question}><FiArrowRightCircle /></button>)}</div> */}
+            <div className={styles.container_btn}>{showResp && (<button className={styles.btnArrow} onClick={next_question}><FiArrowRightCircle /></button>)}</div>
         </div>
     )
     // #AAAAAA - cor cinza 

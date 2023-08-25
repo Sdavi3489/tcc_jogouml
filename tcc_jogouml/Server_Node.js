@@ -53,7 +53,7 @@ app.get('/question/:id', function (req, res) {
 app.post('/answer', function (req, res) {
     client.query({
         text: 'INSERT INTO Resposta (id_resp,resposta_dada,usuario_fk, pergunta_fk) VALUES($1,$2,$3,$4)',
-        values: [req.body.id_resp,req.body.resposta_dada, req.body.usuario_fk, req.body.pergunta_fk]
+        values: [req.body.id_resp, req.body.resposta_dada, req.body.usuario_fk, req.body.pergunta_fk]
     })
         .then(
             function (ret) {
@@ -65,6 +65,32 @@ app.post('/answer', function (req, res) {
 // app.post('/answer', function (req, res) {
 //     res.status(200).json(req.body); // os dados da resposta enviada através da requisição POST
 // })
+
+// Arrumar isso aqui
+app.post('/conq', function (req, res) {
+    client.query({
+        text: 'INSERT INTO Usuario_Conquista (id_usuario,id_conquista) VALUES($1,$2)',
+        values: [req.body.id_usuario,req.body.id_conquista]
+    })
+        .then(
+            function (ret) {
+                res.status(200).json(req.body);
+                console.log(req.body)
+            }
+        )
+})
+
+app.get('/getConq', function (req, res) {
+    client.query({
+        text: 'SELECT id_conquista FROM Usuario,Usuario_Conquista WHERE id_user = id_usuario',
+        //values: [req.body.resposta_correta, req.body.resposta_dada]
+    })
+        .then(
+            function (ret) {
+                res.json(ret.rows)
+            }
+        )
+})
 
 app.delete('/Delresptemp', function (req, res) {
     client.query({
@@ -163,7 +189,7 @@ app.post('/login', (req, res) => {
     }
     try {
         getUser.unshift(req.body);
-        res.status(200).json({ msg: 'Login bem-sucedido!'});
+        res.status(200).json({ msg: 'Login bem-sucedido!' });
     } catch (error) {
         console.log(error);
         res.status(401).json({ error: 'Credenciais inválidas' });
@@ -173,13 +199,13 @@ app.post('/login', (req, res) => {
 const secretKey = process.env.SECRET_KEY;
 
 app.use((req, res, next) => {
-    const IDuser = getUser.map((e)=>e.id_user)
+    const IDuser = getUser.map((e) => e.id_user)
     const id = IDuser[0];
     //console.log("id: ",id);
-    const token = jwt.sign({ userId: id}, secretKey, { expiresIn: '1h' });
+    const token = jwt.sign({ userId: id }, secretKey, { expiresIn: '1h' });
     if (token) {
         req.headers.authorization = `Bearer ${token}`;
-        res.cookie('token', token, { httpOnly: true, path:'/private',});
+        res.cookie('token', token, { httpOnly: true, path: '/private', });
     }
 
     next();
@@ -188,7 +214,7 @@ app.use((req, res, next) => {
 app.get('/protegido', (req, res) => {
     //const token = req.cookies.token;
     const token = req.headers.authorization
-    const IDLoginUser = getUser.map((e)=>e.id_user)
+    const IDLoginUser = getUser.map((e) => e.id_user)
 
     // Verificar se o token está presente
     if (!token) {
@@ -204,11 +230,11 @@ app.get('/protegido', (req, res) => {
         const userId = decoded.userId;
         //console.log("var global", IDLoginUser[0])
         //console.log("userId: ",userId)
-        return res.status(200).json({ message: 'Rota protegida', userId: userId, valido: true, user: getUser[0]});
- 
+        return res.status(200).json({ message: 'Rota protegida', userId: userId, valido: true, user: getUser[0] });
+
     } catch (error) {
         // O token é inválido ou expirou
-        return res.status(401).json({ message: 'Token inválido', valido: false});
+        return res.status(401).json({ message: 'Token inválido', valido: false });
     }
 });
 
@@ -252,14 +278,14 @@ app.get('/protectedCookie', (req, res) => {
     //const token = req.cookies.token;
     const token = req.cookies.token = req.headers.authorization
 
-    if(!token){
-        return res.status(401).json({ message: 'Token não fornecido', valido: null})
+    if (!token) {
+        return res.status(401).json({ message: 'Token não fornecido', valido: null })
     }
 
     try {
         return res.json({ token: token, valido: true })
     } catch (error) {
-        return res.status(401).json({ message: 'Token inválido', valido: false})
+        return res.status(401).json({ message: 'Token inválido', valido: false })
     }
     // if (token) {
     //     //res.send('Acesso autorizado!');

@@ -1,22 +1,24 @@
 .containerResult{
     display: flex;
     background-color: #FFEAD2;
-    width: 30rem;
-    height: auto;
+    max-width: 40rem;
+    height: 30rem;
     text-align: center;
     padding: 1.5rem;
-    margin-left: auto;
-    margin-right: auto;
+    /* margin-left: auto;
+    margin-right: auto; */
     border: 1px solid;
     border-radius: 8px;
     position: relative;
     flex-flow: column wrap;
     align-items: center;
+    margin: auto;
 }
 
 .score{
     font-size: 50px;
-    color: #213547;
+    /*color: #213547;*/
+    color: #5364FF;
     font-weight: bold;
 }
 
@@ -64,8 +66,28 @@ td{
 .containerOpt{
     display: flex;
     justify-content: space-evenly;
-    margin-top: 10px;
+    margin:auto;
     width: 30rem;
     height: 3rem;
     background-color: #333;
+}
+
+.acertos{
+    color: #5364FF;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2rem;
+    font-weight: bold;
+
+}
+
+.contItens{
+    display: flex;
+    justify-content: space-between;
+    flex-flow: row wrap;
+}
+
+.conq{
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-evenly;
 }
