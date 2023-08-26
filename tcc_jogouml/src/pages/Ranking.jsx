@@ -15,7 +15,7 @@ const Ranking = () => {
       .then(response => response.json())
       .then(data => {
         setRank(data);
-        console.log(data.username, data.pontuacao);
+        console.log(data[0]);
       })
       .catch(error => {
         console.log('Ocorreu um erro:', error);

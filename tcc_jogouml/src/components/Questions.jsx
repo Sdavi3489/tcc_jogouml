@@ -142,7 +142,7 @@ const Questions = ({ userID }) => {
             // <Resultado resp=ver.resp_dada/>
             // esse if == 10 vai ser provisório por enquanto não adicionamos mais perguntas, quando adicionar mais eu coloco o tamanho (lenght) do array
             if(Score == 500){
-                localStorage.setItem(`tr01`, 'Conquista: Troféu gabaritando caso de uso');
+                localStorage.setItem(`tr01`, 'Troféu: gabaritando caso de uso');
             }
             localStorage.removeItem('inGame');
             return navigate(`/private/result/${userID}/${Score}/${acertos}`);// esse navigate vai fazer um redirecionamento para a página de resultados

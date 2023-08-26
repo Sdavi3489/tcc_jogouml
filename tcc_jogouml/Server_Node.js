@@ -137,8 +137,8 @@ app.put('/rank/:id/:score', function (req, res) {
         .then(
             function (ret) {
                 res.json(ret.rows)
-                console.log(ret.rows.score)
-                console.log(ret.rowCount)
+                console.log("Score: ",ret.rows.score)
+                console.log("Count: ",ret.rowCount)
 
             }
         )

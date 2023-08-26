@@ -23,13 +23,13 @@ const Menu = () => {
   localStorage.removeItem('inGame'); // remove sessão do jogo caso esteja em aberto no navegador e caso o usuario resolva voltar para o menu
   
   for (let index = 0; index < 12; index++) {
-    localStorage.removeItem(`co0${index}`);
-    localStorage.removeItem(`tr0${index}`);
+    localStorage.removeItem(`co0${index}`);// remove o localStorage das conquistas
+    localStorage.removeItem(`tr0${index}`);// remove o localStorage das trofeus
   }
 
 
   const handleChange = (event, newValue) => {
-    setValue(newValue);
+    setValue(newValue); // muda o valor do nível do jogo
     console.log("Tab value: ")
   };
 
@@ -77,6 +77,7 @@ const Menu = () => {
     //value == 0 significa que o nivel esta no iniciante
     if (value == 0) {
       localStorage.setItem('inGame',userCripto);
+      localStorage.setItem('User', user.username);
       return navigate(`/private/play/${user.id_user}`)
     }
     //value == 1 significa que o nivel esta no intermediário

@@ -6,6 +6,7 @@ import co03 from "../assets/conquistas/co03.jpg"
 import co04 from "../assets/conquistas/co04.jpg"
 import co07 from "../assets/conquistas/co07.jpg"
 import tr01 from "../assets/conquistas/tr01.jpg"
+import tr05 from "../assets/conquistas/tr05.jpg"
 import { useParams } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
@@ -18,20 +19,20 @@ const Resultado = () => {
     const { id, score, acertos } = useParams();
     const [result, setResult] = useState([]);
     const [getconq, setGetconq] = useState([]);
+    const [getUsername, setGetUsername] = useState('');
     const style_red = { backgroundColor: "#FF0000" }
     const style_green = { backgroundColor: "#008000" }
     const style_perg = { backgroundColor: "#333" }
     const style_emoji = { paddingRight: "15rem" }
     const style_itens = { paddingRight: "2rem" }
     const navigate = useNavigate() // navega para o link definido quando o for acionado
+    const user = localStorage.getItem('User');
     const m1 = localStorage.getItem('co01');
     const m2 = localStorage.getItem('co03');
     const m3 = localStorage.getItem('co04');
     const m4 = localStorage.getItem('co07');
     const t1 = localStorage.getItem('tr01');
-
-
-
+    const t5 = localStorage.getItem('tr05');
 
     // function RestartPlayGame() {
 
@@ -92,7 +93,25 @@ const Resultado = () => {
 
     }, [])
 
+    function conq_trofeu() {
+        // Essa função se refere ao troféu que o usuário ganhará se ele for o primeiro do ranking
+        useEffect(() => {
+            fetch(`http://localhost:3000/ranking`)
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data[0]);
+                    //setGetUsername(data[0].username)
+                    if(data[0].username == user){
+                        localStorage.setItem(`tr05`, 'Troféu: Segue o líder');
+                    }
+                })
+                .catch(error => {
+                    console.log('Ocorreu um erro:', error);
+                });
+        }, [])
+    }
 
+    conq_trofeu();
 
     return (
         <>
@@ -103,13 +122,14 @@ const Resultado = () => {
                     <span className={styles.acertos}>Conquistas</span>
                 </div>
                 <div className={styles.conq}>
-                    <FaGrinStars size={50} color='#E4A951' style={style_emoji} />
+                    {/* <FaGrinStars size={50} color='#E4A951' style={style_emoji} /> */}
                     {m1 && (<img src={co01} height={'90px'} />)}
                     {m2 && (<img src={co03} height={'90px'} />)}
                     {m3 && (<img src={co04} height={'90px'} />)}
                     {m4 && (<img src={co07} height={'90px'} />)}
                     {t1 && (<img src={tr01} height={'90px'} />)}
-                    
+                    {t5 && (<img src={tr05} height={'90px'} />)}
+
                 </div>
                 {/* <table className={styles.tableRes}>
                     <tr>
