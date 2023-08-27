@@ -4,6 +4,7 @@ import rank from "../assets/ranking-outline.svg"
 import co01 from "../assets/conquistas/co01.jpg"
 import co03 from "../assets/conquistas/co03.jpg"
 import co04 from "../assets/conquistas/co04.jpg"
+import co06 from "../assets/conquistas/co06.jpg"
 import co07 from "../assets/conquistas/co07.jpg"
 import tr01 from "../assets/conquistas/tr01.jpg"
 import tr05 from "../assets/conquistas/tr05.jpg"
@@ -18,8 +19,8 @@ const Resultado = () => {
 
     const { id, score, acertos } = useParams();
     const [result, setResult] = useState([]);
-    const [getconq, setGetconq] = useState([]);
-    const [getUsername, setGetUsername] = useState('');
+    // const [getconq, setGetconq] = useState([]);
+    // const [getUsername, setGetUsername] = useState('');
     const style_red = { backgroundColor: "#FF0000" }
     const style_green = { backgroundColor: "#008000" }
     const style_perg = { backgroundColor: "#333" }
@@ -31,6 +32,7 @@ const Resultado = () => {
     const m2 = localStorage.getItem('co03');
     const m3 = localStorage.getItem('co04');
     const m4 = localStorage.getItem('co07');
+    const m5 = localStorage.getItem('co06');
     const t1 = localStorage.getItem('tr01');
     const t5 = localStorage.getItem('tr05');
 
@@ -127,6 +129,7 @@ const Resultado = () => {
                     {m2 && (<img src={co03} height={'90px'} />)}
                     {m3 && (<img src={co04} height={'90px'} />)}
                     {m4 && (<img src={co07} height={'90px'} />)}
+                    {m5 && (<img src={co06} height={'90px'} />)}
                     {t1 && (<img src={tr01} height={'90px'} />)}
                     {t5 && (<img src={tr05} height={'90px'} />)}
 

@@ -5,6 +5,7 @@ import { FcOk, FcLike } from 'react-icons/fc';
 import { FiArrowRightCircle } from "react-icons/fi";
 import { IoCloseCircle } from "react-icons/io5";
 import { useNavigate } from 'react-router-dom';
+import comboImg from "../assets/conquistas/combo.png";
 
 
 const Questions = ({ userID }) => {
@@ -16,8 +17,9 @@ const Questions = ({ userID }) => {
     const [count_vida, setCountVida] = useState(5) //Contador de vidas
     const [Score, setScore] = useState(0) // Pontuação do jogador 
     const [resp, setResp] = useState('') // Esta variável identifica qual opção foi escolhida pelo jogador e server para mostrar o resultado na tela.
-    const [acertos, setAcertos] = useState(0)
+    const [acertos, setAcertos] = useState(0) // armazena o numero de acertos
     const [Jogseg, setJogSeg] = useState(0) // Esta variável indica as jogadas seguidas do jogador
+    const [showCombo, setShowCombo] = useState(false); // Esta variável armazena a informação para fazer a pontuacao dobrada aparece
     //const [conq, setConq] = useState([])
     const navigate = useNavigate() // navega para o link definido quando o for acionado
 
@@ -48,9 +50,15 @@ const Questions = ({ userID }) => {
                     break;
             }
 
+            // if(Jogseg < 3){
+            //     setScore((scr) => scr + 50);
+            // }
+
             switch (Jogseg) {
                 case 3:
                     localStorage.setItem(`co03`, 'Conquista: Acerte três perguntas seguidas');
+                    localStorage.setItem(`co06`, 'Conquista: Ganhando dobrado');
+                    setScore((scr) => scr + 50); // Acrescenta o numero de pontos dobrados quando acerta 3 seguidas
                     console.log('Conquista: Acerte três perguntas seguidas')
                     break;                
                 case 5:
@@ -88,6 +96,7 @@ const Questions = ({ userID }) => {
             setScore((scr) => scr - 30); // Diminui o numero de pontos
             setCountVida((ch) => ch - 1); // Diminui uma vida do jogador
             setJogSeg(0);// jogada volta para 0 caso jogador erre uma pergunta
+            setShowCombo(false);
         }
 
         //console.log(bd_dados.map((res) => res.ver_a))
@@ -110,10 +119,11 @@ const Questions = ({ userID }) => {
                 console.log('Ocorreu um erro:', error);
             });
 
-        // o set Timeot define o tempo necessário de 2 segundos para que o usuário confira o resultado antes de pular para a próxima questão
+        // o set Timeot define o tempo necessário de 3 segundos para que o usuário confira o resultado antes de pular para a próxima questão
+        // teste fazendo um console.log() com o for ate 3 para ver se funciona
         // setTimeout(() => {
         //     next_question();
-        // }, 2000);
+        // }, 3000);
 
     }
 
@@ -132,6 +142,15 @@ const Questions = ({ userID }) => {
         //e.preventDefault()
         setCount((e) => e + 1)
         setshowResp(false)
+        // No futuro quem sabe colocar Jogseg >= 3 quando colocar tempo, && tempo > 10000
+        // Adicionar tempo de 10 segundos para combo e adicionar novo if(tempo == 10000) e colocar setShowCombo(false);
+        // lembrar de colocar um setTimeout
+        if(Jogseg == 0){
+            setShowCombo(false);
+        }
+        if(Jogseg >= 3){
+            setShowCombo(true);
+        }
 
         if (count_vida == 0) {
             return navigate('/private/gameover');
@@ -141,7 +160,7 @@ const Questions = ({ userID }) => {
             // const result = ver.map((res) => res.resposta_dada) //pega a resposta dada
             // <Resultado resp=ver.resp_dada/>
             // esse if == 10 vai ser provisório por enquanto não adicionamos mais perguntas, quando adicionar mais eu coloco o tamanho (lenght) do array
-            if(Score == 500){
+            if(acertos == 10){
                 localStorage.setItem(`tr01`, 'Troféu: gabaritando caso de uso');
             }
             localStorage.removeItem('inGame');
@@ -152,7 +171,9 @@ const Questions = ({ userID }) => {
 
     return (
         <div className={styles.container_qt}>
+            <div className={styles.time}><span>Tempo: 12:00</span></div>
             <div className={styles.container_vida}><p className={styles.score}>PONTOS: {Score}</p><p className={styles.countHearts}>{count_vida}</p><FcLike className={styles.fcLike} size={35} /></div>
+            <div className={styles.combo}>{showCombo == true && (<img src={comboImg} height={'50px'} />)}</div>
             <p className={styles.pq}>{bd_dados.map((e, index) => e.pergunta)}</p>
             <button className={styles.btnA} onClick={verifica_resp} value='A'>{bd_dados.map((r) => r.opcao_a)}</button>{showResp && resp == 'A' && (bd_dados.map((res, index) => res.ver_a == true ? <FcOk size={25} /> : <IoCloseCircle color="#FF0000" size={25} />))}
             <button className={styles.btnA} onClick={verifica_resp} value='B'>{bd_dados.map((r) => r.opcao_b)}</button>{showResp && resp == 'B' && (bd_dados.map((res, index) => res.ver_b == true ? <FcOk size={25} /> : <IoCloseCircle color="#FF0000" size={25} />))}

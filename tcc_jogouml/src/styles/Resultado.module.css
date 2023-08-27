@@ -67,6 +67,7 @@ td{
     display: flex;
     justify-content: space-evenly;
     margin:auto;
+    /*max-width: 100%;*/
     width: 30rem;
     height: 3rem;
     background-color: #333;

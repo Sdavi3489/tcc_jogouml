@@ -1,16 +1,17 @@
 .container_qt {
     display: flex;
-    background-color: #FFEAD2;
-    width: 30rem;
-    height: auto;
-    margin-bottom: 7.1rem;
-    margin-top: 3rem;
+    /*background-color: #FFEAD2;*/
+    background-color: #333;
+    width: 96.4%;
+    height: 38rem;
+    /*margin-bottom: 7.1rem;*/
+    /*margin-top: 3rem;*/
     text-align: center;
     padding: 1.5rem;
     margin-left: auto;
     margin-right: auto;
-    border: 1px solid;
-    border-radius: 8px;
+    /*border: 1px solid;*/
+    /*border-radius: 8px;*/
     position: relative;
     flex-flow: column wrap;
     align-items: center;
@@ -30,14 +31,19 @@
     font-weight: bold;
     font-size: 33px;
     padding-left: 25rem;
+    color: #FFF;
 }
 
 .score{
-    font-size: 25px;
+    font-size: 30px;
+    color: #FFF;
 }
 
 .pq {
-    color: #213547;
+    /*color: #213547;*/
+    color: #FFF;
+    font-size: 25px;
+    font-weight: 300;
     padding-top: 1rem;
     padding-bottom: 1rem;
 }
@@ -47,8 +53,9 @@
     border-radius: 8px;
     border: 1px solid transparent;
     padding: 0.6em 1.2em;
-    font-size: 1em;
-    font-weight: 500;
+    /*font-size: 1em;*/
+    font-size: 1.2em;
+    font-weight: 300;
     font-family: 'Montserrat', 'Roboto', sans-serif;
     background-color: #8294C4;
     cursor: pointer;
@@ -81,4 +88,13 @@
 .container_btn{
     display: flex;
     justify-content: center;
+}
+
+.combo{
+    padding-left: 25rem;
+}
+
+.time{
+    font-size: 30px;
+    color: #FFF;
 }
