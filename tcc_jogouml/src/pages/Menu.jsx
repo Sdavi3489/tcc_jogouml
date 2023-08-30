@@ -17,10 +17,11 @@ import bcrypt from 'bcryptjs';
 const Menu = () => {
 
   const [user, setUser] = useState('');
-  const [sumUC, setSumUC] = useState(false);
   const [value, setValue] = useState(1);
   const navigate = useNavigate();
   localStorage.removeItem('inGame'); // remove sessão do jogo caso esteja em aberto no navegador e caso o usuario resolva voltar para o menu
+  localStorage.removeItem('User'); // remove nome de usuario da sessão que jogou anteriormente
+  localStorage.removeItem('time'); // remove o tempo feito na sessão anterior
   
   for (let index = 0; index < 12; index++) {
     localStorage.removeItem(`co0${index}`);// remove o localStorage das conquistas

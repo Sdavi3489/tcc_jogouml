@@ -3,7 +3,8 @@ import styles from '../styles/Ranking.module.css'
 import { useState, useEffect } from 'react'
 
 const Ranking = () => {
-
+  localStorage.removeItem('User'); // remove nome de usuario da sessão que jogou anteriormente
+  localStorage.removeItem('time'); // remove o tempo feito na sessão anterior
   const [rank, setRank] = useState([]);
   for (let index = 0; index < 12; index++) {
     localStorage.removeItem(`co0${index}`);

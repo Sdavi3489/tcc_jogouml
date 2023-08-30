@@ -2,6 +2,7 @@ import React from 'react'
 import styles from '../styles/Resultado.module.css'
 import rank from "../assets/ranking-outline.svg"
 import co01 from "../assets/conquistas/co01.jpg"
+import co02 from "../assets/conquistas/co02.jpg"
 import co03 from "../assets/conquistas/co03.jpg"
 import co04 from "../assets/conquistas/co04.jpg"
 import co06 from "../assets/conquistas/co06.jpg"
@@ -35,6 +36,20 @@ const Resultado = () => {
     const m5 = localStorage.getItem('co06');
     const t1 = localStorage.getItem('tr01');
     const t5 = localStorage.getItem('tr05');
+    const time = localStorage.getItem('time');
+
+    function getTime() {
+        const minutes = Number(time.split(':')[0]) // pega os minutos do tempo obtido
+        const seconds = Number(time.split(':')[1]) // pega os segundos do tempo obtido
+        //console.log(minutes, ":", seconds); 
+        if (minutes >= 8 && seconds >= 0) {
+            // Adiciona a conquista da velocidade se o usuário bater um recorde maior que 8 minutos
+            localStorage.setItem('co02', "Conquista: Eu sou a velocidade!");
+        }
+        //retorna true se o item estiver disponívele mostra na tela de resultados
+        return localStorage.getItem('co02');
+    }
+
 
     // function RestartPlayGame() {
 
@@ -67,19 +82,6 @@ const Resultado = () => {
             });
     }, [result])
 
-    // useEffect(() => {
-    //     fetch(`http://localhost:3000/getConq`)
-    //         .then(response => response.json())
-    //         .then(data => {
-    //             setGetconq(data);
-    //             console.log("Data conquistas",data);
-    //             console.log("conquista id",data.id_conquista);
-    //         })
-    //         .catch(error => {
-    //             console.log('Ocorreu um erro:', error);
-    //         });
-    // }, [])
-
     useEffect(() => {
         fetch(`http://localhost:3000/rank/${id}/${score}`, {
             method: 'PUT'
@@ -103,7 +105,7 @@ const Resultado = () => {
                 .then(data => {
                     console.log(data[0]);
                     //setGetUsername(data[0].username)
-                    if(data[0].username == user){
+                    if (data[0].username == user) {
                         localStorage.setItem(`tr05`, 'Troféu: Segue o líder');
                     }
                 })
@@ -124,33 +126,20 @@ const Resultado = () => {
                     <span className={styles.acertos}>Conquistas</span>
                 </div>
                 <div className={styles.conq}>
-                    {/* <FaGrinStars size={50} color='#E4A951' style={style_emoji} /> */}
                     {m1 && (<img src={co01} height={'90px'} />)}
                     {m2 && (<img src={co03} height={'90px'} />)}
                     {m3 && (<img src={co04} height={'90px'} />)}
                     {m4 && (<img src={co07} height={'90px'} />)}
                     {m5 && (<img src={co06} height={'90px'} />)}
+                    {getTime() && (<img src={co02} height={'90px'} />)}
                     {t1 && (<img src={tr01} height={'90px'} />)}
                     {t5 && (<img src={tr05} height={'90px'} />)}
 
                 </div>
-                {/* <table className={styles.tableRes}>
-                    <tr>
-                        <th>Pergunta</th>
-                        <th>Resposta Correta</th>
-                        <th>Sua Resposta</th>
-                    </tr>
-                    {
-                        result.map((res, index) => {
-                            return <tr key={index}>
-                                <td style={style_perg}>{index + 1}</td>
-                                <td style={style_green}>{res.resposta_correta}</td>
-                                {(res.resposta_dada) == res.resposta_correta ? <td style={style_green}>{res.resposta_dada}</td> : <td style={style_red}>{res.resposta_dada}</td>}
-                            </tr>
-
-                        })
-                    }
-                </table> */}
+                <div className={styles.time}>
+                    <span>Tempo</span><br />
+                    {time && (<span>{time}</span>)}
+                </div>
                 <div className={styles.containerOpt}>
                     <Link to={`/private`}><BiMenu size={50} /></Link>
                     <Link to={`/rank`}><img src={rank} alt="Link para a página Ranking" height={'45px'} /></Link>

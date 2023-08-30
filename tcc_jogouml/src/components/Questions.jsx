@@ -6,6 +6,7 @@ import { FiArrowRightCircle } from "react-icons/fi";
 import { IoCloseCircle } from "react-icons/io5";
 import { useNavigate } from 'react-router-dom';
 import comboImg from "../assets/conquistas/combo.png";
+import Time from './Time';
 
 
 const Questions = ({ userID }) => {
@@ -20,9 +21,7 @@ const Questions = ({ userID }) => {
     const [acertos, setAcertos] = useState(0) // armazena o numero de acertos
     const [Jogseg, setJogSeg] = useState(0) // Esta variável indica as jogadas seguidas do jogador
     const [showCombo, setShowCombo] = useState(false); // Esta variável armazena a informação para fazer a pontuacao dobrada aparece
-    //const [conq, setConq] = useState([])
     const navigate = useNavigate() // navega para o link definido quando o for acionado
-
 
     function verifica_resp(e) {
         e.preventDefault();
@@ -50,46 +49,19 @@ const Questions = ({ userID }) => {
                     break;
             }
 
-            // if(Jogseg < 3){
-            //     setScore((scr) => scr + 50);
-            // }
-
             switch (Jogseg) {
                 case 3:
                     localStorage.setItem(`co03`, 'Conquista: Acerte três perguntas seguidas');
                     localStorage.setItem(`co06`, 'Conquista: Ganhando dobrado');
                     setScore((scr) => scr + 50); // Acrescenta o numero de pontos dobrados quando acerta 3 seguidas
                     console.log('Conquista: Acerte três perguntas seguidas')
-                    break;                
+                    break;
                 case 5:
                     localStorage.setItem(`co04`, 'Conquista: Acerte cinco perguntas seguidas');
+                    setScore((scr) => scr + 50); // Acrescenta o numero de pontos dobrados quando acerta 3 seguidas
                     console.log('Conquista: Acerte cinco perguntas seguidas')
                     break;
             }
-
-            // if (count == 1) {
-            //     let infoRel = {
-            //         acerto1: true,
-            //     }
-            //     fetch('http://localhost:3000/conq', {
-            //         method: 'POST',
-            //         headers: {
-            //             'Content-Type': 'application/json'
-            //         },
-            //         body: JSON.stringify({"id_usuario": userID, "id_conquista": 1}),
-            //     })
-            //         .then(response => response.json())
-            // }
-            // if (count == 10) {
-            //     fetch('http://localhost:3000/conq', {
-            //         method: 'POST',
-            //         headers: {
-            //             'Content-Type': 'application/json'
-            //         },
-            //         body: JSON.stringify({"id_usuario": userID, "id_conquista": 4}),
-            //     })
-            //         .then(response => response.json())
-            // }
         }
         else {
             console.log('Perdeu 1 ponto!');
@@ -145,11 +117,11 @@ const Questions = ({ userID }) => {
         // No futuro quem sabe colocar Jogseg >= 3 quando colocar tempo, && tempo > 10000
         // Adicionar tempo de 10 segundos para combo e adicionar novo if(tempo == 10000) e colocar setShowCombo(false);
         // lembrar de colocar um setTimeout
-        if(Jogseg == 0){
-            setShowCombo(false);
-        }
-        if(Jogseg >= 3){
+        if (Jogseg == 3 || Jogseg == 5) {
             setShowCombo(true);
+        }
+        else{
+            setShowCombo(false);
         }
 
         if (count_vida == 0) {
@@ -160,7 +132,7 @@ const Questions = ({ userID }) => {
             // const result = ver.map((res) => res.resposta_dada) //pega a resposta dada
             // <Resultado resp=ver.resp_dada/>
             // esse if == 10 vai ser provisório por enquanto não adicionamos mais perguntas, quando adicionar mais eu coloco o tamanho (lenght) do array
-            if(acertos == 10){
+            if (acertos == 10) {
                 localStorage.setItem(`tr01`, 'Troféu: gabaritando caso de uso');
             }
             localStorage.removeItem('inGame');
@@ -171,7 +143,7 @@ const Questions = ({ userID }) => {
 
     return (
         <div className={styles.container_qt}>
-            <div className={styles.time}><span>Tempo: 12:00</span></div>
+            <div className={styles.time}><Time/></div>
             <div className={styles.container_vida}><p className={styles.score}>PONTOS: {Score}</p><p className={styles.countHearts}>{count_vida}</p><FcLike className={styles.fcLike} size={35} /></div>
             <div className={styles.combo}>{showCombo == true && (<img src={comboImg} height={'50px'} />)}</div>
             <p className={styles.pq}>{bd_dados.map((e, index) => e.pergunta)}</p>
