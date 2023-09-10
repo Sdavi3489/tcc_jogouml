@@ -31,7 +31,7 @@ const Menu = () => {
 
   const handleChange = (event, newValue) => {
     setValue(newValue); // muda o valor do nível do jogo
-    console.log("Tab value: ")
+    //console.log("Tab value: ", value)
   };
 
   useEffect(() => {
@@ -79,11 +79,13 @@ const Menu = () => {
     if (value == 0) {
       localStorage.setItem('inGame',userCripto);
       localStorage.setItem('User', user.username);
-      return navigate(`/private/play/${user.id_user}`)
+      return navigate(`/private/play/${user.id_user}/${value}`)
     }
     //value == 1 significa que o nivel esta no intermediário
     if (value == 1) {
-      return navigate(`/rank`)
+      localStorage.setItem('inGame',userCripto);
+      localStorage.setItem('User', user.username);
+      return navigate(`/private/play/${user.id_user}/${value}`)
     }
 
     //return navigate(`/private/play/${user.id_user}`)

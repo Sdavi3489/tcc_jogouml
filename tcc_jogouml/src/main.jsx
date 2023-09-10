@@ -46,7 +46,7 @@ const router = createBrowserRouter([
         element: <PrivateRouteGame><Resultado /></PrivateRouteGame>,
       },
       {
-        path: '/private/play/:id_user',
+        path: '/private/play/:id_user/:nivel',
         element: <PrivateRouteGame><User /></PrivateRouteGame>,
       },
       {

@@ -6,13 +6,15 @@ import { FiArrowRightCircle } from "react-icons/fi";
 import { IoCloseCircle } from "react-icons/io5";
 import { useNavigate } from 'react-router-dom';
 import comboImg from "../assets/conquistas/combo.png";
+// import Imgperg from "../assets/questions/questao-16.jpg";
 import Time from './Time';
+import ImageQuestion from './ImageQuestion';
 
-
-const Questions = ({ userID }) => {
+const QuestionsInt = ({userID}) => {
     //const [valTrue, setValTrue] = useState(false); // Verifica se o valor é verdadeiro ou falso
     const [showResp, setshowResp] = useState(false); // Mostra resultado na tela quando o resultado for true, quando o usuário escolher a resposta acionando a função verfica_resp
     const [count, setCount] = useState(1); //conta o id das perguntas conforme o usuário avança e serve para indentifica o id da tabela pergunta.
+    const [question, setQuestion] = useState(11); //conta o id das perguntas nivel intermediario
     const [bd_dados, setBdados] = useState([]) //guarda todas as informações da requisição get do banco de dados da tabela pergunta.
     const [ver, setVer] = useState([]) //guarda as informações que enviamos para o banco de dados da tabela resposta.
     const [count_vida, setCountVida] = useState(5) //Contador de vidas
@@ -21,7 +23,9 @@ const Questions = ({ userID }) => {
     const [acertos, setAcertos] = useState(0) // armazena o numero de acertos
     const [Jogseg, setJogSeg] = useState(0) // Esta variável indica as jogadas seguidas do jogador
     const [showCombo, setShowCombo] = useState(false); // Esta variável armazena a informação para fazer a pontuacao dobrada aparece
+    const [showImg, setShowImg] = useState('') // Esta variável identifica qual opção foi escolhida pelo jogador e server para mostrar o resultado na tela.
     const navigate = useNavigate() // navega para o link definido quando o for acionado
+    const imageP = "../assets/questions/questao-16.jpg";
 
     function verifica_resp(e) {
         e.preventDefault();
@@ -102,25 +106,29 @@ const Questions = ({ userID }) => {
 
     }
 
+    // TODO: MUDAR COUNT PARA question
     useEffect(() => {
-        fetch(`http://localhost:3000/question/${count}`)
+        fetch(`http://localhost:3000/question/${question}`)
             .then(response => response.json())
             .then(data => {
                 setBdados(data); // pega as questoes do banco de dados
+                setShowImg(data[0].image);
+                console.log(data[0].image);
             })
             .catch(error => {
                 console.log('Ocorreu um erro:', error);
             });
-    }, [count])
+    }, [question])
 
     function next_question() {
         //e.preventDefault()
         setCount((e) => e + 1)
+        setQuestion((e) => e + 1)
         setshowResp(false)
         if (Jogseg == 3 || Jogseg == 5) {
             setShowCombo(true); // Mostra imagem do combo 2x pontuacao dobrada
         }
-        else{
+        else {
             setShowCombo(false); // Remove a imagem do combo 2x pontuacao dobrada
         }
 
@@ -128,7 +136,8 @@ const Questions = ({ userID }) => {
             return navigate('/private/gameover');
         }
         // utilizar o map para pegar o numero do index e somar index + 1 para dar o numero certo do total de questões  
-        if (count == 10) {
+        // TODO: question == numero maximo de perguntas do nivel intermediario
+        if (question == 16) {
             // const result = ver.map((res) => res.resposta_dada) //pega a resposta dada
             // esse if == 10 vai ser provisório por enquanto não adicionamos mais perguntas, quando adicionar mais eu coloco o tamanho (lenght) do array
             if (acertos == 10) {
@@ -142,10 +151,13 @@ const Questions = ({ userID }) => {
 
     return (
         <div className={styles.container_qt}>
-            <div className={styles.time}><Time/></div>
+            <h1>Intermediario</h1>
+            <div className={styles.time}><Time /></div>
             <div className={styles.container_vida}><p className={styles.score}>PONTOS: {Score}</p><p className={styles.countHearts}>{count_vida}</p><FcLike className={styles.fcLike} size={35} /></div>
             <div className={styles.combo}>{showCombo == true && (<img src={comboImg} height={'50px'} />)}</div>
             <p className={styles.pq}>{bd_dados.map((e, index) => e.pergunta)}</p>
+            <div className={styles.imgPerg}><ImageQuestion perg={count-1} image={showImg}/></div>
+            {/* <div className={styles.imgPerg}>{bd_dados.map((qtimg) => qtimg.img) != null &&(<img src={showImg} height={'50px'} />)}</div> */}
             <button className={styles.btnA} onClick={verifica_resp} value='A'>{bd_dados.map((r) => r.opcao_a)}</button>{showResp && resp == 'A' && (bd_dados.map((res, index) => res.ver_a == true ? <FcOk size={25} /> : <IoCloseCircle color="#FF0000" size={25} />))}
             <button className={styles.btnA} onClick={verifica_resp} value='B'>{bd_dados.map((r) => r.opcao_b)}</button>{showResp && resp == 'B' && (bd_dados.map((res, index) => res.ver_b == true ? <FcOk size={25} /> : <IoCloseCircle color="#FF0000" size={25} />))}
             <button className={styles.btnA} onClick={verifica_resp} value='C'>{bd_dados.map((r) => r.opcao_c)}</button>{showResp && resp == 'C' && (bd_dados.map((res, index) => res.ver_c == true ? <FcOk size={25} /> : <IoCloseCircle color="#FF0000" size={25} />))}
@@ -153,7 +165,6 @@ const Questions = ({ userID }) => {
             <div className={styles.container_btn}>{showResp && (<button className={styles.btnArrow} onClick={next_question}><FiArrowRightCircle /></button>)}</div>
         </div>
     )
-    // o map pega cada valor do array, o 'e' representa o valor, se eu quiser pegar o valor de a eu uso 'e.a' ou se quiser pegar de b 'e.b' e assim sucessivamente 
 }
 
-export default Questions
+export default QuestionsInt
