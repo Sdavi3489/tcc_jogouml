@@ -3,7 +3,7 @@
     /*background-color: #FFEAD2;*/
     background-color: #333;
     width: 96.4%;
-    height: auto;
+    height: 47rem;
     /*margin-bottom: 7.1rem;*/
     /*margin-top: 3rem;*/
     text-align: center;
@@ -49,28 +49,29 @@
 }
 
 .btnA{
-    color: #213547;
+    font-family: 'Montserrat', 'Roboto', sans-serif;
+    width: 40rem;
+    color: #000;
     border-radius: 8px;
     border: 1px solid transparent;
     padding: 0.6em 1.2em;
     /*font-size: 1em;*/
     font-size: 1.2em;
     font-weight: 300;
-    font-family: 'Montserrat', 'Roboto', sans-serif;
-    background-color: #8294C4;
+    background-color: #FFF;
     cursor: pointer;
     transition: border-color 0.25s;
     margin: 5px;
 }
 
 .btnA:hover {
-    background-color: #ACB1D6;
+    background-color: #8e8c8c;
     border-color: #000;
     transition: 1s;
 }
 
 .btnArrow{
-    color: #213547;
+    color: #000;
     height: 3rem;
     width: 4rem;
     border-radius: 8px;
@@ -79,7 +80,7 @@
     font-size: 1em;
     font-weight: 500;
     font-family: 'Montserrat', 'Roboto', sans-serif;
-    background-color: #8294C4;
+    background-color: #FFF;
     cursor: pointer;
     transition: border-color 0.25s;
     margin: 5px;

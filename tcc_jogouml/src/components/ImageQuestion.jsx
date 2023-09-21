@@ -43,7 +43,7 @@ const ImageQuestion = ({perg, image}) => {
 
   return (
     <>
-      {(image != null ? <img src={imgPergunta[perg].img} height={'250px'} />: <div style={{display: "none"}}>Sem imagem</div>)}
+      {(image != null ? <img src={imgPergunta[perg].img} height={'200px'} />: <div style={{display: "none"}}>Sem imagem</div>)}
     </>
   )
 }

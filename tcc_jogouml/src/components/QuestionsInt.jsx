@@ -6,11 +6,10 @@ import { FiArrowRightCircle } from "react-icons/fi";
 import { IoCloseCircle } from "react-icons/io5";
 import { useNavigate } from 'react-router-dom';
 import comboImg from "../assets/conquistas/combo.png";
-// import Imgperg from "../assets/questions/questao-16.jpg";
 import Time from './Time';
 import ImageQuestion from './ImageQuestion';
 
-const QuestionsInt = ({userID}) => {
+const QuestionsInt = ({ userID }) => {
     //const [valTrue, setValTrue] = useState(false); // Verifica se o valor é verdadeiro ou falso
     const [showResp, setshowResp] = useState(false); // Mostra resultado na tela quando o resultado for true, quando o usuário escolher a resposta acionando a função verfica_resp
     const [count, setCount] = useState(1); //conta o id das perguntas conforme o usuário avança e serve para indentifica o id da tabela pergunta.
@@ -25,7 +24,6 @@ const QuestionsInt = ({userID}) => {
     const [showCombo, setShowCombo] = useState(false); // Esta variável armazena a informação para fazer a pontuacao dobrada aparece
     const [showImg, setShowImg] = useState('') // Esta variável identifica qual opção foi escolhida pelo jogador e server para mostrar o resultado na tela.
     const navigate = useNavigate() // navega para o link definido quando o for acionado
-    const imageP = "../assets/questions/questao-16.jpg";
 
     function verifica_resp(e) {
         e.preventDefault();
@@ -156,12 +154,12 @@ const QuestionsInt = ({userID}) => {
             <div className={styles.container_vida}><p className={styles.score}>PONTOS: {Score}</p><p className={styles.countHearts}>{count_vida}</p><FcLike className={styles.fcLike} size={35} /></div>
             <div className={styles.combo}>{showCombo == true && (<img src={comboImg} height={'50px'} />)}</div>
             <p className={styles.pq}>{bd_dados.map((e, index) => e.pergunta)}</p>
-            <div className={styles.imgPerg}><ImageQuestion perg={count-1} image={showImg}/></div>
+            <div className={styles.imgPerg}><ImageQuestion perg={count - 1} image={showImg} /></div>
             {/* <div className={styles.imgPerg}>{bd_dados.map((qtimg) => qtimg.img) != null &&(<img src={showImg} height={'50px'} />)}</div> */}
-            <button className={styles.btnA} onClick={verifica_resp} value='A'>{bd_dados.map((r) => r.opcao_a)}</button>{showResp && resp == 'A' && (bd_dados.map((res, index) => res.ver_a == true ? <FcOk size={25} /> : <IoCloseCircle color="#FF0000" size={25} />))}
-            <button className={styles.btnA} onClick={verifica_resp} value='B'>{bd_dados.map((r) => r.opcao_b)}</button>{showResp && resp == 'B' && (bd_dados.map((res, index) => res.ver_b == true ? <FcOk size={25} /> : <IoCloseCircle color="#FF0000" size={25} />))}
-            <button className={styles.btnA} onClick={verifica_resp} value='C'>{bd_dados.map((r) => r.opcao_c)}</button>{showResp && resp == 'C' && (bd_dados.map((res, index) => res.ver_c == true ? <FcOk size={25} /> : <IoCloseCircle color="#FF0000" size={25} />))}
-            <button className={styles.btnA} onClick={verifica_resp} value='D'>{bd_dados.map((r) => r.opcao_d)}</button>{showResp && resp == 'D' && (bd_dados.map((res, index) => res.ver_d == true ? <FcOk size={25} /> : <IoCloseCircle color="#FF0000" size={25} />))}
+            <button className={styles.btnA} onClick={verifica_resp} value='A'>{bd_dados.map((r) => r.opcao_a)}{showResp && resp == 'A' && (bd_dados.map((res, index) => res.ver_a == true ? <FcOk size={25} /> : <IoCloseCircle color="#FF0000" size={25} />))}</button>
+            <button className={styles.btnA} onClick={verifica_resp} value='B'>{bd_dados.map((r) => r.opcao_b)}{showResp && resp == 'B' && (bd_dados.map((res, index) => res.ver_b == true ? <FcOk size={25} /> : <IoCloseCircle color="#FF0000" size={25} />))}</button>
+            <button className={styles.btnA} onClick={verifica_resp} value='C'>{bd_dados.map((r) => r.opcao_c)}{showResp && resp == 'C' && (bd_dados.map((res, index) => res.ver_c == true ? <FcOk size={25} /> : <IoCloseCircle color="#FF0000" size={25} />))}</button>
+            <button className={styles.btnA} onClick={verifica_resp} value='D'>{bd_dados.map((r) => r.opcao_d)}{showResp && resp == 'D' && (bd_dados.map((res, index) => res.ver_d == true ? <FcOk size={25} /> : <IoCloseCircle color="#FF0000" size={25} />))}</button>
             <div className={styles.container_btn}>{showResp && (<button className={styles.btnArrow} onClick={next_question}><FiArrowRightCircle /></button>)}</div>
         </div>
     )

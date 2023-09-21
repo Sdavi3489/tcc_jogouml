@@ -5,8 +5,9 @@
 
 body{
   font-family: 'Montserrat', 'Roboto', sans-serif;
-  /*background-color: #213547;*/
-   background-image: linear-gradient(to bottom, #213547, #d3d3d3);
+  background-color:  #506485;
+  /*background-image: linear-gradient(to bottom, #799ba1, #d3d3d3);*/
+  /*background-image: linear-gradient(to bottom, #213547, #d3d3d3);*/
 }
 
 a {
