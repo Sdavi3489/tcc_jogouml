@@ -120,7 +120,7 @@ const Questions = ({ userID }) => {
         if (Jogseg == 3 || Jogseg == 5) {
             setShowCombo(true); // Mostra imagem do combo 2x pontuacao dobrada
         }
-        else{
+        else {
             setShowCombo(false); // Remove a imagem do combo 2x pontuacao dobrada
         }
 
@@ -142,10 +142,15 @@ const Questions = ({ userID }) => {
 
     return (
         <div className={styles.container_qt}>
-            <div className={styles.time}><Time/></div>
-            <div className={styles.container_vida}><p className={styles.score}>PONTOS: {Score}</p><p className={styles.countHearts}>{count_vida}</p><FcLike className={styles.fcLike} size={35} /></div>
-            <div className={styles.combo}>{showCombo == true && (<img src={comboImg} height={'50px'} />)}</div>
-            <p className={styles.pq}>{bd_dados.map((e, index) => e.pergunta)}</p>
+            <div className={styles.contItemsGame}>
+                <div className={styles.time}><Time /></div>
+                <p className={styles.score}>PONTOS: {Score}</p>
+                <FcLike className={styles.fcLike} size={35} /><p className={styles.countHearts}>{count_vida}</p>
+            </div>
+            <div className={styles.imgPerg}>
+                <p className={styles.pq}>{bd_dados.map((e, index) => e.pergunta)}</p>
+                <div className={styles.combo}>{showCombo == true && (<img src={comboImg} height={'50px'} />)}</div>
+            </div>
             <button className={styles.btnA} onClick={verifica_resp} value='A'>{bd_dados.map((r) => r.opcao_a)}{showResp && resp == 'A' && (bd_dados.map((res, index) => res.ver_a == true ? <FcOk size={25} /> : <IoCloseCircle color="#FF0000" size={25} />))}</button>
             <button className={styles.btnA} onClick={verifica_resp} value='B'>{bd_dados.map((r) => r.opcao_b)}{showResp && resp == 'B' && (bd_dados.map((res, index) => res.ver_b == true ? <FcOk size={25} /> : <IoCloseCircle color="#FF0000" size={25} />))}</button>
             <button className={styles.btnA} onClick={verifica_resp} value='C'>{bd_dados.map((r) => r.opcao_c)}{showResp && resp == 'C' && (bd_dados.map((res, index) => res.ver_c == true ? <FcOk size={25} /> : <IoCloseCircle color="#FF0000" size={25} />))}</button>

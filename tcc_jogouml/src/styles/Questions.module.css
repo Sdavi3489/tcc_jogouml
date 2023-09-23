@@ -17,26 +17,33 @@
     align-items: center;
 }
 
-.container_vida{
+.contItemsGame{
+    display: flex;
+    flex-flow: row wrap;
+}
+
+/* .container_vida{
     display: flex;
     width: 30rem;
     position: relative;
     flex-flow: row wrap;
     justify-content: center;
     
-}
+} */
 
 .countHearts{
     font-family: 'Montserrat', 'Roboto', sans-serif;
     font-weight: bold;
     font-size: 33px;
-    padding-left: 25rem;
+    /*padding-left: 25rem;*/
     color: #FFF;
 }
 
 .score{
     font-size: 30px;
     color: #FFF;
+    margin-right: 150px;
+    margin-bottom: 15px;
 }
 
 .pq {
@@ -86,6 +93,11 @@
     margin: 5px;
 }
 
+.containerButtons{
+    display: flex;
+    flex-flow: row wrap;
+}
+
 .container_btn{
     display: flex;
     justify-content: center;
@@ -98,4 +110,17 @@
 .time{
     font-size: 30px;
     color: #FFF;
+    margin-right: 150px;
+}
+
+.imgPerg{
+    background-color: #FFF;
+    padding: 15px;
+    border-radius: 8px;
+}
+
+.imgPerg > p{
+    color: #000;
+    font-weight: bold;
+    font-size: 20px;
 }

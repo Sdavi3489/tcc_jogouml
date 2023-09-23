@@ -30,15 +30,15 @@ const Ranking = () => {
         <table className={styles.tableRanking}>
           <tr>
             <th className={styles.thRank}>Posição</th>
-            <th className={styles.thRank}>Username</th>
             <th className={styles.thRank}>Pontuação</th>
+            <th className={styles.thRank}>Username</th>
           </tr>
           {
             rank.map((res, index) => {
               return <tr key={index}>
                 <td>{index+1}</td>
-                <td className={styles.user}>{res.username}</td>
                 <td className={styles.score}>{res.pontuacao}</td>
+                <td className={styles.user}>{res.username}</td>
               </tr>
 
             })

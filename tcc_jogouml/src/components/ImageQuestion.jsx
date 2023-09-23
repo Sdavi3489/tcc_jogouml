@@ -1,5 +1,6 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
+import styles from '../styles/ImageQuestion.module.css'
 import Imgperg11_13 from "../assets/questions/questao-11-13.jpg";
 import Imgperg14 from "../assets/questions/questao-14.jpg";
 import Imgperg15 from "../assets/questions/questao-15.jpg";
@@ -43,7 +44,7 @@ const ImageQuestion = ({perg, image}) => {
 
   return (
     <>
-      {(image != null ? <img src={imgPergunta[perg].img} height={'200px'} />: <div style={{display: "none"}}>Sem imagem</div>)}
+      {(image != null ? <img className={styles.QuestionImg} src={imgPergunta[perg].img} height={'200px'} />: <div style={{display: "none"}}>Sem imagem</div>)}
     </>
   )
 }
