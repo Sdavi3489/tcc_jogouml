@@ -20,6 +20,7 @@
 .contItemsGame{
     display: flex;
     flex-flow: row wrap;
+    margin: 15px
 }
 
 /* .container_vida{
@@ -46,29 +47,20 @@
     margin-bottom: 15px;
 }
 
-.pq {
-    /*color: #213547;*/
-    color: #FFF;
-    font-size: 25px;
-    font-weight: 300;
-    padding-top: 1rem;
-    padding-bottom: 1rem;
-}
-
 .btnA{
     font-family: 'Montserrat', 'Roboto', sans-serif;
-    width: 40rem;
+    width: 30rem;
+    margin: 5px;
     color: #000;
     border-radius: 8px;
     border: 1px solid transparent;
     padding: 0.6em 1.2em;
     /*font-size: 1em;*/
     font-size: 1.2em;
-    font-weight: 300;
     background-color: #FFF;
     cursor: pointer;
     transition: border-color 0.25s;
-    margin: 5px;
+    font-weight: 500;
 }
 
 .btnA:hover {
@@ -76,6 +68,29 @@
     border-color: #000;
     transition: 1s;
 }
+
+.btnInt{
+    font-family: 'Montserrat', 'Roboto', sans-serif;
+    width: 30vh; /* 10rem ou auto para se  adaptar ao tamanho do texto*/
+    margin: 5px;
+    color: #000;
+    border-radius: 8px;
+    border: 1px solid transparent;
+    padding: 0.6em 1.2em;
+    /*font-size: 1em;*/
+    font-size: 1.2em;
+    background-color: #FFF;
+    cursor: pointer;
+    transition: border-color 0.25s;
+    font-weight: 500;
+}
+
+.btnInt:hover {
+    background-color: #8e8c8c;
+    border-color: #000;
+    transition: 1s;
+}
+
 
 .btnArrow{
     color: #000;
@@ -96,6 +111,7 @@
 .containerButtons{
     display: flex;
     flex-flow: row wrap;
+    justify-content: center;
 }
 
 .container_btn{
@@ -104,7 +120,7 @@
 }
 
 .combo{
-    padding-left: 25rem;
+    margin-right: 10px;
 }
 
 .time{
@@ -117,10 +133,13 @@
     background-color: #FFF;
     padding: 15px;
     border-radius: 8px;
+    margin-bottom: 15px;
 }
 
 .imgPerg > p{
-    color: #000;
+    color:  #506485;
     font-weight: bold;
-    font-size: 20px;
+    font-size: 25px;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
 }

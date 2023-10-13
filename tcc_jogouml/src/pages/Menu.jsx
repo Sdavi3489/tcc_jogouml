@@ -113,12 +113,12 @@ const Menu = () => {
                     Caso de uso
                   </Typography>
                   <Typography variant="body2" color="text.secondary">
-                    Esta sessão contém conteúdo sobre:
+                    Esta seção contém conteúdo sobre:
                     Atores,
                     Caso de uso,
                     Relacionamentos,
                     Include,
-                    Exclude
+                    Extends
                   </Typography>
                 </CardContent>
                 <Tabs value={value} onChange={handleChange} aria-label="disabled tabs example">

@@ -25,21 +25,21 @@ const QuestionsInt = ({ userID }) => {
     const [showImg, setShowImg] = useState('') // Esta variável identifica qual opção foi escolhida pelo jogador e server para mostrar o resultado na tela.
     const navigate = useNavigate() // navega para o link definido quando o for acionado
 
+
     function verifica_resp(e) {
         e.preventDefault();
         const resp_dada = { "id_resp": count, "resposta_dada": e.target.value, "usuario_fk": userID, "pergunta_fk": count } // manda as informações em json para a requisição post.
         const rev = bd_dados.map((res) => res.resposta_correta) //pega a resposta correta
-        //document.getElementById(e).disabled = false;
         setshowResp(true); //Mostra a resposta correta e incorreta da questão
         setResp(resp_dada.resposta_dada);// manda a resposta escolhida pelo jogador
+        //console.log(rev);
 
-        console.log(rev);
+
         if (resp_dada.resposta_dada == rev) {
             console.log('Ganhou 1 ponto!');
             setScore((scr) => scr + 50); // Acrescenta o numero de pontos
             setAcertos((act) => act + 1); //Acrescenta numero de acertos
             setJogSeg((seg) => seg + 1); //Acrescenta jogadas seguindas
-
             // usando switch para determinados casos
             // Caso 1 for certo e o contador for 1 ganha a conquista e se for o ultimo também
             switch (count) {
@@ -76,6 +76,13 @@ const QuestionsInt = ({ userID }) => {
             setShowCombo(false);
         }
 
+        // if (btnValue) {
+        //     document.querySelector(e.target).disabled = true;
+        //     return
+        // } else {
+        //     document.querySelector(e.target).disabled = false;
+        // }
+
         //console.log(bd_dados.map((res) => res.ver_a))
         //console.log(bd_dados.map((res) => res.ver_a[0]))
         //console.log(rev[0])
@@ -100,7 +107,8 @@ const QuestionsInt = ({ userID }) => {
         // teste fazendo um console.log() com o for ate 3 para ver se funciona
         // setTimeout(() => {
         //     next_question();
-        // }, 3000);
+        // }, 1000);
+
 
     }
 
@@ -152,18 +160,18 @@ const QuestionsInt = ({ userID }) => {
             <div className={styles.contItemsGame}>
                 <div className={styles.time}><Time /></div>
                 <p className={styles.score}>PONTOS: {Score}</p>
+                <div className={styles.combo}>{showCombo == true && (<img src={comboImg} height={'50px'} />)}</div>
                 <FcLike className={styles.fcLike} size={35} /><p className={styles.countHearts}>{count_vida}</p>
             </div>
-            <div className={styles.combo}>{showCombo == true && (<img src={comboImg} height={'50px'} />)}</div>
             <div className={styles.imgPerg}>
                 <ImageQuestion perg={count - 1} image={showImg} />
                 <p className={styles.pq}>{bd_dados.map((e, index) => e.pergunta)}</p>
             </div>
             <div className={styles.containerButtons}>
-                <button className={styles.btnA} onClick={verifica_resp} value='A'>{bd_dados.map((r) => r.opcao_a)}{showResp && resp == 'A' && (bd_dados.map((res, index) => res.ver_a == true ? <FcOk size={25} /> : <IoCloseCircle color="#FF0000" size={25} />))}</button>
-                <button className={styles.btnA} onClick={verifica_resp} value='B'>{bd_dados.map((r) => r.opcao_b)}{showResp && resp == 'B' && (bd_dados.map((res, index) => res.ver_b == true ? <FcOk size={25} /> : <IoCloseCircle color="#FF0000" size={25} />))}</button>
-                <button className={styles.btnA} onClick={verifica_resp} value='C'>{bd_dados.map((r) => r.opcao_c)}{showResp && resp == 'C' && (bd_dados.map((res, index) => res.ver_c == true ? <FcOk size={25} /> : <IoCloseCircle color="#FF0000" size={25} />))}</button>
-                <button className={styles.btnA} onClick={verifica_resp} value='D'>{bd_dados.map((r) => r.opcao_d)}{showResp && resp == 'D' && (bd_dados.map((res, index) => res.ver_d == true ? <FcOk size={25} /> : <IoCloseCircle color="#FF0000" size={25} />))}</button>
+                <button className={styles.btnInt} onClick={verifica_resp} value='A' disabled={showResp}>{bd_dados.map((r) => r.opcao_a)}{showResp && resp == 'A' && (bd_dados.map((res, index) => res.ver_a == true ? <FcOk size={25} /> : <IoCloseCircle color="#FF0000" size={25} />))}</button>
+                <button className={styles.btnInt} onClick={verifica_resp} value='B' disabled={showResp}>{bd_dados.map((r) => r.opcao_b)}{showResp && resp == 'B' && (bd_dados.map((res, index) => res.ver_b == true ? <FcOk size={25} /> : <IoCloseCircle color="#FF0000" size={25} />))}</button>
+                <button className={styles.btnInt} onClick={verifica_resp} value='C' disabled={showResp}>{bd_dados.map((r) => r.opcao_c)}{showResp && resp == 'C' && (bd_dados.map((res, index) => res.ver_c == true ? <FcOk size={25} /> : <IoCloseCircle color="#FF0000" size={25} />))}</button>
+                <button className={styles.btnInt} onClick={verifica_resp} value='D' disabled={showResp}>{bd_dados.map((r) => r.opcao_d)}{showResp && resp == 'D' && (bd_dados.map((res, index) => res.ver_d == true ? <FcOk size={25} /> : <IoCloseCircle color="#FF0000" size={25} />))}</button>
             </div>
             <div className={styles.container_btn}>{showResp && (<button className={styles.btnArrow} onClick={next_question}><FiArrowRightCircle /></button>)}</div>
 

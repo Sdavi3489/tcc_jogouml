@@ -145,11 +145,11 @@ const Questions = ({ userID }) => {
             <div className={styles.contItemsGame}>
                 <div className={styles.time}><Time /></div>
                 <p className={styles.score}>PONTOS: {Score}</p>
+                <div className={styles.combo}>{showCombo == true && (<img src={comboImg} height={'50px'} />)}</div>
                 <FcLike className={styles.fcLike} size={35} /><p className={styles.countHearts}>{count_vida}</p>
             </div>
             <div className={styles.imgPerg}>
                 <p className={styles.pq}>{bd_dados.map((e, index) => e.pergunta)}</p>
-                <div className={styles.combo}>{showCombo == true && (<img src={comboImg} height={'50px'} />)}</div>
             </div>
             <button className={styles.btnA} onClick={verifica_resp} value='A'>{bd_dados.map((r) => r.opcao_a)}{showResp && resp == 'A' && (bd_dados.map((res, index) => res.ver_a == true ? <FcOk size={25} /> : <IoCloseCircle color="#FF0000" size={25} />))}</button>
             <button className={styles.btnA} onClick={verifica_resp} value='B'>{bd_dados.map((r) => r.opcao_b)}{showResp && resp == 'B' && (bd_dados.map((res, index) => res.ver_b == true ? <FcOk size={25} /> : <IoCloseCircle color="#FF0000" size={25} />))}</button>
