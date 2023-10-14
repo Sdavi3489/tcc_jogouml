@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react'
-import style from '../styles/Home.module.css'
-import banner from "../assets/banner_jogo.jpg"
+import { Link, useNavigate} from 'react-router-dom'
 import bcrypt from 'bcryptjs';
-import { useNavigate } from 'react-router-dom';
+import style from '../styles/Home.module.css'
 import Alert from '@mui/material/Alert';
 import AlertTitle from '@mui/material/AlertTitle';
 import Stack from '@mui/material/Stack';
+import InfoCard from '../components/InfoCard';
 
 const Home = () => {
   const [username, setUsername] = useState(''); // informações do usuario
@@ -120,7 +120,9 @@ const Home = () => {
     <>
       <div className={style.containerHome}>
         <div className={style.banner}>
-          <img src={banner} alt="banner do site que representa um diagrama de caso de uso" height={'100%'} />
+          <h2 className={style.title}>Aprenda na prática!</h2>
+          <p className={style.desc}>Estude a teoria e aplique em problemas de sistemas reais</p>
+          <Link className={style.regs} to="/register">Registre-se</Link>
         </div>
         <div className={style.login}>
           <form action="" onSubmit={onSubmitValues}>
@@ -129,7 +131,6 @@ const Home = () => {
             <label className={style.userLabel}>Senha: </label>
             <input className={style.ipt} type="password" placeholder="Senha" value={password} onChange={(e) => setPassword(e.target.value)} />
             <button className={style.btnEntrar} type='submit'>Entrar</button>
-            <a className={style.registro} href="/register">Registre-se</a>
             {isValido && <Stack sx={{ width: '100%' }} spacing={2}>
               <Alert severity="error">
                 <AlertTitle>Erro</AlertTitle>
@@ -139,6 +140,10 @@ const Home = () => {
           </form>
         </div>
       </div>
+      <div className={style.containerCards}>
+        <InfoCard></InfoCard>
+      </div>
+
     </>
   )
 }

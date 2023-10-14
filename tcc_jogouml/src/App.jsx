@@ -10,7 +10,6 @@ function App() {
   return (
     <>
       <Navbar/>
-      <hr />
       <Outlet/>
       <Footer/>
     </>
