@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { Link, useNavigate} from 'react-router-dom'
 import style from '../styles/Register.module.css'
 import bcrypt from 'bcryptjs';
 import Home from './Home';
@@ -77,6 +78,9 @@ const Register = () => {
     return (
         <>
             <div className={style.containerHome}>
+                <div className={style.backBtn}>
+                    <Link className={style.returnBtn} to="/">Voltar</Link>
+                </div>
                 <div className={style.login}>
                     <form action="" onSubmit={onSubmitValues}>
                         <h2>Registre-se</h2>

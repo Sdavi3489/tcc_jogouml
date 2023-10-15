@@ -4,12 +4,18 @@ import './App.css'
 import Questions from './components/Questions'
 import Footer from './layout/Footer'
 import Add_question from './pages/Add_question'
-import { Outlet } from 'react-router-dom'
+import { useLocation ,Outlet } from 'react-router-dom'
+import NavBarHome from './layout/NavBarHome'
 
 function App() {
+  const location = useLocation();
+  const renderNavBar = location.pathname != '/' && location.pathname != '/register';
+  const renderNavBarHome = location.pathname === '/' || location.pathname === '/register';
+
   return (
     <>
-      <Navbar/>
+      {renderNavBar && <Navbar/>}
+      {renderNavBarHome && <NavBarHome/>}
       <Outlet/>
       <Footer/>
     </>

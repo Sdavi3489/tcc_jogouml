@@ -70,3 +70,30 @@ form > h2{
     font-weight: bold;
     font-size: large;
 }
+
+.backBtn{
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    position: fixed;
+}
+
+.returnBtn{
+    width: auto;
+    height: auto;
+    padding: 20px;
+    font-family: 'Montserrat', 'Roboto', sans-serif;
+    font-size: medium;
+    font-weight: bold;
+    color: #2c3869;
+    background-color: #f1f3f6;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-left: 50px;
+}
+
+.returnBtn:hover{
+    background-color: #acbcd3;
+}

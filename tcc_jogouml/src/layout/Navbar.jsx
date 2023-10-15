@@ -27,7 +27,7 @@ const Navbar = () => {
     return (
         <header>
             <ul>
-                <li><Link className={style.linkNav} to="/private">Home</Link></li>
+                <li><Link className={style.linkNav} to="/private">Menu</Link></li>
                 <li><Link className={style.linkNav} to="/rules">Instruções</Link></li>
                 <li><Link className={style.linkNav} to="/rank">Ranking</Link></li>
                 <li><Link className={style.btnLogout} onClick={OnLogout}><BiLogOut color='#FFF' size={25} /></Link></li>
