@@ -122,6 +122,7 @@ const Home = () => {
         <div className={style.banner}>
           <h2 className={style.title}>Aprenda na prática!</h2>
           <p className={style.desc}>Estude a teoria e aplique em problemas de sistemas reais</p>
+          <p className={style.descReg}>Não possui registro?</p>
           <Link className={style.regs} to="/register">Registre-se</Link>
         </div>
         <div className={style.login}>

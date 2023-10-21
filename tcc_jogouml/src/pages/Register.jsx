@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from 'react'
-import { Link, useNavigate} from 'react-router-dom'
+import React, { useState} from 'react'
+import { Link } from 'react-router-dom'
 import style from '../styles/Register.module.css'
 import bcrypt from 'bcryptjs';
-import Home from './Home';
 import Alert from '@mui/material/Alert';
 import AlertTitle from '@mui/material/AlertTitle';
 import Stack from '@mui/material/Stack';
@@ -90,7 +89,7 @@ const Register = () => {
                         <input className={style.ipt} type="password" placeholder="Digite sua senha" value={password} onChange={(e) => setPassword(e.target.value)} />
                         <label className={style.userLabel}>Verificar Senha: </label>
                         <input className={style.ipt} type="password" placeholder="Digite sua senha novamente" value={verpass} onChange={(e) => setVerpass(e.target.value)} />
-                        <button className={style.btnEntrar} type='submit'>Entrar</button>
+                        <button className={style.btnEntrar} type='submit'>Registre-se</button>
                         {isValido && (
                             val == true ? <Stack sx={{ width: '100%' }} spacing={2}>
                                 <Alert severity="success">

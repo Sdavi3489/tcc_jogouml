@@ -41,7 +41,7 @@ form > h2{
 
 .ipt {
     font-family: 'Montserrat', 'Roboto', sans-serif;
-    width: 250px;
+    width: 280px;
     height: 30px;
     border-radius: 8px;
     padding: 10px;
@@ -54,7 +54,7 @@ form > h2{
     color: #2c3869;
     margin-top: 1.5rem;
     height: 55px;
-    width: 150px;
+    width: 100%;
     border-radius: 8px;
     cursor: pointer;
 }

@@ -119,7 +119,6 @@ form {
 .regs:hover{
     /* background-color: #c3c3c3; */
     background-color: #acbcd3;
-
 }
 
 .containerCards{
@@ -131,4 +130,12 @@ form {
     height: auto;
     padding: 25px;
     background-color: #f1f3f6;
+}
+
+.descReg{
+    margin-top: 15px;
+    font-family: 'Roboto', 'Segoe UI', 'Arial', sans-serif;
+    font-size: large;
+    font-weight: bold;
+    color: #f1f3f6;
 }

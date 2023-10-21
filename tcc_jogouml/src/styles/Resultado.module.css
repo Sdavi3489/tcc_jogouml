@@ -1,15 +1,15 @@
 .containerResult{
     display: flex;
-    background-color: #FFEAD2;
-    max-width: 40rem;
+    background-color: #f1f3f6;
+    max-width: 50%;
     height: auto;
     text-align: center;
     padding: 1.5rem;
     /* margin-left: auto;
     margin-right: auto; */
-    border: 1px solid;
-    border-radius: 8px;
-    position: relative;
+    /* border: 1px solid; */
+    /* border-radius: 8px; */
+    /* position: relative; */
     flex-flow: column wrap;
     align-items: center;
     margin: 2rem auto 3rem auto;
@@ -42,7 +42,7 @@
     border: 1px solid black;
 }*/
 
-.tableRes{
+/* .tableRes{
     margin-top: 30px;
     border-radius: 8px;
     padding: 10px;
@@ -61,7 +61,7 @@ th{
 td{
     padding-top: 2px;
     padding-bottom: 2px;
-}
+} */
 
 .containerOpt{
     display: flex;

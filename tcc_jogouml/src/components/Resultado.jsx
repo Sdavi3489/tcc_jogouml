@@ -9,23 +9,19 @@ import co06 from "../assets/conquistas/co06.jpg"
 import co07 from "../assets/conquistas/co07.jpg"
 import tr01 from "../assets/conquistas/tr01.jpg"
 import tr05 from "../assets/conquistas/tr05.jpg"
-import { useParams } from 'react-router-dom'
+import { useParams, useLocation } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { GiAlliedStar } from "react-icons/gi";
-import { FaGrinStars } from "react-icons/fa";
 import { BiMenu } from "react-icons/bi";
 
 const Resultado = () => {
-
+    const location = useLocation();
+    const parametrosURL = new URLSearchParams(location.search);
+    const erros = parametrosURL.get('erros');
     const { id, score, acertos } = useParams();
     const [result, setResult] = useState([]);
     // const [getconq, setGetconq] = useState([]);
-    // const [getUsername, setGetUsername] = useState('');
-    const style_red = { backgroundColor: "#FF0000" }
-    const style_green = { backgroundColor: "#008000" }
-    const style_perg = { backgroundColor: "#333" }
-    const style_emoji = { paddingRight: "15rem" }
     const style_itens = { paddingRight: "2rem" }
     const navigate = useNavigate() // navega para o link definido quando o for acionado
     const user = localStorage.getItem('User');
@@ -37,16 +33,29 @@ const Resultado = () => {
     const t1 = localStorage.getItem('tr01');
     const t5 = localStorage.getItem('tr05');
     const time = localStorage.getItem('time');
+    const minutes = Number(time.split(':')[0]) // pega os minutos do tempo obtido
+    const seconds = Number(time.split(':')[1]) // pega os segundos do tempo obtido
+    const timeComplete = minutes + seconds - erros*10 // pega tempo completo e desconta pontos extras do tempo
+    const scoreConvertido = Number(score)
+    // TODO: VERIFICA ESSA CONTA SE ELA FUNCIONA NORMAL
+    const FinalScore = scoreConvertido + timeComplete; //pontuacao final/criterio de desempate
+
+    console.log("score", score);
+    console.log("Time result component:", FinalScore);
+    console.log("desconto tempo", timeComplete);
+    // console.log("Time result component subtraido por erros:", FinalScoreteste);
+    console.log('erros componente result:', erros);
+    // o usuario perde 10 pontos do tempo por pergunta errada na pontuação final
 
     function getTime() {
-        const minutes = Number(time.split(':')[0]) // pega os minutos do tempo obtido
-        const seconds = Number(time.split(':')[1]) // pega os segundos do tempo obtido
+        // const minutes = Number(time.split(':')[0]) // pega os minutos do tempo obtido
+        // const seconds = Number(time.split(':')[1]) // pega os segundos do tempo obtido
         //console.log(minutes, ":", seconds); 
         if (minutes >= 8 && seconds >= 0) {
             // Adiciona a conquista da velocidade se o usuário bater um recorde maior que 8 minutos
             localStorage.setItem('co02', "Conquista: Eu sou a velocidade!");
         }
-        //retorna true se o item estiver disponívele mostra na tela de resultados
+        //retorna true se o item estiver disponível e mostra na tela de resultados
         return localStorage.getItem('co02');
     }
 
@@ -83,7 +92,9 @@ const Resultado = () => {
     }, [result])
 
     useEffect(() => {
-        fetch(`http://localhost:3000/rank/${id}/${score}`, {
+        // TODO: MUDEI O SCORE PARA O NOVO SCORE DE DESEMPATE caso quiser trocar só vir aqui
+        // lembrar de trocar para float
+        fetch(`http://localhost:3000/rank/${id}/${FinalScore}`, {
             method: 'PUT'
         })
             .then(response => response.json())
@@ -120,7 +131,7 @@ const Resultado = () => {
     return (
         <>
             <div className={styles.containerResult}>
-                <span className={styles.score}>Pontuação: {score} <GiAlliedStar size={35} color='#699BF7' /></span>
+                <span className={styles.score}>Pontuação: {FinalScore} <GiAlliedStar size={35} color='#699BF7' /></span>
                 <div className={styles.contItens}>
                     <span className={styles.acertos} style={style_itens}>{acertos} Acertos</span>
                     <span className={styles.acertos}>Conquistas</span>
@@ -138,7 +149,11 @@ const Resultado = () => {
                 </div>
                 <div className={styles.time}>
                     <span>Tempo</span><br />
-                    {time && (<span>{time}</span>)}
+                    {/* {time && (<span>{time}</span>)} */}
+                    {time && (
+                        <span>{time}</span>
+                    )
+                    }
                 </div>
                 <div className={styles.containerOpt}>
                     <Link to={`/private`}><BiMenu size={50} /></Link>

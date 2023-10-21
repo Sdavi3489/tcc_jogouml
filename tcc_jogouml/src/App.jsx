@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import Navbar from './layout/Navbar'
 import './App.css'
-import Questions from './components/Questions'
 import Footer from './layout/Footer'
 import Add_question from './pages/Add_question'
 import { useLocation ,Outlet } from 'react-router-dom'

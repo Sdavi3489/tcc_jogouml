@@ -3,7 +3,7 @@ import styles from '../styles/Questions.module.css'
 import { useState, useEffect } from 'react'
 import { FcOk, FcLike } from 'react-icons/fc';
 import { FiArrowRightCircle } from "react-icons/fi";
-import { IoCloseCircle } from "react-icons/io5";
+import { IoCloseCircle, IoTimeOutline } from "react-icons/io5";
 import { useNavigate } from 'react-router-dom';
 import comboImg from "../assets/conquistas/combo.png";
 import Time from './Time';
@@ -20,10 +20,12 @@ const QuestionsInt = ({ userID }) => {
     const [Score, setScore] = useState(0) // Pontuação do jogador 
     const [resp, setResp] = useState('') // Esta variável identifica qual opção foi escolhida pelo jogador e server para mostrar o resultado na tela.
     const [acertos, setAcertos] = useState(0) // armazena o numero de acertos
+    const [erros, setErros] = useState(0) // armazena o numero de erros
     const [Jogseg, setJogSeg] = useState(0) // Esta variável indica as jogadas seguidas do jogador
     const [showCombo, setShowCombo] = useState(false); // Esta variável armazena a informação para fazer a pontuacao dobrada aparece
     const [showImg, setShowImg] = useState('') // Esta variável identifica qual opção foi escolhida pelo jogador e server para mostrar o resultado na tela.
     const navigate = useNavigate() // navega para o link definido quando o for acionado
+    const style_itens = { paddingRight: ".5rem"} // espaçamento
 
 
     function verifica_resp(e) {
@@ -71,6 +73,7 @@ const QuestionsInt = ({ userID }) => {
         else {
             console.log('Perdeu 1 ponto!');
             setScore((scr) => scr - 30); // Diminui o numero de pontos
+            setErros((er) => er + 1);
             setCountVida((ch) => ch - 1); // Diminui uma vida do jogador
             setJogSeg(0);// jogada volta para 0 caso jogador erre uma pergunta
             setShowCombo(false);
@@ -144,13 +147,14 @@ const QuestionsInt = ({ userID }) => {
         // utilizar o map para pegar o numero do index e somar index + 1 para dar o numero certo do total de questões  
         // TODO: question == numero maximo de perguntas do nivel intermediario
         if (question == 16) {
+            // const erros = question - acertos
             // const result = ver.map((res) => res.resposta_dada) //pega a resposta dada
             // esse if == 10 vai ser provisório por enquanto não adicionamos mais perguntas, quando adicionar mais eu coloco o tamanho (lenght) do array
             if (acertos == 10) {
                 localStorage.setItem(`tr01`, 'Troféu: gabaritando caso de uso');
             }
             localStorage.removeItem('inGame');
-            return navigate(`/private/result/${userID}/${Score}/${acertos}`);// esse navigate vai fazer um redirecionamento para a página de resultados
+            return navigate(`/private/result/${userID}/${Score}/${acertos}?erros=${erros}`);// esse navigate vai fazer um redirecionamento para a página de resultados
 
         }
     }
@@ -158,6 +162,7 @@ const QuestionsInt = ({ userID }) => {
     return (
         <div className={styles.container_qt}>
             <div className={styles.contItemsGame}>
+                <IoTimeOutline style={style_itens} size={30} color='#FFF'></IoTimeOutline>
                 <div className={styles.time}><Time /></div>
                 <p className={styles.score}>PONTOS: {Score}</p>
                 <div className={styles.combo}>{showCombo == true && (<img src={comboImg} height={'50px'} />)}</div>
