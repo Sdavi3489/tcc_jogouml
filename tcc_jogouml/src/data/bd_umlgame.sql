@@ -7,7 +7,7 @@ CREATE TABLE Usuario(
 
 CREATE TABLE Pergunta(
 	id_perg INT PRIMARY KEY,
-	pergunta VARCHAR(255),
+	pergunta VARCHAR(2500),
 	image VARCHAR(255),
 	opcao_a VARCHAR(255),
 	opcao_b VARCHAR(255),
@@ -63,7 +63,7 @@ INSERT INTO Resposta VALUES(2,'Representa apenas o sistema',150,1,2)
 
 
 SELECT * FROM Usuario
-SELECT * FROM Pergunta where id_perg > 10
+SELECT * FROM Pergunta
 SELECT * FROM Resposta
 SELECT * FROM Conquista
 SELECT * FROM Usuario_Conquista

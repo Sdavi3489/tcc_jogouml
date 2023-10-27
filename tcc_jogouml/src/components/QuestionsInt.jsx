@@ -146,11 +146,12 @@ const QuestionsInt = ({ userID }) => {
         }
         // utilizar o map para pegar o numero do index e somar index + 1 para dar o numero certo do total de questões  
         // TODO: question == numero maximo de perguntas do nivel intermediario
-        if (question == 16) {
+        if (question == 28) {
             // const erros = question - acertos
             // const result = ver.map((res) => res.resposta_dada) //pega a resposta dada
             // esse if == 10 vai ser provisório por enquanto não adicionamos mais perguntas, quando adicionar mais eu coloco o tamanho (lenght) do array
             if (acertos == 10) {
+                // TODO: Arrumar essa condicional com o numero atualizado
                 localStorage.setItem(`tr01`, 'Troféu: gabaritando caso de uso');
             }
             localStorage.removeItem('inGame');

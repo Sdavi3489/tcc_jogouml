@@ -17,6 +17,7 @@ function App() {
       {renderNavBarHome && <NavBarHome/>}
       <Outlet/>
       <Footer/>
+      <Add_question></Add_question>
     </>
   )
 }

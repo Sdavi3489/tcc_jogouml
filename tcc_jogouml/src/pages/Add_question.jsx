@@ -159,7 +159,7 @@ const Add_question = () => {
         {
             "id_perg": 12,
             "pergunta": "Informe qual destas opções é a relação de inclusão",
-            "image": "../assets/questions/questao-11-13.jpg",
+            "image": "../assets/questions/questao-12-14.jpg",
             "opcao_a": "1",
             "opcao_b": "2",
             "opcao_c": "3",
@@ -172,22 +172,8 @@ const Add_question = () => {
         },
         {
             "id_perg": 13,
-            "pergunta": "Informe qual destas opções é a relação de extensão",
-            "image": "../assets/questions/questao-11-13.jpg",
-            "opcao_a": "1",
-            "opcao_b": "2",
-            "opcao_c": "3",
-            "opcao_d": "4",
-            "ver_a": false,
-            "ver_b": false,
-            "ver_c": false,
-            "ver_d": true,
-            "resposta_correta": "D"
-        },
-        {
-            "id_perg": 14,
             "pergunta": "Informe qual destas opções é a relação de generalização",
-            "image": "../assets/questions/questao-11-13.jpg",
+            "image": "../assets/questions/questao-12-14.jpg",
             "opcao_a": "1",
             "opcao_b": "2",
             "opcao_c": "3",
@@ -199,9 +185,23 @@ const Add_question = () => {
             "resposta_correta": "B"
         },
         {
+            "id_perg": 14,
+            "pergunta": "Informe qual destas opções é a relação de extensão",
+            "image": "../assets/questions/questao-12-14.jpg",
+            "opcao_a": "1",
+            "opcao_b": "2",
+            "opcao_c": "3",
+            "opcao_d": "4",
+            "ver_a": false,
+            "ver_b": false,
+            "ver_c": false,
+            "ver_d": true,
+            "resposta_correta": "D"
+        },
+        {
             "id_perg": 15,
             "pergunta": "Indique qual é o tipo de relação que precisa ser utilizada neste caso",
-            "image": "../assets/questions/questao-14.jpg",
+            "image": "../assets/questions/questao-15.jpg",
             "opcao_a": "1",
             "opcao_b": "2",
             "opcao_c": "3",
@@ -215,7 +215,7 @@ const Add_question = () => {
         {
             "id_perg": 16,
             "pergunta": "Qual dessas opções representa o Ator no diagrama de caso de uso?",
-            "image": "../assets/questions/questao-15.jpg",
+            "image": "../assets/questions/questao-16.jpg",
             "opcao_a": "1",
             "opcao_b": "2",
             "opcao_c": "3",
@@ -229,7 +229,7 @@ const Add_question = () => {
         {
             "id_perg": 17,
             "pergunta": "Qual dessas opções representa o caso de uso?",
-            "image": "../assets/questions/questao-16.jpg",
+            "image": "../assets/questions/questao-17.jpg",
             "opcao_a": "1",
             "opcao_b": "2",
             "opcao_c": "3",
@@ -241,9 +241,9 @@ const Add_question = () => {
             "resposta_correta": "D"
         },
         {
-            "id_perg": 17,
+            "id_perg": 18,
             "pergunta": "Informe qual seria um caso de uso relacionado ao bibliotecário no sistema de uma biblioteca",
-            "image": "../assets/questions/questao-17.png",
+            "image": "../assets/questions/questao-18.png",
             "opcao_a": "1",
             "opcao_b": "2",
             "opcao_c": "3",
@@ -255,9 +255,9 @@ const Add_question = () => {
             "resposta_correta": "B"
         },
         {
-            "id_perg": 18,
+            "id_perg": 19,
             "pergunta": "O sistema de gerenciamento de uma escola contém diversas funcionalidades para os diversos atores, dessa forma, qual ator seria responsável por Registrar Presença?",
-            "image": "../assets/questions/questao-18.png",
+            "image": "../assets/questions/questao-19.png",
             "opcao_a": "1",
             "opcao_b": "2",
             "opcao_c": "3",
@@ -269,9 +269,9 @@ const Add_question = () => {
             "resposta_correta": "C"
         },
         {
-            "id_perg": 19,
+            "id_perg": 20,
             "pergunta": "O sistema de reserva de consulta médica é responsável por registrar as consultas do pacientes, dessa forma, qual seria um caso de uso especificamente do ator Médico?",
-            "image": "../assets/questions/questao-19.png",
+            "image": "../assets/questions/questao-20.png",
             "opcao_a": "1",
             "opcao_b": "2",
             "opcao_c": "3",
@@ -283,9 +283,9 @@ const Add_question = () => {
             "resposta_correta": "B"
         },
         {
-            "id_perg": 20,
-            "pergunta": 'Os atores representados acima representam um sistema que pode ser externo ou integrado. O atores são identificados com o nome "system" entre sinais de "<" e ">", que serve para diferenciá-los de atores humanos, nesse caso como é chamado esse tipo de identificação?',
-            "image": "../assets/questions/questao-20.png",
+            "id_perg": 21,
+            "pergunta": 'Os atores podem ser identificados com o nome "system" entre sinais de "<" e ">", que serve para diferenciá-los de atores humanos, nesse caso como é chamado esse tipo de identificação?',
+            "image": "../assets/questions/questao-21.png",
             "opcao_a": "Extend",
             "opcao_b": "Include",
             "opcao_c": "Estereótipo",
@@ -297,9 +297,9 @@ const Add_question = () => {
             "resposta_correta": "C"
         },        
         {
-            "id_perg": 21,
+            "id_perg": 22,
             "pergunta": 'Um usuário do GitHub pode criar tanto um repositório público como um privado, dessa forma de acordo com a imagem a seguir, qual é o tipo de relacionamento correto para se utilizar nesse caso de uso?',
-            "image": "../assets/questions/questao-21.png",
+            "image": "../assets/questions/questao-22.png",
             "opcao_a": "1",
             "opcao_b": "2",
             "opcao_c": "3",
@@ -311,9 +311,9 @@ const Add_question = () => {
             "resposta_correta": "B"
         },
         {
-            "id_perg": 22,
-            "pergunta": 'O caso de uso da imagem abaixo apresenta o diagrama de caso de uso de uma pizzaria. Na imagem é possível visualizar os casos de uso "Validar pedido" e "Efetuar Pagamento". Nesse caso a execução do caso de uso "Efetuar Pagamento" obriga a execução do caso de uso "Validar Pedido". Por esse motivo, qual é o relacionamento correto para esta situação?',
-            "image": "../assets/questions/questao-22.png",
+            "id_perg":23,
+            "pergunta":'O caso de uso da imagem abaixo apresenta o diagrama de caso de uso de uma pizzaria. Na imagem é possível visualizar os casos de uso "Validar pedido" e "Efetuar Pagamento". Nesse caso a execução do caso de uso "Efetuar Pagamento" obriga a execução do caso de uso "Validar Pedido". Por esse motivo, qual é o relacionamento correto para esta situação?',
+            "image": "../assets/questions/questao-23.png",
             "opcao_a": "1",
             "opcao_b": "2",
             "opcao_c": "3",
@@ -325,9 +325,9 @@ const Add_question = () => {
             "resposta_correta": "C"
         },
         {
-            "id_perg": 23,
+            "id_perg": 24,
             "pergunta": 'No caso de uso de uma loja virtual existe uma relação entre dois casos de uso, dessa forma qual seria o tipo de relacionamento correto nessa situação?',
-            "image": "../assets/questions/questao-23.png",
+            "image": "../assets/questions/questao-24.png",
             "opcao_a": "1",
             "opcao_b": "2",
             "opcao_c": "3",
@@ -339,9 +339,9 @@ const Add_question = () => {
             "resposta_correta": "D"
         },
         {
-            "id_perg": 24,
+            "id_perg": 25,
             "pergunta": 'No caso de uso apresentado abaixo contém dois tipos de usuário no sistema de um site de eventos. Entretanto, os usuários compartilham do mesmo caso de uso, dessa forma qual desses relacionamentos podem servir para relacionar os dois atores ao Ator principal do sistema?',
-            "image": "../assets/questions/questao-24.png",
+            "image": "../assets/questions/questao-25.png",
             "opcao_a": "1",
             "opcao_b": "2",
             "opcao_c": "3",
@@ -353,9 +353,9 @@ const Add_question = () => {
             "resposta_correta": "B"
         },
         {
-            "id_perg": 25,
+            "id_perg": 26,
             "pergunta": 'Em um caso de uso estendido onde a condição para a execução não fica claro, é necessário acrescentar uma restrição à associação de extensão por meio de uma nota.',
-            "image": "../assets/questions/questao-25.png",
+            "image": "../assets/questions/questao-26.png",
             "opcao_a": "1",
             "opcao_b": "2",
             "opcao_c": "3",
@@ -367,11 +367,11 @@ const Add_question = () => {
             "resposta_correta": "C"
         },
         {
-            "id_perg": 26,
+            "id_perg": 27,
             "pergunta": 'Sobre a documentação de caso de uso qual destas alternativa é a correta?',
             "image": null,
             "opcao_a": "Existe um formato específico de documentação para casos de uso",
-            "opcao_b": "Os casos de uso não podem ser documentados por meios de outros diagramas por meio de outros diagramas como o diagrama de sequência ou de atividades",
+            "opcao_b": "Os casos de uso não podem ser documentados por meio de outros diagramas como o diagrama de sequência ou de atividades",
             "opcao_c": "O formato da documentação não é flexível e não permite que o caso de uso seja documentado da forma que se considera melhor",
             "opcao_d": "A documentação de um caso de uso descreve os atores que interagem com o caso de uso e quais as funções que eles desempenham.",
             "ver_a": false,
@@ -381,9 +381,9 @@ const Add_question = () => {
             "resposta_correta": "D"
         },
         {
-            "id_perg": 27,
+            "id_perg": 28,
             "pergunta": 'Responda qual é a alternativa correta para cada relacionamento começando pelo primeiro caso de uso e depois pelo segundo respectivamente',
-            "image": null,
+            "image": "../assets/questions/questao-28.png",
             "opcao_a": "<<Extend>> / <<Include>>",
             "opcao_b": "<<Include>> / <<Include>>",
             "opcao_c": "<<Include>> / <<Extend>>",
@@ -434,7 +434,7 @@ const Add_question = () => {
     // fazer um map que fara o cadastro de cada pergunta automaticamente
     function OnHandlesubmit() {
         let index = 0;
-        while (index <= 26) {
+        while (index <= 27) {
             fetch('http://localhost:3000/perg', {
                 method: 'POST',
                 headers: {
