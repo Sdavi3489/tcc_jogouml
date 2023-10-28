@@ -1,0 +1,64 @@
+.containerContent{
+    display: grid;
+    grid-template-columns: auto auto;
+}
+
+.sidebar{
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    padding-top: 80px;
+    flex-flow: column wrap;
+    background-color: #f1f3f6;
+    border-right: 5px solid #acbcd3;
+    width: 18rem;
+    height: auto;
+    overflow: auto;
+}
+
+.h2SideBar{
+    font-family: 'Roboto', sans-serif;
+    color: #29212a;
+    font-weight: 300;
+}
+
+/* li{
+    text-decoration: none;
+    list-style: none;
+    
+} */
+
+.ulRulesAside{
+    /* list-style-type: none; */
+    /* overflow: hidden; */
+    padding-top: .5rem;
+
+}
+
+.itensBar{
+    width: auto;
+    height: auto;
+    /* padding: 20px; */
+    /* border: 1px solid #29212a; */
+    font-size: medium;
+    font-weight: bold; /* 500 ou bold*/
+    background-color: #f1f3f6;
+    color: #2c3869;
+    border-radius: 8px;
+    cursor: pointer;
+    /* margin-top: 15px; */
+    
+}
+
+.itensBar:hover{
+    /* background-color: #2c3869; */
+    transition: 0.3s;
+}
+
+.contentRules{
+    width: auto;
+    height: auto;
+    background-color: #f1f3f6;
+    padding: 90px;
+    overflow:visible;
+}

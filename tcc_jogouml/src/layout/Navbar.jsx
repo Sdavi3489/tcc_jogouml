@@ -26,11 +26,11 @@ const Navbar = () => {
 
     return (
         <header>
-            <ul>
-                <li><Link className={style.linkNav} to="/private">Menu</Link></li>
-                <li><Link className={style.linkNav} to="/rules">Instruções</Link></li>
-                <li><Link className={style.linkNav} to="/rank">Ranking</Link></li>
-                <li><Link className={style.btnLogout} onClick={OnLogout}><BiLogOut color='#FFF' size={25} /></Link></li>
+            <ul className={style.ulNav}>
+                <li className={style.liNav}><Link className={style.linkNav} to="/private">Menu</Link></li>
+                <li className={style.liNav}><Link className={style.linkNav} to="/rules">Instruções</Link></li>
+                <li className={style.liNav}><Link className={style.linkNav} to="/rank">Ranking</Link></li>
+                <li className={style.liNav}><Link className={style.btnLogout} onClick={OnLogout}><BiLogOut color='#FFF' size={25} /></Link></li>
             </ul>
         </header>
     )

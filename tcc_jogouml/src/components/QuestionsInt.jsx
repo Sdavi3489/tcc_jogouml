@@ -150,7 +150,7 @@ const QuestionsInt = ({ userID }) => {
             // const erros = question - acertos
             // const result = ver.map((res) => res.resposta_dada) //pega a resposta dada
             // esse if == 10 vai ser provisório por enquanto não adicionamos mais perguntas, quando adicionar mais eu coloco o tamanho (lenght) do array
-            if (acertos == 10) {
+            if (acertos == 17) {
                 // TODO: Arrumar essa condicional com o numero atualizado
                 localStorage.setItem(`tr01`, 'Troféu: gabaritando caso de uso');
             }

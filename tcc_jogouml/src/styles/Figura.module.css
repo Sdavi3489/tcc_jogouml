@@ -1,0 +1,12 @@
+.figuraRules{    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-flow: column wrap;
+}
+
+.figuraImg{
+    /* width: 450px;
+    height: 350px; */
+    margin-top: 50px;
+}

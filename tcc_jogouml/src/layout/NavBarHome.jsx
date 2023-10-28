@@ -6,10 +6,10 @@ import style from '../styles/NavBarHome.module.css'
 const NavBarHome = () => {
     return (
         <header>
-            <ul>
-                <li><Link className={style.linkNav} to="/rules">Instruções</Link></li>
-                <li><Link className={style.linkNav} to="/rank">Ranking</Link></li>
-                <li><Link className={style.linkNav} to="#">Sobre</Link></li>
+            <ul className={style.ulNav}>
+                <li className={style.liNav}><Link className={style.linkNav} to="/rules">Instruções</Link></li>
+                <li className={style.liNav}><Link className={style.linkNav} to="/rank">Ranking</Link></li>
+                <li className={style.liNav}><Link className={style.linkNav} to="#">Sobre</Link></li>
             </ul>
         </header>
     )
