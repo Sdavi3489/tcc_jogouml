@@ -13,7 +13,7 @@
     border-right: 5px solid #acbcd3;
     width: 18rem;
     height: auto;
-    overflow: auto;
+    /* overflow: auto; */
 }
 
 .h2SideBar{
@@ -60,5 +60,5 @@
     height: auto;
     background-color: #f1f3f6;
     padding: 90px;
-    overflow:visible;
+    /* overflow:scroll; */
 }

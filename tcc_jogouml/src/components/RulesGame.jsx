@@ -2,6 +2,10 @@ import React from 'react'
 import Title from './Title'
 import imgMenu from '../assets/imgRules/new-menu-jogo.png'
 import imgJogo from '../assets/imgRules/tela-jogo-rules.png'
+import imgPergCorrect from '../assets/imgRules/barra-respostas.png'
+import imgPergIncorrect from '../assets/imgRules/barra-respostas-false.png'
+import comboIMG from '../assets/imgRules/tela-combo.png'
+import ResultadoTela from '../assets/imgRules/resultados-tela.png'
 import Figura from './Figura'
 import style from '../styles/RulesGame.module.css'
 
@@ -31,37 +35,66 @@ const RulesGame = () => {
             </p>
             <Figura image={imgJogo} caption="Jogo em andamento" />
 
-            <ol>
-                <li>Navbar</li>
+            <ol className={style.listComponents}>
+                <li className={style.listTelajogo}>Navbar</li>
                 <p>Oferece uma barra de navegação onde o usuário pode voltar ao menu, consulta as instruções, consultar ranking e sair do jogo</p>
-                <li>Time</li>
+                <li className={style.listTelajogo}>Time</li>
                 <p>
                     Esse é o cronometro do jogo, ele que vai determinar o tempo que o jogador possui para finalizar
                     e caso o jogador não terminar a tempo será Game Over.
                 </p>
-                <li>Pontuação</li>
+                <li className={style.listTelajogo}>Pontuação</li>
                 <p>
-                    A pontuação do jogo em todos os níveis contabilizam 50 pontos para cada questão correta e menos 30 pontos para as incorretas. 
+                    A pontuação do jogo em todos os níveis contabilizam 50 pontos para cada questão correta e menos 30 pontos para as incorretas.
                     Lembrando também do critério de desempate em que a pontuação final é contabilizada através da soma da pontuação parcial adquirida no jogo mais o tempo, levando em consideração que o bônus do tempo poderá ser subtraído em dez pontos por cada erro.
                 </p>
-                <li>Vidas do jogador</li>
+                <li className={style.listTelajogo}>Vidas do jogador</li>
                 <p>
                     O jogador possui 5 vidas e deve mantê-las respondendo as perguntas corretamente e caso
                     responder diversas perguntas incorretas o jogador irá ter o número de vidas subtraídas até
                     eventualmente um Game Over ocorrer ou ficar com uma pontuação menor.
                 </p>
-                <li>Ilustração da pergunta</li>
+                <li className={style.listTelajogo}>Ilustração da pergunta</li>
                 <p>
                     A ilustração das perguntas ajudarão o jogador a entender a situação apresentada
                     e através da interpretação da imagem com a pergunta feita deverá solucionar a situação
                     através de uma das respostas.
                 </p>
-                <li>Barra de respostas</li>
+                <li className={style.listTelajogo}>Barra de respostas</li>
                 <p>
                     A barra de resposta contém todas as respostas disponíveis para que o jogador solucione
                     o problema apresentado.
                 </p>
             </ol>
+            <Title topico="1.3" title="Vericação da resposta" />
+            <p className={style.paragrafoTexto}>
+                A resposta é verificada após o usuário escolher uma resposta disponível. Dessa forma, quando a resposta
+                for correta, o jogo deve adicionar o ícone verde demostrando que está certo e se for incorreto mostrar
+                o ícone vermelho indicando que a resposta informada está incorreta. Após o jogador ter respondido aparecerá um botão para
+                prosseguir para a próxima questão.
+            </p>
+            <Figura image={imgPergCorrect} caption="Indicativo de Resposta Correta" />
+            <Figura image={imgPergIncorrect} caption="Indicativo de Resposta Incorreta" />
+
+            <Title topico="1.4" title="Conquista de pontuação dobrada" />
+            <p className={style.paragrafoTexto}>
+                O usuário ganha essa recompensa quando consegue
+                o benefício de pontos dobrados após um sequência
+                de três ou cinco acertos e na questão seguinte se for certa
+                a pontuação será contabilizado o dobro da pontuação. O ícone da pontuação dobrada aparece
+                ao lado do ícone de vida do jogador para sinalizar que a pontuação dobrada está ativada. 
+            </p>
+            <Figura image={comboIMG} caption="Imagem demonstrando que a pontuação dobrada está ativa" />
+
+            <Title topico="1.5" title="Tela de resultados" />
+            <p className={style.paragrafoTexto}>
+                A tela de resultados é apresentada quando o jogador consegue chegar até o final
+                do jogo e obtendo seu desempenho final. A tela do resultado final, além da pontuação contém também
+                as conquistas obtidas, o número de acertos e o tempo de duração do jogo.
+            </p>
+            <Figura image={ResultadoTela} caption="Tela de Resultados" />
+            
+
         </>
     )
 }
