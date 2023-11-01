@@ -6,6 +6,7 @@ import imgPergCorrect from '../assets/imgRules/barra-respostas.png'
 import imgPergIncorrect from '../assets/imgRules/barra-respostas-false.png'
 import comboIMG from '../assets/imgRules/tela-combo.png'
 import ResultadoTela from '../assets/imgRules/resultados-tela.png'
+import telaGameOver from '../assets/imgRules/tela-game-over.png'
 import Figura from './Figura'
 import style from '../styles/RulesGame.module.css'
 
@@ -89,10 +90,17 @@ const RulesGame = () => {
             <Title topico="1.5" title="Tela de resultados" />
             <p className={style.paragrafoTexto}>
                 A tela de resultados é apresentada quando o jogador consegue chegar até o final
-                do jogo e obtendo seu desempenho final. A tela do resultado final, além da pontuação contém também
+                do jogo obtendo seu desempenho final. A tela do resultado final, além da pontuação contém também
                 as conquistas obtidas, o número de acertos e o tempo de duração do jogo.
             </p>
             <Figura image={ResultadoTela} caption="Tela de Resultados" />
+
+            
+            <Title topico="1.6" title="Tela de Game Over" />
+            <p className={style.paragrafoTexto}>
+                A tela de Game Over aparece quando o jogador perde todas as vidas ou quando o tempo acabar.
+            </p>
+            <Figura image={telaGameOver} caption="Tela de Game Over" />
             
 
         </>
