@@ -7,7 +7,7 @@ const Figura = ({image, caption, lar, alt}) => {
         <>
             <figure className={style.figuraRules}>
                 <img  className={style.figuraImg} src={image} alt="imagem Menu" width={lar} height={alt}/>
-                <figcaption>{caption}</figcaption>
+                <figcaption className={style.figuraCaption}>{caption}</figcaption>
             </figure>
         </>
     )

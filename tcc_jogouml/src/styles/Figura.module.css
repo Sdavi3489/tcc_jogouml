@@ -8,5 +8,10 @@
 .figuraImg{
     /* width: 450px;
     height: 350px; */
-    margin-top: 50px;
+    margin-top: 30px;
+    /* margin-bottom: 20px; */
+}
+
+.figuraCaption{
+    margin-bottom: 30px;
 }
