@@ -13,6 +13,19 @@ import style from '../styles/RulesGame.module.css'
 const RulesGame = () => {
     return (
         <>
+
+            <div className={style.containerTopicos}>
+                <ul className={style.ulTopico}>
+                    <li className={style.liTopico}><a className={style.topicoList} href="#Regras do Jogo Componente">Regras do Jogo Componente</a></li>
+                    <li className={style.liTopico}><a className={style.topicoList} href="#Menu Inicial">Menu Inicial</a></li>
+                    <li className={style.liTopico}><a className={style.topicoList} href="#Tela do jogo">Tela do jogo</a></li>
+                    <li className={style.liTopico}><a className={style.topicoList} href="#Verificação da resposta">Verificação da resposta</a></li>
+                    <li className={style.liTopico}><a className={style.topicoList} href="#Conquista de pontuação dobrada">Conquista de pontuação dobrada</a></li>
+                    <li className={style.liTopico}><a className={style.topicoList} href="#Tela de resultados">Tela de resultados</a></li>
+                    <li className={style.liTopico}><a className={style.topicoList} href="#Tela de Game Over">Tela de Game Over</a></li>
+                </ul>
+            </div>
+            
             <Title topico="1" title="Regras do Jogo Componente" />
             <p className={style.paragrafoTexto}>
                 Os tópicos a seguir explicam a dinâmica do jogo.
@@ -67,7 +80,7 @@ const RulesGame = () => {
                     o problema apresentado.
                 </p>
             </ol>
-            <Title topico="1.3" title="Vericação da resposta" />
+            <Title topico="1.3" title="Verificação da resposta" />
             <p className={style.paragrafoTexto}>
                 A resposta é verificada após o usuário escolher uma resposta disponível. Dessa forma, quando a resposta
                 for correta, o jogo deve adicionar o ícone verde demostrando que está certo e se for incorreto mostrar
@@ -83,7 +96,7 @@ const RulesGame = () => {
                 o benefício de pontos dobrados após um sequência
                 de três ou cinco acertos e na questão seguinte se for certa
                 a pontuação será contabilizado o dobro da pontuação. O ícone da pontuação dobrada aparece
-                ao lado do ícone de vida do jogador para sinalizar que a pontuação dobrada está ativada. 
+                ao lado do ícone de vida do jogador para sinalizar que a pontuação dobrada está ativada.
             </p>
             <Figura image={comboIMG} caption="Imagem demonstrando que a pontuação dobrada está ativa" />
 
@@ -95,13 +108,13 @@ const RulesGame = () => {
             </p>
             <Figura image={ResultadoTela} caption="Tela de Resultados" />
 
-            
+
             <Title topico="1.6" title="Tela de Game Over" />
             <p className={style.paragrafoTexto}>
                 A tela de Game Over aparece quando o jogador perde todas as vidas ou quando o tempo acabar.
             </p>
             <Figura image={telaGameOver} caption="Tela de Game Over" />
-            
+
 
         </>
     )

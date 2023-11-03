@@ -340,7 +340,7 @@ const Add_question = () => {
         },
         {
             "id_perg": 25,
-            "pergunta": 'No caso de uso apresentado abaixo contém dois tipos de usuário no sistema de um site de eventos. Entretanto, os usuários compartilham do mesmo caso de uso, dessa forma qual desses relacionamentos podem servir para relacionar os dois atores ao Ator principal do sistema?',
+            "pergunta": 'No caso de uso apresentado contém dois tipos de usuário no sistema de um site de eventos. Entretanto, os usuários compartilham do mesmo caso de uso, dessa forma qual desses relacionamentos podem servir para relacionar os dois atores ao Ator principal do sistema?',
             "image": "../assets/questions/questao-25.png",
             "opcao_a": "1",
             "opcao_b": "2",

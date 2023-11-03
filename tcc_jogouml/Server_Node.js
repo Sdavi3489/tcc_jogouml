@@ -157,6 +157,8 @@ app.get('/ranking', function (req, res) {
         )
 })
 
+// TODO: FAZER UM NOVO ENDPOINT QUE CONSULTA A PONTUAÇÃO DE UM JOGADOR
+
 // Rota para fazer o login e gerar o token
 app.post('/registro', (req, res) => {
     client.query({

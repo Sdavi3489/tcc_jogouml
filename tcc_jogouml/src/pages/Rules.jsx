@@ -26,7 +26,6 @@ const Rules = () => {
           {rulesInitial && <RulesGame />}
           {rulesCasodeUso && <RulesUseCase/>}
         </article>
-
       </div>
 
     </>

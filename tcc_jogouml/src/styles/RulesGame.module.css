@@ -17,3 +17,25 @@
     font-weight: bold;
 
 }
+
+.containerTopicos{
+    display: flex;
+    justify-content: center;
+    width: 300px;
+    height: auto;
+    background-color: #2c3869;
+    margin-bottom: 30px;
+    padding: 10px;
+}
+
+.liTopico{
+    margin-bottom: 5px;
+}
+
+.ulTopico{
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+    font-size: 17px;
+    padding: 30px;
+    color: #f1f3f6;
+}

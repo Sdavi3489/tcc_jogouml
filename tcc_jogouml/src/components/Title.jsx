@@ -4,7 +4,7 @@ import style from '../styles/Title.module.css'
 const Title = ({topico,title}) => {
   return (
     <>
-        <h1>{topico}: {title}</h1>
+        <h1 id={title}>{topico}: {title}</h1>
         <div className={style.divider}></div>
     </>
   )

@@ -13,7 +13,7 @@ const QuestionsInt = ({ userID }) => {
     //const [valTrue, setValTrue] = useState(false); // Verifica se o valor é verdadeiro ou falso
     const [showResp, setshowResp] = useState(false); // Mostra resultado na tela quando o resultado for true, quando o usuário escolher a resposta acionando a função verfica_resp
     const [count, setCount] = useState(1); //conta o id das perguntas conforme o usuário avança e serve para indentifica o id da tabela pergunta.
-    const [question, setQuestion] = useState(11); //conta o id das perguntas nivel intermediario
+    const [question, setQuestion] = useState(12); //conta o id das perguntas nivel intermediario
     const [bd_dados, setBdados] = useState([]) //guarda todas as informações da requisição get do banco de dados da tabela pergunta.
     const [ver, setVer] = useState([]) //guarda as informações que enviamos para o banco de dados da tabela resposta.
     const [count_vida, setCountVida] = useState(5) //Contador de vidas
@@ -73,7 +73,7 @@ const QuestionsInt = ({ userID }) => {
         else {
             console.log('Perdeu 1 ponto!');
             setScore((scr) => scr - 30); // Diminui o numero de pontos
-            setErros((er) => er + 1);
+            setErros((er) => er + 1); // Aumenta o numero de erros
             setCountVida((ch) => ch - 1); // Diminui uma vida do jogador
             setJogSeg(0);// jogada volta para 0 caso jogador erre uma pergunta
             setShowCombo(false);
@@ -152,7 +152,7 @@ const QuestionsInt = ({ userID }) => {
             // esse if == 10 vai ser provisório por enquanto não adicionamos mais perguntas, quando adicionar mais eu coloco o tamanho (lenght) do array
             if (acertos == 17) {
                 // TODO: Arrumar essa condicional com o numero atualizado
-                localStorage.setItem(`tr01`, 'Troféu: gabaritando caso de uso');
+                localStorage.setItem(`tr04`, 'Troféu: gabaritando caso de uso intermediário');
             }
             localStorage.removeItem('inGame');
             return navigate(`/private/result/${userID}/${Score}/${acertos}?erros=${erros}`);// esse navigate vai fazer um redirecionamento para a página de resultados

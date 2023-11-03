@@ -21,9 +21,6 @@ const ImageQuestion = ({perg, image}) => {
   console.log('img: ', image)
   const imgPergunta = [
     {
-      "img": null
-    },
-    {
       "img": Imgperg12_14,
     },
     {

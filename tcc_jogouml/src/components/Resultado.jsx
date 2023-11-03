@@ -8,6 +8,7 @@ import co04 from "../assets/conquistas/co04.jpg"
 import co06 from "../assets/conquistas/co06.jpg"
 import co07 from "../assets/conquistas/co07.jpg"
 import tr01 from "../assets/conquistas/tr01.jpg"
+import tr04 from "../assets/conquistas/tr04.jpg"
 import tr05 from "../assets/conquistas/tr05.jpg"
 import { useParams, useLocation } from 'react-router-dom'
 import { useState, useEffect } from 'react'
@@ -31,6 +32,7 @@ const Resultado = () => {
     const m4 = localStorage.getItem('co07');
     const m5 = localStorage.getItem('co06');
     const t1 = localStorage.getItem('tr01');
+    const t4 = localStorage.getItem('tr04');
     const t5 = localStorage.getItem('tr05');
     const time = localStorage.getItem('time');
     const minutes = Number(time.split(':')[0]) // pega os minutos do tempo obtido
@@ -39,12 +41,14 @@ const Resultado = () => {
     const scoreConvertido = Number(score)
     // TODO: VERIFICA ESSA CONTA SE ELA FUNCIONA NORMAL
     const FinalScore = scoreConvertido + timeComplete; //pontuacao final/criterio de desempate
+    // TODO: Fazer uma pontuação que soma o final score com a pontuação registrada antes
 
-    console.log("score", score);
-    console.log("Time result component:", FinalScore);
-    console.log("desconto tempo", timeComplete);
+    // console.log("resultado ranking consulta: ", result);
+    // console.log("score", score);
+    // console.log("Time result component:", FinalScore);
+    // console.log("desconto tempo", timeComplete);
     // console.log("Time result component subtraido por erros:", FinalScoreteste);
-    console.log('erros componente result:', erros);
+    //console.log('erros componente result:', erros);
     // o usuario perde 10 pontos do tempo por pergunta errada na pontuação final
 
     function getTime() {
@@ -114,7 +118,7 @@ const Resultado = () => {
             fetch(`http://localhost:3000/ranking`)
                 .then(response => response.json())
                 .then(data => {
-                    console.log(data[0]);
+                    // console.log('pontuacao rank: ', data[0]);
                     //setGetUsername(data[0].username)
                     if (data[0].username == user) {
                         localStorage.setItem(`tr05`, 'Troféu: Segue o líder');
@@ -144,6 +148,7 @@ const Resultado = () => {
                     {m5 && (<img src={co06} height={'90px'} />)}
                     {getTime() && (<img src={co02} height={'90px'} />)}
                     {t1 && (<img src={tr01} height={'90px'} />)}
+                    {t4 && (<img src={tr04} height={'90px'} />)}
                     {t5 && (<img src={tr05} height={'90px'} />)}
 
                 </div>
