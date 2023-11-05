@@ -321,6 +321,6 @@ app.get('/protectedCookie', (req, res) => {
 });
 
 
-app.listen(3000,
+app.listen(process.env.PORT_SERVER,
     function () { console.log('Inicialização OK!'); }
 );
