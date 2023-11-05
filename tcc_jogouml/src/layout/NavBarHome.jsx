@@ -10,8 +10,8 @@ const NavBarHome = () => {
             <ul className={style.ulNav}>
                 <li className={style.liNav}><img className={style.imageLogo} src={imgLogo} alt="Logo do site" /></li>
                 <li className={style.liNav}><Link className={style.linkNav} to="/rules">Instruções</Link></li>
-                <li className={style.liNav}><Link className={style.linkNav} to="/rank">Ranking</Link></li>
-                <li className={style.liNav}><Link className={style.linkNav} to="#">Sobre</Link></li>
+                {/* <li className={style.liNav}><Link className={style.linkNav} to="/rank">Ranking</Link></li> */}
+                <li className={style.liNav}><Link className={style.linkNav} to="/sobre">Sobre</Link></li>
             </ul>
         </header>
     )

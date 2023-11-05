@@ -7,6 +7,7 @@ import imgPergIncorrect from '../assets/imgRules/barra-respostas-false.png'
 import comboIMG from '../assets/imgRules/tela-combo.png'
 import ResultadoTela from '../assets/imgRules/resultados-tela.png'
 import telaGameOver from '../assets/imgRules/tela-game-over.png'
+import telaRanking from '../assets/imgRules/ranking-rules.png'
 import Figura from './Figura'
 import style from '../styles/RulesGame.module.css'
 
@@ -23,6 +24,7 @@ const RulesGame = () => {
                     <li className={style.liTopico}><a className={style.topicoList} href="#Conquista de pontuação dobrada">Conquista de pontuação dobrada</a></li>
                     <li className={style.liTopico}><a className={style.topicoList} href="#Tela de resultados">Tela de resultados</a></li>
                     <li className={style.liTopico}><a className={style.topicoList} href="#Tela de Game Over">Tela de Game Over</a></li>
+                    <li className={style.liTopico}><a className={style.topicoList} href="#Ranking">Ranking</a></li>
                 </ul>
             </div>
             
@@ -114,6 +116,15 @@ const RulesGame = () => {
                 A tela de Game Over aparece quando o jogador perde todas as vidas ou quando o tempo acabar.
             </p>
             <Figura image={telaGameOver} caption="Tela de Game Over" />
+
+            <Title topico="1.7" title="Ranking" />
+            <p className={style.paragrafoTexto}>
+                O ranking do jogo contém a pontuação final dos jogadores. A pontuação final no ranking é contabilizada de
+                forma diferente, nesse caso, o ranking funciona de acordo com a soma das pontuações de cada rodada jogada, ou seja,
+                não importa o nível de dificuldade, toda vez que o jogador terminar uma rodada, a pontuação final será somada com
+                a pontuação anterior.
+            </p>
+            <Figura image={telaRanking} caption="Ranking do jogo" />
 
 
         </>

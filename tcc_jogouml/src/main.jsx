@@ -15,6 +15,7 @@ import Menu from './pages/Menu.jsx'
 import GameOver from './components/GameOver.jsx'
 import PrivateRouteGame from './Routes/PrivateRouteGame.jsx'
 import RulesUseCase from './components/RulesUseCase.jsx'
+import Sobre from './pages/Sobre.jsx'
 
 
 const router = createBrowserRouter([
@@ -57,6 +58,10 @@ const router = createBrowserRouter([
       {
         path: '/private/gameover',
         element: <PrivateRouteGame><GameOver/></PrivateRouteGame>,
+      },
+      {
+        path: 'sobre',
+        element: <Sobre/>,
       },
     ]
   },
