@@ -13,6 +13,7 @@ const Register = () => {
     const [dataUser, setDataUser] = useState([]);
     const [val, setVal] = useState();
     const [isValido, setIsvalido] = useState(false);
+    const [erro, setErro] = useState();
 
 
 
@@ -48,31 +49,29 @@ const Register = () => {
                 .then(response => response.json())
                 .then(data => {
                     setDataUser(data);
+                    setIsvalido(true);
+                    setVal(true);
                     //console.log(data); // Dados retornados pela API após a requisição POST
                 })
                 .catch(error => {
-                    console.log('Ocorreu um erro:', error);
+                    console.log('Ocorreu um erro no registro:', error);
+                    setIsvalido(true);
+                    setVal(false);
                 });
-
-            setIsvalido(true);
-            setVal(true);
         }
         else {
             setIsvalido(true);
             setVal(false);
         }
+
+        if(val == true){
+            setErro(false)
+        }
+        else{
+            setErro(true)
+        }
     }
 
-    // useEffect(() => {
-    //     fetch(`http://localhost:3000/user/${iduser}`)
-    //         .then(response => response.json())
-    //         .then(data => {
-    //             setUser(data);
-    //         })
-    //         .catch(error => {
-    //             console.log('Ocorreu um erro:', error);
-    //         });
-    // }, [password])
 
     return (
         <>
@@ -91,7 +90,7 @@ const Register = () => {
                         <input className={style.ipt} type="password" placeholder="Digite sua senha novamente" value={verpass} onChange={(e) => setVerpass(e.target.value)} />
                         <button className={style.btnEntrar} type='submit'>Registre-se</button>
                         {isValido && (
-                            val == true ? <Stack sx={{ width: '100%' }} spacing={2}>
+                            val == true && erro == false ? <Stack sx={{ width: '100%' }} spacing={2}>
                                 <Alert severity="success">
                                     <AlertTitle>Sucesso</AlertTitle>
                                     <strong>Usuário Cadastrado com sucesso!</strong>
@@ -100,8 +99,8 @@ const Register = () => {
                                 : <Stack sx={{ width: '100%' }} spacing={2}>
                                     <Alert severity="error">
                                         <AlertTitle>Erro</AlertTitle>
-                                        As senhas não coincidem — <strong>Tente novamente!</strong>
-                                        <a className={style.LinkLogin} href="/">Voltar para a página de login</a>
+                                        As senhas não coincidem ou usuário em uso<br/><strong>Tente novamente!</strong>
+                                        <br/><a className={style.LinkLogin} href="/">Voltar para a página de login</a>
                                     </Alert>
                                 </Stack>
 

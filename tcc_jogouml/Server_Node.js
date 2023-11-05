@@ -16,11 +16,11 @@ app.use(cookieParser());
 //lembrar de utilizar de guardar a senha do banco de dados no arquivo .env para segurança, quando for fazer deploy
 const client = new pg.Client(
     {
-        user: 'postgres',
-        host: 'localhost',
-        database: 'bd_jogouml',
-        password: 'sdavi1201',
-        port: 5432,
+        user: process.env.USER,
+        host: process.env.HOST,
+        database: process.env.DATABASE,
+        password: process.env.PASSWORD,
+        port: process.env.PORT,
     }
 );
 
@@ -70,7 +70,7 @@ app.post('/answer', function (req, res) {
 app.post('/conq', function (req, res) {
     client.query({
         text: 'INSERT INTO Usuario_Conquista (id_usuario,id_conquista) VALUES($1,$2)',
-        values: [req.body.id_usuario,req.body.id_conquista]
+        values: [req.body.id_usuario, req.body.id_conquista]
     })
         .then(
             function (ret) {
@@ -137,8 +137,8 @@ app.put('/rank/:id/:score', function (req, res) {
         .then(
             function (ret) {
                 res.json(ret.rows)
-                console.log("Score: ",ret.rows.score)
-                console.log("Count: ",ret.rowCount)
+                console.log("Score: ", ret.rows.score)
+                console.log("Count: ", ret.rowCount)
 
             }
         )
@@ -158,6 +158,18 @@ app.get('/ranking', function (req, res) {
 })
 
 // TODO: FAZER UM NOVO ENDPOINT QUE CONSULTA A PONTUAÇÃO DE UM JOGADOR
+app.get('/rank/:idUser', function (req, res) {
+    client.query({
+        text: 'SELECT pontuacao FROM Usuario WHERE id_user = $1',
+        values: [req.params.idUser]
+    })
+        .then(
+            function (ret) {
+                res.json(ret.rows)
+            }
+        )
+})
+
 
 // Rota para fazer o login e gerar o token
 app.post('/registro', (req, res) => {
@@ -173,7 +185,18 @@ app.post('/registro', (req, res) => {
                 if (!req.body.hash) {
                     return res.status(422).json({ msg: "A senha é obrigatória!" })
                 }
-                res.json(req.body);
+                try {
+                    // res.json(req.body);
+                    res.status(200).json(req.body);
+                }
+                catch (error) {
+                    console.error('Erro no Registro, tente com outro username e senha!');
+                    res.status(401).json({ error: 'Erro no Registro, tente com outro username e senha!' });
+                }
+            }).catch((err)=>{
+                console.error('Erro no Registro, tente com outro username e senha!', err);
+                res.status(401).json({ error: 'Erro no Registro, tente com outro username e senha!' });
+
             });
 });
 

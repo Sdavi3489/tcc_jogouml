@@ -13,7 +13,7 @@ const Navbar = () => {
             .then(data => {
                 const sair = data.logout
                 console.log(sair)
-                localStorage.removeItem('sessao');
+                localStorage.removeItem('auth');
                 localStorage.removeItem('inGame');
                 navigate(`/`);
             })

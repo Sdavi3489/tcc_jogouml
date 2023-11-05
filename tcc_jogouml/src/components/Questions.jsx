@@ -10,7 +10,6 @@ import Time from './Time';
 
 
 const Questions = ({ userID }) => {
-    //const [valTrue, setValTrue] = useState(false); // Verifica se o valor é verdadeiro ou falso
     const [showResp, setshowResp] = useState(false); // Mostra resultado na tela quando o resultado for true, quando o usuário escolher a resposta acionando a função verfica_resp
     const [count, setCount] = useState(1); //conta o id das perguntas conforme o usuário avança e serve para indentifica o id da tabela pergunta.
     const [bd_dados, setBdados] = useState([]) //guarda todas as informações da requisição get do banco de dados da tabela pergunta.
@@ -30,7 +29,6 @@ const Questions = ({ userID }) => {
         e.preventDefault();
         const resp_dada = { "id_resp": count, "resposta_dada": e.target.value, "usuario_fk": userID, "pergunta_fk": count } // manda as informações em json para a requisição post.
         const rev = bd_dados.map((res) => res.resposta_correta) //pega a resposta correta
-        //document.getElementById(e).disabled = false;
         setshowResp(true); //Mostra a resposta correta e incorreta da questão
         setResp(resp_dada.resposta_dada);// manda a resposta escolhida pelo jogador
 
@@ -98,12 +96,6 @@ const Questions = ({ userID }) => {
                 console.log('Ocorreu um erro:', error);
             });
 
-        // o set Timeot define o tempo necessário de 3 segundos para que o usuário confira o resultado antes de pular para a próxima questão
-        // teste fazendo um console.log() com o for ate 3 para ver se funciona
-        // setTimeout(() => {
-        //     next_question();
-        // }, 3000);
-
     }
 
     useEffect(() => {
@@ -133,8 +125,6 @@ const Questions = ({ userID }) => {
         }
         // utilizar o map para pegar o numero do index e somar index + 1 para dar o numero certo do total de questões  
         if (count == 10) {
-            // const result = ver.map((res) => res.resposta_dada) //pega a resposta dada
-            // esse if == 10 vai ser provisório por enquanto não adicionamos mais perguntas, quando adicionar mais eu coloco o tamanho (lenght) do array
             if (acertos == 10) {
                 localStorage.setItem(`tr01`, 'Troféu: gabaritando caso de uso iniciante');
             }

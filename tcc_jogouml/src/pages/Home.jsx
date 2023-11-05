@@ -10,39 +10,12 @@ import InfoCard from '../components/InfoCard';
 const Home = () => {
   const [username, setUsername] = useState(''); // informações do usuario
   const [password, setPassword] = useState(''); // senha
-  //const [iduser, setIduser] = useState('');
   const [isValido, setIsvalido] = useState(false);
   const [user, setUser] = useState([]);
   const navigate = useNavigate()
 
-
-  // function onChangeInput(event) {
-  //   const { value, name } = event.target;
-
-  //   setUsers({
-  //     ...users,
-  //     [name]: value,
-  //   });
-  // }
-
   async function onSubmitValues(e) {
     e.preventDefault();
-    //const login = { "id_user": 1, "username": username, "hash": password}
-
-    // //Função para criptografar o username
-    // const criptoUsername = async (username) => {
-    //   try {
-    //     const salt = await bcrypt.genSalt(10); // Gerar um salt aleatório
-    //     const hash = await bcrypt.hash(username, salt); // Gerar o hash da senha com o salt
-    //     return hash;
-    //   } catch (error) {
-    //     throw new Error('Erro ao criptografar o username');
-    //   }
-    // };
-
-    // // Criptografar o username durante o registro
-    // const userCripto = await criptoUsername(username);
-    // console.log('username criptografado:', userCripto);
 
     // Função para verificar a senha
     const comparePassword = async (password, hash) => {
@@ -57,16 +30,13 @@ const Home = () => {
     const userID = user.map((u) => u.id_user); // Retorna o id de usuário
     const hashedPassword = user.map((u) => u.hash); // Retorna a senha criptografada
 
-    //console.log('Senha criptografada do map:', hashedPassword[0]);
 
     // Verificar a senha durante o processo de login
     const Comp_senha = await comparePassword(password, hashedPassword[0]);
-    //console.log('Senha correta:', Comp_senha);
 
     if (Comp_senha) {
       console.log('Senha correta', Comp_senha);
       const infoLogin = { "id_user": userID[0], "username": username, "hash": hashedPassword[0] }
-      //console.log('infologin', infoLogin);
 
       fetch('http://localhost:3000/login', {
         method: 'POST',
@@ -77,13 +47,11 @@ const Home = () => {
       })
         .then(response => response.json())
         .then(data => {
-          console.log(data); // Dados retornados pela API após a requisição POST
+          // console.log(data); // Dados retornados pela API após a requisição POST
         })
         .catch(error => {
           console.log('Ocorreu um erro:', error);
         });
-
-      //navigate(`/play/${userID[0]}`);
 
       // REQUISIÇÃO GET PARA CRIAR O TOKEN E VALIDÁ-LO
       fetch(`http://localhost:3000/protegido`)
@@ -91,11 +59,10 @@ const Home = () => {
         .then(data => {
           const val = data.valido
           console.log("É valido: ", val)
-          localStorage.setItem('sessao', val);
+          localStorage.setItem(`auth`, val);
           navigate(`/private`);
         })
         .catch(error => {
-          //const verify = error.valido
           navigate(`/`);
           console.log('Não é válido:', error);
         });

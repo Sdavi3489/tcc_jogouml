@@ -38,7 +38,7 @@ const Menu = () => {
     const fetchData = async () => {
       const response = await fetch('http://localhost:3000/protegido');
       const data = await response.json();
-      console.log(data.user)
+      // console.log(data.user)
       setUser(data.user);
     };
     fetchData();
@@ -72,7 +72,7 @@ const Menu = () => {
 
     // Criptografar o username durante o registro
     const userCripto = await criptoUsername(user.username);
-    console.log('username criptografado:', userCripto);
+    // console.log('username criptografado:', userCripto);
 
     
     //value == 0 significa que o nivel esta no iniciante

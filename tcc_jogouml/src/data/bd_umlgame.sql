@@ -1,8 +1,8 @@
 CREATE TABLE Usuario(
 	id_user SERIAL PRIMARY KEY,
-	username VARCHAR(255) NOT NULL,
+	username VARCHAR(255) NOT NULL UNIQUE,
 	hash TEXT NOT NULL,
-	pontuacao INTEGER
+	pontuacao INTEGER DEFAULT 0
 )
 
 CREATE TABLE Pergunta(
@@ -54,7 +54,7 @@ CREATE SEQUENCE IF NOT EXISTS usuario_id_user_seq
     CACHE 1;
 
 INSERT INTO Usuario (username, hash) VALUES('Davi','654546546dsadasdas')
-INSERT INTO Usuario (username, hash) VALUES('João','654546546dsadasdas')
+INSERT INTO Usuario (username, hash) VALUES('Davi','6das98d4as894984dsadds')
 INSERT INTO Usuario VALUES(3,'Paulo')
 INSERT INTO Pergunta VALUES(1,'O que é caso de uso?','É uma ação do usuário','Representa a ligação do usuário com o sistema','Serve como forma de relacionamento','É uma característica do ator',true,false,false,false,'A')
 INSERT INTO Pergunta VALUES(2,'O que são os atores?','Representa apenas o sistema','Representa a ligação do usuário com o sistema', 'Serve como forma de relacionamento', 'São usuários que utilizam o sistema',false,false,false,true,'D')
@@ -108,6 +108,8 @@ WHERE id_user = 1
 UPDATE Usuario
 SET pontuacao = 20
 WHERE id_user = 1 AND 20 > pontuacao;
+
+SELECT pontuacao FROM Usuario WHERE id_user = 1
 
 -- Adicionando as conquistas
 INSERT INTO Conquista (conquista, descricao) VALUES ('Começando com o pé direiro!','Acerte a primeira pergunta')

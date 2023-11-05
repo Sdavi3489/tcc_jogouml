@@ -31,3 +31,8 @@ nav{
     text-decoration: underline;
     color: #acbcd3;
 }
+
+.imageLogo{
+    width: 100px;
+    height: 80px;
+}

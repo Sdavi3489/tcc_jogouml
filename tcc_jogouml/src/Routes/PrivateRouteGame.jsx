@@ -5,10 +5,10 @@ const PrivateRouteGame = ({ children }) => {
 
     useEffect(() => {
         // Verificar se o token está disponível (exemplo: armazenado no localStorage)
-        const sessao = localStorage.getItem('sessao');
-        console.log("sessao:", sessao);
+        const sessao = localStorage.getItem('auth');
+        // console.log("sessao:", sessao);
         const sessao_game = localStorage.getItem('inGame');
-        console.log("sessao game:", sessao_game);
+        // console.log("sessao game:", sessao_game);
         
 
         if (sessao && sessao_game) {

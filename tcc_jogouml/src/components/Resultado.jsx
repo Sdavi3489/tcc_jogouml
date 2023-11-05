@@ -22,7 +22,7 @@ const Resultado = () => {
     const erros = parametrosURL.get('erros');
     const { id, score, acertos } = useParams();
     const [result, setResult] = useState([]);
-    // const [getconq, setGetconq] = useState([]);
+    const [pontuacaoRank, setPontuacaoRank] = useState('');
     const style_itens = { paddingRight: "2rem" }
     const navigate = useNavigate() // navega para o link definido quando o for acionado
     const user = localStorage.getItem('User');
@@ -42,19 +42,11 @@ const Resultado = () => {
     // TODO: VERIFICA ESSA CONTA SE ELA FUNCIONA NORMAL
     const FinalScore = scoreConvertido + timeComplete; //pontuacao final/criterio de desempate
     // TODO: Fazer uma pontuação que soma o final score com a pontuação registrada antes
-
-    // console.log("resultado ranking consulta: ", result);
-    // console.log("score", score);
-    // console.log("Time result component:", FinalScore);
-    // console.log("desconto tempo", timeComplete);
-    // console.log("Time result component subtraido por erros:", FinalScoreteste);
-    //console.log('erros componente result:', erros);
+    const pontosRank = Number(pontuacaoRank)
+    const ScoreRankFinal = FinalScore + pontosRank;
     // o usuario perde 10 pontos do tempo por pergunta errada na pontuação final
 
     function getTime() {
-        // const minutes = Number(time.split(':')[0]) // pega os minutos do tempo obtido
-        // const seconds = Number(time.split(':')[1]) // pega os segundos do tempo obtido
-        //console.log(minutes, ":", seconds); 
         if (minutes >= 8 && seconds >= 0) {
             // Adiciona a conquista da velocidade se o usuário bater um recorde maior que 8 minutos
             localStorage.setItem('co02', "Conquista: Eu sou a velocidade!");
@@ -62,27 +54,6 @@ const Resultado = () => {
         //retorna true se o item estiver disponível e mostra na tela de resultados
         return localStorage.getItem('co02');
     }
-
-
-    // function RestartPlayGame() {
-
-    //     fetch('http://localhost:3000/Delresptemp', {
-    //         method: 'DELETE',
-    //         headers: {
-    //             'Content-Type': 'application/json'
-    //         },
-    //     })
-    //         .then(data => {
-    //             console.log(data)
-    //         })
-    //         .catch(error => {
-    //             console.log('Ocorreu um erro:', error);
-    //         });
-
-
-    //     //localStorage.setItem('inGame',user);
-    //     return navigate(`/private/play/${id}`)
-    // }
 
     useEffect(() => {
         fetch(`http://localhost:3000/result`)
@@ -97,19 +68,30 @@ const Resultado = () => {
 
     useEffect(() => {
         // TODO: MUDEI O SCORE PARA O NOVO SCORE DE DESEMPATE caso quiser trocar só vir aqui
-        // lembrar de trocar para float
-        fetch(`http://localhost:3000/rank/${id}/${FinalScore}`, {
+        fetch(`http://localhost:3000/rank/${id}/${ScoreRankFinal}`, {
             method: 'PUT'
         })
             .then(response => response.json())
             .then(data => {
-                //setVer(data);
-                console.log(data); // Dados retornados pela API após a requisição POST
+                // console.log(data); // Dados retornados pela API após a requisição POST
             })
             .catch(error => {
                 console.log('Ocorreu um erro:', error);
             });
 
+    }, [result])
+
+    useEffect(() => {
+        fetch(`http://localhost:3000/rank/${id}`)
+            .then(response => response.json())
+            .then(data => {
+                console.log('Pontuacao consulta',data[0].pontuacao);
+                console.log(data[0].pontuacao);
+                setPontuacaoRank(data[0].pontuacao)
+            })
+            .catch(error => {
+                console.log('Ocorreu um erro:', error);
+            });
     }, [])
 
     function conq_trofeu() {
@@ -118,8 +100,6 @@ const Resultado = () => {
             fetch(`http://localhost:3000/ranking`)
                 .then(response => response.json())
                 .then(data => {
-                    // console.log('pontuacao rank: ', data[0]);
-                    //setGetUsername(data[0].username)
                     if (data[0].username == user) {
                         localStorage.setItem(`tr05`, 'Troféu: Segue o líder');
                     }
@@ -154,7 +134,6 @@ const Resultado = () => {
                 </div>
                 <div className={styles.time}>
                     <span>Tempo</span><br />
-                    {/* {time && (<span>{time}</span>)} */}
                     {time && (
                         <span>{time}</span>
                     )
@@ -163,7 +142,6 @@ const Resultado = () => {
                 <div className={styles.containerOpt}>
                     <Link to={`/private`}><BiMenu size={50} /></Link>
                     <Link to={`/rank`}><img src={rank} alt="Link para a página Ranking" height={'45px'} /></Link>
-                    {/* <Link onClick={RestartPlayGame}><VscDebugRestart size={50} /></Link> */}
                 </div>
             </div>
         </>
