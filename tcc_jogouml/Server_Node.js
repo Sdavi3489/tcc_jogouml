@@ -12,19 +12,20 @@ import axios from 'axios';
 app.use(bodyParser.json());
 app.use(cors());
 app.use(cookieParser());
+app.use(express.json())
 
 //lembrar de utilizar de guardar a senha do banco de dados no arquivo .env para segurança, quando for fazer deploy
-const client = new pg.Client(
-    {
-        user: process.env.USER,
-        host: process.env.HOST,
-        database: process.env.DATABASE,
-        password: process.env.PASSWORD,
-        port: process.env.PORT,
-    }
-);
+// const client = new pg.Client(
+//     {
+//         user: process.env.USER,
+//         host: process.env.HOST,
+//         database: process.env.DATABASE,
+//         password: process.env.PASSWORD,
+//         port: process.env.PORT,
+//     }
+// );
 
-client.connect();
+// client.connect();
 
 app.post('/perg', function (req, res) {
     client.query({
