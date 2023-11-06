@@ -2,7 +2,7 @@
     "version": 2,
     "builds": [
       {
-        "src": "./Server_Node.js",
+        "src": "Server_Node.js",
         "use": "@vercel/node"
       }
     ],
