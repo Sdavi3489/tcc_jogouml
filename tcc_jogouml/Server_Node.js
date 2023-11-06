@@ -14,17 +14,17 @@ app.use(cors());
 app.use(cookieParser());
 
 //lembrar de utilizar de guardar a senha do banco de dados no arquivo .env para segurança, quando for fazer deploy
-// const client = new pg.Client(
-//     {
-//         user: process.env.POSTGRES_USER,
-//         host: process.env.POSTGRES_HOST,
-//         database: process.env.POSTGRES_DATABASE,
-//         password: process.env.POSTGRES_PASSWORD,
-//         port: process.env.PORT,
-//     }
-// );
+const client = new pg.Client(
+    {
+        user: process.env.POSTGRES_USER,
+        host: process.env.POSTGRES_HOST,
+        database: process.env.POSTGRES_DATABASE,
+        password: process.env.POSTGRES_PASSWORD,
+        port: process.env.PORT,
+    }
+);
 
-// client.connect();
+client.connect();
 
 app.post('/perg', function (req, res) {
     client.query({
