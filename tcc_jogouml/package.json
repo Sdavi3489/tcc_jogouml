@@ -2,8 +2,10 @@
   "name": "tcc_jogouml",
   "private": true,
   "version": "0.0.0",
+  "main": "Server_Node.js",
   "type": "module",
   "scripts": {
+    "start": "node Server_Node.js",
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint src --ext js,jsx --report-unused-disable-directives --max-warnings 0",
