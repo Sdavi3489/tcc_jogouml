@@ -16,7 +16,7 @@ const PrivateRoute = ({ children }) => {
         }
     }, []);
 
-    return token ? children : <h1>Página não encontrada</h1>;
+    return token ? children : navigate("/");
 }
 
 export default PrivateRoute

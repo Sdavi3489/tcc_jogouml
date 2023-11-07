@@ -4,11 +4,12 @@ import { Link, useNavigate} from 'react-router-dom'
 import { BiLogOut } from "react-icons/bi";
 
 const Navbar = () => {
+    const apiURL = import.meta.env.VITE_REACT_APP_API_URL; // url da api
     const navigate = useNavigate();
 
     function OnLogout(e) {
         e.preventDefault();
-        fetch(`http://localhost:3000/logout`)
+        fetch(`${apiURL}/logout`)
             .then(response => response.json())
             .then(data => {
                 const sair = data.logout

@@ -155,9 +155,6 @@ const RulesUseCase = () => {
             <p className={style.paragrafoTexto}>
                 GUEDES, Gilleanes T. A. <strong>UML 2</strong>: guia prático. 2. ed. São Paulo: Novatec, 2014. 192 p. : il.
             </p>
-
-
-
         </>
     )
 }

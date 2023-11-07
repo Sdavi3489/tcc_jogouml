@@ -44,6 +44,7 @@ const Resultado = () => {
     // TODO: Fazer uma pontuação que soma o final score com a pontuação registrada antes
     const pontosRank = Number(pontuacaoRank)
     const ScoreRankFinal = FinalScore + pontosRank;
+    const apiURL = import.meta.env.VITE_REACT_APP_API_URL; // url da api
     // o usuario perde 10 pontos do tempo por pergunta errada na pontuação final
 
     function getTime() {
@@ -56,7 +57,7 @@ const Resultado = () => {
     }
 
     useEffect(() => {
-        fetch(`http://localhost:3000/result`)
+        fetch(`${apiURL}/result`)
             .then(response => response.json())
             .then(data => {
                 setResult(data);
@@ -68,7 +69,7 @@ const Resultado = () => {
 
     useEffect(() => {
         // TODO: MUDEI O SCORE PARA O NOVO SCORE DE DESEMPATE caso quiser trocar só vir aqui
-        fetch(`http://localhost:3000/rank/${id}/${ScoreRankFinal}`, {
+        fetch(`${apiURL}/rank/${id}/${ScoreRankFinal}`, {
             method: 'PUT'
         })
             .then(response => response.json())
@@ -82,7 +83,7 @@ const Resultado = () => {
     }, [result])
 
     useEffect(() => {
-        fetch(`http://localhost:3000/rank/${id}`)
+        fetch(`${apiURL}/rank/${id}`)
             .then(response => response.json())
             .then(data => {
                 console.log('Pontuacao consulta',data[0].pontuacao);
@@ -97,7 +98,7 @@ const Resultado = () => {
     function conq_trofeu() {
         // Essa função se refere ao troféu que o usuário ganhará se ele for o primeiro do ranking
         useEffect(() => {
-            fetch(`http://localhost:3000/ranking`)
+            fetch(`${apiURL}/ranking`)
                 .then(response => response.json())
                 .then(data => {
                     if (data[0].username == user) {

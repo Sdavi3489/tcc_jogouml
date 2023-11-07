@@ -26,6 +26,7 @@ const QuestionsInt = ({ userID }) => {
     const [showImg, setShowImg] = useState('') // Esta variável identifica qual opção foi escolhida pelo jogador e server para mostrar o resultado na tela.
     const navigate = useNavigate() // navega para o link definido quando o for acionado
     const style_itens = { paddingRight: ".5rem"} // espaçamento
+    const apiURL = import.meta.env.VITE_REACT_APP_API_URL; // url da api
 
 
     function verifica_resp(e) {
@@ -79,18 +80,11 @@ const QuestionsInt = ({ userID }) => {
             setShowCombo(false);
         }
 
-        // if (btnValue) {
-        //     document.querySelector(e.target).disabled = true;
-        //     return
-        // } else {
-        //     document.querySelector(e.target).disabled = false;
-        // }
-
         //console.log(bd_dados.map((res) => res.ver_a))
         //console.log(bd_dados.map((res) => res.ver_a[0]))
         //console.log(rev[0])
 
-        fetch('http://localhost:3000/answer', {
+        fetch(`${apiURL}/answer`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -105,19 +99,11 @@ const QuestionsInt = ({ userID }) => {
             .catch(error => {
                 console.log('Ocorreu um erro:', error);
             });
-
-        // o set Timeot define o tempo necessário de 3 segundos para que o usuário confira o resultado antes de pular para a próxima questão
-        // teste fazendo um console.log() com o for ate 3 para ver se funciona
-        // setTimeout(() => {
-        //     next_question();
-        // }, 1000);
-
-
     }
 
     // TODO: MUDAR COUNT PARA question
     useEffect(() => {
-        fetch(`http://localhost:3000/question/${question}`)
+        fetch(`${apiURL}/question/${question}`)
             .then(response => response.json())
             .then(data => {
                 setBdados(data); // pega as questoes do banco de dados

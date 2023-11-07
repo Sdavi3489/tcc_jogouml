@@ -84,7 +84,7 @@ const Questions = ({ userID }) => {
         //console.log(bd_dados.map((res) => res.ver_a[0]))
         //console.log(rev[0])
         // TODO: Trocar todas requisições do servidor para a apiURL onde o servidor está hospedado
-        fetch('http://localhost:3000/answer', {
+        fetch(`${apiURL}/answer`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -103,7 +103,7 @@ const Questions = ({ userID }) => {
     }
 
     useEffect(() => {
-        fetch(`http://localhost:3000/question/${count}`)
+        fetch(`${apiURL}/question/${count}`)
             .then(response => response.json())
             .then(data => {
                 setBdados(data); // pega as questoes do banco de dados

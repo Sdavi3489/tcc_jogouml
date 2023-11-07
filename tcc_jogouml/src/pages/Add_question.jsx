@@ -433,9 +433,10 @@ const Add_question = () => {
 
     // fazer um map que fara o cadastro de cada pergunta automaticamente
     function OnHandlesubmit() {
+        const apiURL = import.meta.env.VITE_REACT_APP_API_URL; // url da api
         let index = 0;
         while (index <= 27) {
-            fetch('http://localhost:3000/perg', {
+            fetch(`${apiURL}/perg`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

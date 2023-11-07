@@ -14,8 +14,7 @@ const Register = () => {
     const [val, setVal] = useState();
     const [isValido, setIsvalido] = useState(false);
     const [erro, setErro] = useState();
-
-
+    const apiURL = import.meta.env.VITE_REACT_APP_API_URL; // url da api
 
     async function onSubmitValues(e) {
         e.preventDefault();
@@ -39,7 +38,7 @@ const Register = () => {
 
             const infoUser = { "username": username, "hash": hashedPassword }
 
-            fetch('http://localhost:3000/registro', {
+            fetch(`${apiURL}/registro`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

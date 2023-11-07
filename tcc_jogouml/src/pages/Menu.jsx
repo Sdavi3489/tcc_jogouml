@@ -19,6 +19,7 @@ const Menu = () => {
   const [user, setUser] = useState('');
   const [value, setValue] = useState(1);
   const navigate = useNavigate();
+  const apiURL = import.meta.env.VITE_REACT_APP_API_URL; // url da api
   localStorage.removeItem('inGame'); // remove sessão do jogo caso esteja em aberto no navegador e caso o usuario resolva voltar para o menu
   localStorage.removeItem('User'); // remove nome de usuario da sessão que jogou anteriormente
   localStorage.removeItem('time'); // remove o tempo feito na sessão anterior
@@ -36,7 +37,7 @@ const Menu = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await fetch('http://localhost:3000/protegido');
+      const response = await fetch(`${apiURL}/protegido`);
       const data = await response.json();
       // console.log(data.user)
       setUser(data.user);
@@ -45,7 +46,7 @@ const Menu = () => {
   }, []);
 
   async function onPlayGame() {
-    fetch('http://localhost:3000/Delresptemp', {
+    fetch(`${apiURL}/Delresptemp`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json'

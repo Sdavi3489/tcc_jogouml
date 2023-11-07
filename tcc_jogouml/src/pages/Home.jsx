@@ -13,6 +13,8 @@ const Home = () => {
   const [isValido, setIsvalido] = useState(false);
   const [user, setUser] = useState([]);
   const navigate = useNavigate()
+  const apiURL = import.meta.env.VITE_REACT_APP_API_URL; // url da api
+
 
   async function onSubmitValues(e) {
     e.preventDefault();
@@ -38,7 +40,7 @@ const Home = () => {
       console.log('Senha correta', Comp_senha);
       const infoLogin = { "id_user": userID[0], "username": username, "hash": hashedPassword[0] }
 
-      fetch('http://localhost:3000/login', {
+      fetch(`${apiURL}/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -54,7 +56,7 @@ const Home = () => {
         });
 
       // REQUISIÇÃO GET PARA CRIAR O TOKEN E VALIDÁ-LO
-      fetch(`http://localhost:3000/protegido`)
+      fetch(`${apiURL}/protegido`)
         .then(response => response.json())
         .then(data => {
           const val = data.valido
@@ -72,7 +74,7 @@ const Home = () => {
   }
 
   useEffect(() => {
-    fetch(`http://localhost:3000/user/${username}`)
+    fetch(`${apiURL}/user/${username}`)
       .then(response => response.json())
       .then(data => {
         setUser(data);

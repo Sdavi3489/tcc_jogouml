@@ -14,22 +14,22 @@ app.use(cors());
 app.use(cookieParser());
 
 //lembrar de utilizar de guardar a senha do banco de dados no arquivo .env para segurança, quando for fazer deploy
-// const client = new pg.Client(
-//     {
-//         connectionString: process.env.POSTGRES_URL + "?sslmode=require",
-//     }
-//);
 const client = new pg.Client(
     {
-        user: process.env.USER,
-        host: process.env.HOST,
-        database: process.env.DATABASE,
-        password: process.env.PASSWORD,
-        port: process.env.PORT,
+        connectionString: process.env.POSTGRES_URL + "?sslmode=require",
     }
 );
+// const client = new pg.Client(
+//     {
+//         user: process.env.USER,
+//         host: process.env.HOST,
+//         database: process.env.DATABASE,
+//         password: process.env.PASSWORD,
+//         port: process.env.PORT,
+//     }
+// );
 
-console.log(process.env.REACT_APP_API_URL);
+// console.log(process.env.VITE_REACT_APP_API_URL);
 
 client.connect();
 
