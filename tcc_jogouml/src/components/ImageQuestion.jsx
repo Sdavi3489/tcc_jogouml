@@ -17,8 +17,8 @@ import Imgperg26 from "../assets/questions/questao-26.png";
 import Imgperg28 from "../assets/questions/questao-28.png";
 
 const ImageQuestion = ({perg, image}) => {
-  console.log('prop: ', perg)
-  console.log('img: ', image)
+  // console.log('prop: ', perg)
+  // console.log('img: ', image)
   const imgPergunta = [
     {
       "img": Imgperg12_14,
@@ -72,18 +72,6 @@ const ImageQuestion = ({perg, image}) => {
       "img": Imgperg28,
     }
   ]
-
-  // useEffect(() => {
-  //   fetch(`http://localhost:3000/question/${perg.perg}`)
-  //     .then(response => response.json())
-  //     .then(data => {
-  //       setImgPerg(data[0].image);
-  //       console.log('bd img',data[0].image);
-  //     })
-  //     .catch(error => {
-  //       console.log('Ocorreu um erro:', error);
-  //     });
-  // }, [])
 
   return (
     <>

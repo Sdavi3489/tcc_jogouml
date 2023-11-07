@@ -23,6 +23,9 @@ const Questions = ({ userID }) => {
     const [showCombo, setShowCombo] = useState(false); // Esta variável armazena a informação para fazer a pontuacao dobrada aparece
     const navigate = useNavigate() // navega para o link definido quando o for acionado
     const style_itens = { paddingRight: ".5rem"} // espaçamento
+    const apiURL = import.meta.env.VITE_REACT_APP_API_URL; // url da api
+    // TODO: Trocar todas requisições do servidor para a apiURL onde o servidor está hospedado
+    console.log(apiURL);
 
 
     function verifica_resp(e) {
@@ -32,7 +35,8 @@ const Questions = ({ userID }) => {
         setshowResp(true); //Mostra a resposta correta e incorreta da questão
         setResp(resp_dada.resposta_dada);// manda a resposta escolhida pelo jogador
 
-        console.log(rev);
+        // console.log(rev);
+
         if (resp_dada.resposta_dada == rev) {
             console.log('Ganhou 1 ponto!');
             setScore((scr) => scr + 50); // Acrescenta o numero de pontos
@@ -79,7 +83,7 @@ const Questions = ({ userID }) => {
         //console.log(bd_dados.map((res) => res.ver_a))
         //console.log(bd_dados.map((res) => res.ver_a[0]))
         //console.log(rev[0])
-
+        // TODO: Trocar todas requisições do servidor para a apiURL onde o servidor está hospedado
         fetch('http://localhost:3000/answer', {
             method: 'POST',
             headers: {

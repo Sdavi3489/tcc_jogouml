@@ -58,7 +58,7 @@ const Home = () => {
         .then(response => response.json())
         .then(data => {
           const val = data.valido
-          console.log("É valido: ", val)
+          // console.log("É valido: ", val)
           localStorage.setItem(`auth`, val);
           navigate(`/private`);
         })
