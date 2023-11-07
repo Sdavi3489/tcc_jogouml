@@ -25,7 +25,6 @@ const Questions = ({ userID }) => {
     const style_itens = { paddingRight: ".5rem"} // espaçamento
     const apiURL = import.meta.env.VITE_REACT_APP_API_URL; // url da api
     // TODO: Trocar todas requisições do servidor para a apiURL onde o servidor está hospedado
-    console.log(apiURL);
 
 
     function verifica_resp(e) {
