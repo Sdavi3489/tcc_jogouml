@@ -8,14 +8,16 @@ import NavBarHome from './layout/NavBarHome'
 
 function App() {
   const location = useLocation();
-  const renderNavBar = location.pathname != '/' && location.pathname != '/register';
-  const renderNavBarHome = location.pathname === '/' || location.pathname === '/register';
+  const renderNavBar = location.pathname != '/' && location.pathname != '/register' && location.pathname != '/rules' && location.pathname != '/rules/caso-de-uso' && location.pathname != '/sobre';
+  const renderNavBarHome = location.pathname === '/' || location.pathname === '/register' || location.pathname === '/rules' || location.pathname === '/rules/caso-de-uso' || location.pathname === '/sobre';
 
   return (
     <>
-      {renderNavBar && <Navbar />}
+      {/* {renderNavRules && <NavBarHome />} */}
       {renderNavBarHome && <NavBarHome />}
+      {renderNavBar && <Navbar />}
       <Outlet />
+      <Add_question/>
       <Footer />
     </>
   )

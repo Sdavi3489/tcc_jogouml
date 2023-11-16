@@ -60,7 +60,7 @@ const Add_question = () => {
         },
         {
             "id_perg": 5,
-            "pergunta": "Qual é a finalidade da relação de inclusão no Diagrama de Caso de Uso?",
+            "pergunta": "Qual é a finalidade da relação de 'include' no Diagrama de Caso de Uso?",
             "image": null,
             "opcao_a": "Representar a herança entre casos de uso",
             "opcao_b": "Mostrar que um caso de uso utiliza outro caso de uso",
@@ -102,7 +102,7 @@ const Add_question = () => {
         },
         {
             "id_perg": 8,
-            "pergunta": "Qual é a opção correta em relação ao relacionamento de inclusão?",
+            "pergunta": "Qual é a opção correta em relação ao relacionamento de 'include'?",
             "image": null,
             "opcao_a": "Em um relacionamento de inclusão a execução do primeiro caso de uso obriga a execução do segundo caso de uso",
             "opcao_b": "Representa um relacionamento onde um caso é executado quando uma condição é satisfeita",
@@ -130,10 +130,10 @@ const Add_question = () => {
         },
         {
             "id_perg": 10,
-            "pergunta": "Qual é a opção correta em relação ao relacionamento de extensão?",
+            "pergunta": "Qual é a opção correta em relação ao relacionamento de 'extend'?",
             "image": null,
-            "opcao_a": "O relacionamento de extensão ocorre quando um caso de uso obriga a execução de outro caso de uso",
-            "opcao_b": 'A seta apontando "<<extends>>" aponta para o caso de uso que estende',
+            "opcao_a": 'O relacionamento "<<extend>>" ocorre quando um caso de uso obriga a execução de outro caso de uso',
+            "opcao_b": 'A seta apontando "<<extend>>" aponta para o caso de uso que estende',
             "opcao_c": "Representa o relacionamento entre o ator e o caso de uso",
             "opcao_d": "Representa a obrigatoriedade da execução de um caso de uso",
             "ver_a": false,
@@ -158,7 +158,7 @@ const Add_question = () => {
         },
         {
             "id_perg": 12,
-            "pergunta": "Informe qual destas opções é a relação de inclusão",
+            "pergunta": "Informe qual destas opções é o relacionamento de inclusão de um caso de uso",
             "image": "../assets/questions/questao-12-14.jpg",
             "opcao_a": "1",
             "opcao_b": "2",
@@ -186,7 +186,7 @@ const Add_question = () => {
         },
         {
             "id_perg": 14,
-            "pergunta": "Informe qual destas opções é a relação de extensão",
+            "pergunta": "Informe qual destas opções é o relacionamento de extensão de um caso de uso",
             "image": "../assets/questions/questao-12-14.jpg",
             "opcao_a": "1",
             "opcao_b": "2",

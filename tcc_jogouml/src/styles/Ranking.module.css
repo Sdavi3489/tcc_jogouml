@@ -1,11 +1,13 @@
 .container {
+    position: relative;
+    min-height: 83.8vh;
     display: flex;
     background-color: #333333;
     width: auto;
-    height: auto;
+    /* height: auto; */
     flex-flow: column wrap;
-    padding-bottom: 25rem;
-    justify-content: center;
+    /* padding-bottom: 25rem; */
+    justify-content: flex-start;
     align-items: center;
 }
 

@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react'
-import { Link, useNavigate} from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import bcrypt from 'bcryptjs';
 import style from '../styles/Home.module.css'
 import Alert from '@mui/material/Alert';
 import AlertTitle from '@mui/material/AlertTitle';
 import Stack from '@mui/material/Stack';
 import InfoCard from '../components/InfoCard';
+import imgLogo from '../assets/logo-jogo-tcc-new.png'
+import Footer from '../layout/Footer';
 
 const Home = () => {
   const [username, setUsername] = useState(''); // informações do usuario
@@ -89,8 +91,9 @@ const Home = () => {
     <>
       <div className={style.containerHome}>
         <div className={style.banner}>
-          <h2 className={style.title}>Aprenda na prática!</h2>
-          <p className={style.desc}>Estude a teoria e aplique em problemas de sistemas reais</p>
+          <img className={style.imageLogo} src={imgLogo} alt="Logo do site" />
+          <h2 className={style.title}>Aprenda UML na prática!</h2>
+          <p className={style.desc}>Aprenda sobre modelagem UML e saiba com aplicar em situações de sistemas reais!</p>
           <p className={style.descReg}>Não possui registro?</p>
           <Link className={style.regs} to="/register">Registre-se</Link>
         </div>
@@ -113,7 +116,6 @@ const Home = () => {
       <div className={style.containerCards}>
         <InfoCard></InfoCard>
       </div>
-
     </>
   )
 }

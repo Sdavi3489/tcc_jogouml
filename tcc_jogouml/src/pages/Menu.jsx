@@ -43,7 +43,7 @@ const Menu = () => {
       setUser(data.user);
     };
     fetchData();
-  }, []);
+  }, []); // se der erro retirar o user do array
 
   async function onPlayGame() {
     fetch(`${apiURL}/Delresptemp`, {

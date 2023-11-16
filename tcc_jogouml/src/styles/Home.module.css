@@ -23,12 +23,14 @@
     font-size: 40px;
     color: #f1f3f6;
     margin-bottom: 15px;
+    text-align: center;
 }
 
 .desc{
     font-family: 'Roboto', 'Segoe UI', 'Arial', sans-serif;
     font-size: medium;
     color: #f1f3f6;
+    text-align: center;
 }
 
 .login {
@@ -124,11 +126,11 @@ form {
 .containerCards{
     display: flex;
     flex-flow: row wrap;
-    justify-content: space-evenly;
-    /* align-items: center; */
+    justify-content: center;
+    align-items: stretch;
     width: auto;
     height: auto;
-    padding: 25px;
+    /* padding: 25px; */
     background-color: #f1f3f6;
 }
 
@@ -138,4 +140,10 @@ form {
     font-size: large;
     font-weight: bold;
     color: #f1f3f6;
+}
+
+.imageLogo{
+    width: 120px;
+    height: 100px;
+    margin-left: 50px;
 }

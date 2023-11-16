@@ -1,10 +1,19 @@
 .rodape {
+    position: absolute; 
     display: flex;
     background-color: #333333;
-    width: 100%;
-    height: auto;
+    height: auto; 
+    width: 100%; 
+    z-index: 1; 
     flex-direction: column;
     align-items: center;
+    /* position: absolute;
+    bottom: 0;
+    margin: 0;
+    width: 100%;
+    height: auto;
+    display: flex;
+    background-color: #333333; */
 }
 
 .link{

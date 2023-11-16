@@ -14,7 +14,7 @@ const InfoCard = () => {
         {
             img: quiz,
             alt: "imagem representativa de um quiz",
-            title: "Aprenda a teoria e aplique na prática!",
+            title: "Aprenda a modelagem UML e aplique na prática!",
             descricao: `Aprenda com base na resolução de situações 
                 relacionadas ao desenvolvimento da modelagem de sistemas`
         },
@@ -32,11 +32,13 @@ const InfoCard = () => {
         }
     ]
 
+    const style_itens = { margin: "10px"} // espaçamento
+
     return (
         <>
             {
                 cardContent.map((e, index) => {
-                    return (<Card sx={{ maxWidth: 345 }}>
+                    return (<Card sx={{ maxWidth: 345 }} style={style_itens}>
                         <CardActionArea>
                             <CardMedia
                                 component="img"
@@ -45,10 +47,10 @@ const InfoCard = () => {
                                 alt= {e.alt}
                             />
                             <CardContent>
-                                <Typography gutterBottom variant="h5" component="div">
+                                <Typography gutterBottom variant="h5" component="div" style={{textAlign:"center"}}>
                                     {e.title}
                                 </Typography>
-                                <Typography variant="body2" color="text.secondary">
+                                <Typography variant="body2" color="text.secondary" style={{textAlign:"justify"}}>
                                     {e.descricao}
                                 </Typography>
                             </CardContent>
