@@ -17,7 +17,6 @@ function App() {
       {renderNavBarHome && <NavBarHome />}
       {renderNavBar && <Navbar />}
       <Outlet />
-      <Add_question/>
       <Footer />
     </>
   )
