@@ -13,7 +13,6 @@ const Register = () => {
     const [dataUser, setDataUser] = useState([]);
     const [val, setVal] = useState();
     const [isValido, setIsvalido] = useState(false);
-    const [erro, setErro] = useState();
     const apiURL = import.meta.env.VITE_REACT_APP_API_URL; // url da api
 
     async function onSubmitValues(e) {
@@ -62,13 +61,6 @@ const Register = () => {
             setIsvalido(true);
             setVal(false);
         }
-
-        if(val == true){
-            setErro(false)
-        }
-        else{
-            setErro(true)
-        }
     }
 
 
@@ -89,7 +81,7 @@ const Register = () => {
                         <input className={style.ipt} type="password" placeholder="Digite sua senha novamente" value={verpass} onChange={(e) => setVerpass(e.target.value)} />
                         <button className={style.btnEntrar} type='submit'>Registre-se</button>
                         {isValido && (
-                            val == true && erro == false ? <Stack sx={{ width: '100%' }} spacing={2}>
+                            val == true ? <Stack sx={{ width: '100%' }} spacing={2}>
                                 <Alert severity="success">
                                     <AlertTitle>Sucesso</AlertTitle>
                                     <strong>Usuário Cadastrado com sucesso!</strong>

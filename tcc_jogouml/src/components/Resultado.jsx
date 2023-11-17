@@ -142,7 +142,7 @@ const Resultado = () => {
                 </div>
                 <div className={styles.containerOpt}>
                     <Link to={`/private`}><BiMenu size={50} /></Link>
-                    <Link to={`/rank`}><img src={rank} alt="Link para a página Ranking" height={'45px'} /></Link>
+                    <Link to={`/rank`}><img src={rank} alt="Link para a página Ranking" height={'50px'} /></Link>
                 </div>
             </div>
         </>
